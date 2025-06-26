@@ -7,6 +7,7 @@
 \usepackage{longtable}
 \usepackage{float}
 \usepackage{indentfirst}
+\usepackage{array}
 \usepackage{fancyhdr}
 \usepackage{amsmath,amssymb}
 \usepackage{csquotes}
@@ -18,12 +19,14 @@
 \usepackage{setspace}
 \usepackage{lmodern}
 \usepackage{changepage}
-\usepackage[backend=biber,style=abnt-numeric]{biblatex}
+\usepackage{tabularx}
+\usepackage[backend=biber,style=abnt]{biblatex}
 
 \usepackage[colorlinks=true, linkcolor=black, citecolor=black, urlcolor=blue]{hyperref}
 
 \renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
 \renewcommand{\listfigurename}{Lista de Ilustrações}
+\renewcommand{\arraystretch}{1.5}
 
 \addbibresource{referencias.bib}
 
@@ -424,7 +427,29 @@ Outro ponto relevante do estudo é a flexibilidade do modelo, o qual foi aplicad
 Em síntese, o estudo de Seybold, Kier e Cheng \cite{seybold1997simulation} apresenta uma abordagem inovadora para a simulação de cinéticas químicas utilizando autômatos celulares. Ao integrar a modelagem discreta com regras probabilísticas e atualizações assíncronas, os autores evidenciam uma estratégia eficaz para reproduzir tanto os comportamentos determinísticos quanto as variações estocásticas observadas em reações de primeira ordem. Essa contribuição se destaca pela simplicidade de implementação e pelo potencial de aplicação em estudos mais complexos, estabelecendo as bases para a utilização de autômatos celulares em investigações futuras envolvendo reações enzimáticas e outros processos dinâmicos.
 
 \chapter{METODOLOGIA}
-% Conteúdo da metodologia...
+
+
+
+\begin{table}[H]
+    \centering
+    \caption{\textbf{Interpretação da probabilidade ($P_B$)}}
+    \vspace{0.2cm}
+    \begin{tabularx}{\textwidth}{m{3.5cm} X}
+        \hline
+        \multicolumn{2}{c}{$\mathbf{0 \leq P_B(\mathbf{x}_i, \mathbf{x}_j) \leq 1}$} \\
+        \hline
+        \textbf{Valores} & \textbf{Significado}                                      \\
+        \hline
+        $P_B = 0$        & Os componentes permanecem sempre unidos                   \\
+        $P_B \to 0^+$    & Tendência de permanecerem sempre unidos                   \\
+        $P_B \to 1^-$    & Tendência de permanecerem sempre separados                \\
+        $P_B = 1$        & Os componentes permanecem sempre separados                \\
+        \hline
+    \end{tabularx}
+    
+    \vspace{0.2cm}
+    \makebox[\linewidth][l]{\small Fonte: Autoria própria}
+\end{table}
 
 \chapter{RESULTADOS}
 % Conteúdo dos resultados...
