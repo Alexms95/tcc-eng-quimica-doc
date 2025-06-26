@@ -29,7 +29,7 @@
 \titleformat{\chapter}[hang]{\normalfont\bfseries\Large}{\thechapter}{0.5em}{}
 \titleformat{\section}{\normalfont\bfseries}{\thesection}{1em}{}
 \titleformat{\subsection}{\normalfont\bfseries}{\thesubsection}{1em}{}
-\titleformat{\subsubsection}{\normalfont\bfseries}{\thesubsubsection}{1em}{}
+\titleformat{\subsubsection}{\normalfont\bfseries}{\thechapter}{1em}{}
 
 \captionsetup[figure]{labelfont=bf,labelsep=endash,name=Figura}
 \captionsetup[table]{labelfont=bf,labelsep=endash,name=Tabela}
@@ -188,18 +188,34 @@ SILVA, Alex Matos da. \textbf{Desenvolvimento de Software para Simulação de Pr
 \chapter*{Lista de Abreviaturas e Siglas}
 \addcontentsline{toc}{chapter}{Lista de Abreviaturas e Siglas}
 \begin{tabbing}
-    CSTR \hspace{2cm} \= Continuous-Stirred Tank Reactor \\
-    PP \> Polipropileno \\
+    AC \hspace{2cm} \= Autômato Celular \\
+    CA \> Cellular Automaton \\
+    CSTR \> Continuous Stirred-Tank Reactor \\
+    EDO \> Equação Diferencial Ordinária \\
+    EQ \> Escola de Química \\
+    GUI \> Graphical User Interface \\
+    MM \> Michaelis-Menten \\
+    PFR \> Plug Flow Reactor \\
     TCC \> Trabalho de Conclusão de Curso \\
-    VC \> Volume de Controle \\
+    UFRJ \> Universidade Federal do Rio de Janeiro \\
 \end{tabbing}
 
 % Lista de símbolos
 \chapter*{Lista de Símbolos}
 \begin{tabbing}
-    $\cdot$ \hspace{2cm} \= Taxa de reação (mol s\textsuperscript{-1} m\textsuperscript{-3}) \\
-    $R$ \> Constante dos gases ideais (J mol\textsuperscript{-1}K\textsuperscript{-1}) \\
-    $\gamma$ \> Constante de Euler-Mascheroni \\
+    $[E]$ \hspace{2cm} \= Concentração de enzima livre (mol L\textsuperscript{-1}) \\
+    $[S]$ \> Concentração de substrato (mol L\textsuperscript{-1}) \\
+    $[ES]$ \> Concentração do complexo enzima-substrato (mol L\textsuperscript{-1}) \\
+    $[P]$ \> Concentração de produto (mol L\textsuperscript{-1}) \\
+    $k_1$ \> Constante de velocidade da associação enzima-substrato (L mol\textsuperscript{-1} s\textsuperscript{-1}) \\
+    $k_{-1}$ \> Constante de velocidade da dissociação do complexo (s\textsuperscript{-1}) \\
+    $k_2$ \> Constante de velocidade de formação do produto (s\textsuperscript{-1}) \\
+    $K_m$ \> Constante de Michaelis-Menten (mol L\textsuperscript{-1}) \\
+    $V_{max}$ \> Velocidade máxima da reação (mol L\textsuperscript{-1} s\textsuperscript{-1}) \\
+    $r$ \> Taxa de reação (mol L\textsuperscript{-1} s\textsuperscript{-1}) \\
+    $P$ \> Probabilidade de transição em AC \\
+    $N$ \> Número de células na grade do autômato \\
+    $\Delta t$ \> Intervalo de tempo (s) \\
 \end{tabbing}
 
 \newpage
