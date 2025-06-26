@@ -17,6 +17,7 @@
 \usepackage{caption}
 \usepackage{setspace}
 \usepackage{lmodern}
+\usepackage{changepage}
 \usepackage[backend=biber,style=abnt-numeric]{biblatex}
 
 \usepackage[colorlinks=true, linkcolor=black, citecolor=black, urlcolor=blue]{hyperref}
@@ -104,25 +105,43 @@
 \begin{center}
     \textbf{Alex Matos da Silva}
 
-    \vfill
+    \vspace{1cm}
 
-    \textbf{\Large DESENVOLVIMENTO DE SOFTWARE PARA SIMULAÇÃO DE PROCESSOS ENZIMÁTICOS}
+    \textbf{DESENVOLVIMENTO DE SOFTWARE PARA SIMULAÇÃO DE PROCESSOS ENZIMÁTICOS}
 
-    \vfill
+    \vspace{0.5cm}
 
-    Trabalho de Conclusão de Curso aprovado em 20 de agosto de 2022.
+    \begin{adjustwidth}{8cm}{0cm}
+        Trabalho de Conclusão de Curso apresentado à Escola de Química da Universidade Federal do Rio de Janeiro, como parte dos requisitos necessários à obtenção do grau de Engenheiro Químico.
+    \end{adjustwidth}
 
-    \vfill
+    \vspace{0.5cm}
+
+\end{center}
+
+Aprovado em 20 de agosto de 2025.
+
+\begin{center}
 
     \vspace{2cm}
 
     \noindent\rule{10cm}{0.4pt}\\
-    \noindent\hspace*{0.2cm}Heloísa Lajas Sanches Fernandes
+    \noindent\hspace*{0.2cm}Heloísa Lajas Sanches Fernandes, D.Sc
+
+    \vspace{1cm}
+
+    \noindent\rule{10cm}{0.4pt}\\
+    \noindent\hspace*{0.2cm}Bernardo Dias Ribeiro, D.Sc
 
     \vspace{2cm}
 
     \noindent\rule{10cm}{0.4pt}\\
-    \noindent\hspace*{0.2cm}Bernardo Dias Ribeiro
+    \noindent\hspace*{0.2cm}Nome (COMPLETO) do Avaliador 1, titulação, instituição
+
+    \vspace{1cm}
+
+    \noindent\rule{10cm}{0.4pt}\\
+    \noindent\hspace*{0.2cm}Nome (COMPLETO) do Avaliador 2, titulação, instituição
 
 
     \vfill
@@ -153,7 +172,7 @@ Inserir aqui os agradecimentos.
 \vspace*{\fill}
 
 % Resumo
-\chapter*{Resumo}
+\chapter*{\MakeUppercase{Resumo}}
 SILVA, Alex Matos da. \textbf{Desenvolvimento de Software para Simulação de Processos Enzimáticos}. Rio de Janeiro, 2025. Trabalho de Conclusão de Curso (Graduação em Engenharia Química) – Escola de Química, Universidade Federal do Rio de Janeiro, 2025.
 
 \medskip
@@ -165,7 +184,7 @@ SILVA, Alex Matos da. \textbf{Desenvolvimento de Software para Simulação de Pr
 \textbf{Palavras-chave}: palavra-chave 1; palavra-chave 2; palavra-chave 3.
 
 % Abstract
-\chapter*{Abstract}
+\chapter*{\MakeUppercase{Abstract}}
 SILVA, Alex Matos da. \textbf{Desenvolvimento de Software para Simulação de Processos Enzimáticos}. Rio de Janeiro, 2025. Trabalho de Conclusão de Curso (Graduação em Engenharia Química) – Escola de Química, Universidade Federal do Rio de Janeiro, 2025.
 
 \medskip
