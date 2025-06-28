@@ -341,6 +341,47 @@ Portanto, o desenvolvimento de processos enzimáticos eficientes em meios multif
 
 Autômatos Celulares (AC) representam um paradigma computacional discreto que modela sistemas complexos através da interação local de componentes simples. Essencialmente, um autômato celular consiste em uma grade regular de células, onde cada célula possui um estado finito e discreto. A evolução do sistema ocorre em passos de tempo discretos, e o estado de cada célula no próximo passo de tempo é determinado por uma regra de transição que leva em consideração o seu próprio estado atual e os estados de suas células vizinhas. Essa regra é aplicada de forma síncrona e uniforme a todas as células da grade. A simplicidade das regras locais, quando aplicadas em larga escala, pode gerar comportamentos globais extremamente complexos e emergentes, tornando os ACs ferramentas poderosas para a simulação de fenômenos diversos \cite{kier2005}.
 
+Os autômatos celulares são frequentemente representados por uma grade multidimensional, onde cada célula pode assumir um de vários estados possíveis. A configuração mais comum é a grade bidimensional, mas também podem ser utilizados em grades unidimensionais ou tridimensionais. Para este trabalho, é utilizada uma grade bidimensional e os estados possíveis de uma célula são representados por componentes, que possuem significado físico, ou por vazios. As células interagem com suas vizinhas imediatas, que podem ser definidas de diferentes maneiras.
+
+A vizinhança mais comum é a \textit{vizinhança de von Neumann}, que inclui as quatro células adjacentes (cima, baixo, esquerda e direita) pintadas de azul na Figura \ref{fig:vizinhanca_von_neumann}. A \textit{vizinhança de von Neumann estendida}, por sua vez, inclui também as células pintadas de verde na Figura \ref{fig:vizinhanca_von_neumann_estendida}, totalizando oito células vizinhas. Também é possível definir outras vizinhanças, como a \textit{vizinhança de Moore}, que inclui todas as oito células adjacentes (cima, baixo, esquerda, direita e as quatro diagonais), como na Figura \ref{fig:vizinhanca_moore}. A escolha da vizinhança influencia diretamente a dinâmica do autômato celular e, consequentemente, o comportamento emergente do sistema simulado. Neste trabalho são utilizadas as vizinhanças de von Neumann e von Neumann estendida.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{vizinhanca_von_neumann.png}
+    \caption{\small Vizinhança de von Neumann de um componente A, definida pelas 4 células azuis.}
+    \label{fig:vizinhanca_von_neumann}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{vizinhanca_von_neumann_estendida.png}
+    \caption{\small Vizinhança de von Neumann estendida de um componente A, definida pelas células azuis e verdes.}
+    \label{fig:vizinhanca_von_neumann_estendida}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{vizinhanca_moore.png}
+    \caption{\small Vizinhança de Moore de um componente A, definida pelas 8 células azuis.}
+    \label{fig:vizinhanca_moore}
+\end{figure}
+
+Os modelos de autômato celular (AC) empregados neste trabalho seguem predominantemente o formalismo probabilístico descrito por Kier \cite{kier2005}. Cada ingrediente (molécula, íon ou vazio) ocupa uma célula de uma malha quadrada e interage apenas com as células de sua \textit{vizinhança de von Neumann estendida}. A dinâmica emerge da aplicação sincrônica, a cada iteração, (i) das \textbf{regras de movimentação} e (ii) das \textbf{regras de transição}. A seguir são definidos os quatro parâmetros fundamentais desses conjuntos de regras: $P_m$, $P_b$, $J$ e $P_r$.
+
+\subsubsection{Probabilidade de Movimentação Livre – \texorpdfstring{$P_m$}{Pm}}
+\label{sec:probabilidade_movimento_livre}
+
+\begin{itemize}
+    \item \textbf{Definição:} $P_m$ representa a chance de um ingrediente se mover para uma célula desocupada de sua vizinhança de von Neumann. Essa probabilidade é influenciada por fatores como a densidade de ingredientes nas células vizinhas e a natureza do próprio ingrediente.
+    \item \textbf{Intervalo:} $0 \le P_m \le 1$.
+    \item \textbf{Interpretação física:} controla a \textit{mobilidade inerente}.
+          Valores próximos de 1 reproduzem um passeio aleatório praticamente livre; valores
+          menores simulam espécies mais lentas.
+    \item \textbf{Implementação:} para cada $A$, gera-se um número aleatório
+          $r\in[0,1]$; se $r \le P_m$ o deslocamento é tentado, respeitando
+          colisões e demais regras.
+\end{itemize}
+
 \subsection{Breve Histórico, Aplicações e Exemplos}
 
 A concepção dos autômatos celulares remonta aos anos 1940, com os trabalhos pioneiros de John von Neumann e Stanisław Ulam, que buscavam modelos para sistemas autorreprodutores e o crescimento de cristais, respectivamente. No entanto, foi com o matemático John Conway, na década de 1970, que os autômatos celulares ganharam notoriedade com a criação do ``Jogo da Vida'' (Conway's Game of Life) \cite{Gardner1970}. O ``Jogo da Vida'' é um autômato celular bidimensional com regras extremamente simples: uma célula viva com menos de dois vizinhos vivos morre por subpopulação; uma célula viva com dois ou três vizinhos vivos sobrevive para a próxima geração; uma célula viva com mais de três vizinhos vivos morre por superpopulação; e uma célula morta com exatamente três vizinhos vivos se torna uma célula viva por reprodução. Apesar da simplicidade das regras, o ``Jogo da Vida'' é capaz de gerar padrões complexos e dinâmicos, incluindo estruturas que se movem, se replicam e interagem, demonstrando o poder dos ACs para simular fenômenos emergentes \cite{Gardner1970}.
@@ -431,6 +472,31 @@ Em síntese, o estudo de Seybold, Kier e Cheng \cite{seybold1997simulation} apre
 
 \chapter{METODOLOGIA}
 
+\section{Modelo do Autômato Celular}
+
+\subsection{Definição}
+
+\subsection{Regras de Evolução}
+
+\section{Implementação Computacional}
+
+\subsection{Código Fonte do Modelo}
+% mencionar que você escreveu um código em Python para a simulação (que estará no Apêndice ou no GitHub).
+% fluxograma
+
+\subsection{Interface do Usuário}
+% explicar como você construiu a interface para o usuário (prints de tela são bem-vindos), inclusive com os detalhes de input/output.
+
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=0.8\textwidth]{interface_usuario.png}
+%     \caption{Interface do Usuário}
+%     \label{fig:interface_usuario}
+% \end{figure}
+
+\subsection{Ambiente Computacional}
+% computador utilizado para as simulações (mencionar especialmente processador e RAM).
+% Performance do código (tempo de execução, uso de memória, etc.).
 
 
 \begin{table}[H]
@@ -449,7 +515,7 @@ Em síntese, o estudo de Seybold, Kier e Cheng \cite{seybold1997simulation} apre
         $P_B = 1$        & Os componentes permanecem sempre separados                \\
         \hline
     \end{tabularx}
-    
+
     \vspace{0.2cm}
     \makebox[\linewidth][l]{\small Fonte: Autoria própria}
 \end{table}
