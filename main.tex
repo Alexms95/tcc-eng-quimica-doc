@@ -338,6 +338,12 @@ Portanto, o desenvolvimento de processos enzimáticos eficientes em meios multif
 
 \section{SIMULAÇÃO COM AUTÔMATOS CELULARES}
 
+\subsection{Breve Histórico e Aplicações}
+
+A concepção dos autômatos celulares remonta aos anos 1940, com os trabalhos pioneiros de John von Neumann e Stanisław Ulam, que buscavam modelos para sistemas autorreprodutores e o crescimento de cristais, respectivamente. No entanto, foi com o matemático John Conway, na década de 1970, que os autômatos celulares ganharam notoriedade com a criação do ``Jogo da Vida'' (Conway's Game of Life) \cite{Gardner1970}. O ``Jogo da Vida'' é um autômato celular bidimensional com regras extremamente simples: uma célula viva com menos de dois vizinhos vivos morre por subpopulação; uma célula viva com dois ou três vizinhos vivos sobrevive para a próxima geração; uma célula viva com mais de três vizinhos vivos morre por superpopulação; e uma célula morta com exatamente três vizinhos vivos se torna uma célula viva por reprodução. Apesar da simplicidade das regras, o ``Jogo da Vida'' é capaz de gerar padrões complexos e dinâmicos, incluindo estruturas que se movem, se replicam e interagem, demonstrando o poder dos ACs para simular fenômenos emergentes \cite{Gardner1970}.
+
+Além do ``Jogo da Vida'', os autômatos celulares encontraram aplicações em uma vasta gama de áreas. Na física, são utilizados para modelar fenômenos como a formação de padrões em fluidos e a propagação de incêndios florestais. Na biologia, são empregados para simular o crescimento de populações, a propagação de doenças e o desenvolvimento embrionário. A versatilidade dos autômatos celulares reside na sua capacidade de capturar a essência da interação local e sua emergência em comportamentos globais, tornando-os uma ferramenta valiosa para a compreensão e simulação de sistemas complexos em diversas disciplinas \cite{kier2005}.
+
 \subsection{Definição}
 
 Autômatos Celulares (AC) representam um paradigma computacional discreto que modela sistemas complexos através da interação local de componentes simples. Essencialmente, um autômato celular consiste em uma grade regular de células, onde cada célula possui um estado finito e discreto. A evolução do sistema ocorre em passos de tempo discretos, e o estado de cada célula no próximo passo de tempo é determinado por uma regra de transição que leva em consideração o seu próprio estado atual e os estados de suas células vizinhas. Essa regra é aplicada de forma síncrona e uniforme a todas as células da grade. A simplicidade das regras locais, quando aplicadas em larga escala, pode gerar comportamentos globais extremamente complexos e emergentes, tornando os ACs ferramentas poderosas para a simulação de fenômenos diversos \cite{kier2005}.
@@ -483,13 +489,6 @@ As transições simulam mudanças de estado químico
     \vspace{0.2cm}
     \makebox[\linewidth][l]{\small Fonte: Autoria própria}
 \end{table}
-
-
-\subsection{Breve Histórico, Aplicações e Exemplos}
-
-A concepção dos autômatos celulares remonta aos anos 1940, com os trabalhos pioneiros de John von Neumann e Stanisław Ulam, que buscavam modelos para sistemas autorreprodutores e o crescimento de cristais, respectivamente. No entanto, foi com o matemático John Conway, na década de 1970, que os autômatos celulares ganharam notoriedade com a criação do ``Jogo da Vida'' (Conway's Game of Life) \cite{Gardner1970}. O ``Jogo da Vida'' é um autômato celular bidimensional com regras extremamente simples: uma célula viva com menos de dois vizinhos vivos morre por subpopulação; uma célula viva com dois ou três vizinhos vivos sobrevive para a próxima geração; uma célula viva com mais de três vizinhos vivos morre por superpopulação; e uma célula morta com exatamente três vizinhos vivos se torna uma célula viva por reprodução. Apesar da simplicidade das regras, o ``Jogo da Vida'' é capaz de gerar padrões complexos e dinâmicos, incluindo estruturas que se movem, se replicam e interagem, demonstrando o poder dos ACs para simular fenômenos emergentes \cite{Gardner1970}.
-
-Além do ``Jogo da Vida'', os autômatos celulares encontraram aplicações em uma vasta gama de áreas. Na física, são utilizados para modelar fenômenos como a formação de padrões em fluidos e a propagação de incêndios florestais. Na biologia, são empregados para simular o crescimento de populações, a propagação de doenças e o desenvolvimento embrionário. A versatilidade dos autômatos celulares reside na sua capacidade de capturar a essência da interação local e sua emergência em comportamentos globais, tornando-os uma ferramenta valiosa para a compreensão e simulação de sistemas complexos em diversas disciplinas \cite{kier2005}.
 
 \subsection{Simulação de Reações Químicas}
 
