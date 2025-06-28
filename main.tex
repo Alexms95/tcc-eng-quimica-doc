@@ -23,6 +23,7 @@
 \usepackage[backend=biber,style=abnt]{biblatex}
 
 \usepackage[colorlinks=true, linkcolor=black, citecolor=black, urlcolor=blue]{hyperref}
+\usepackage{booktabs}
 
 \setlength{\parindent}{2em}
 \setlength{\parskip}{0.5em}
@@ -341,9 +342,16 @@ Portanto, o desenvolvimento de processos enzimáticos eficientes em meios multif
 
 Autômatos Celulares (AC) representam um paradigma computacional discreto que modela sistemas complexos através da interação local de componentes simples. Essencialmente, um autômato celular consiste em uma grade regular de células, onde cada célula possui um estado finito e discreto. A evolução do sistema ocorre em passos de tempo discretos, e o estado de cada célula no próximo passo de tempo é determinado por uma regra de transição que leva em consideração o seu próprio estado atual e os estados de suas células vizinhas. Essa regra é aplicada de forma síncrona e uniforme a todas as células da grade. A simplicidade das regras locais, quando aplicadas em larga escala, pode gerar comportamentos globais extremamente complexos e emergentes, tornando os ACs ferramentas poderosas para a simulação de fenômenos diversos \cite{kier2005}.
 
-Os autômatos celulares são frequentemente representados por uma grade multidimensional, onde cada célula pode assumir um de vários estados possíveis. A configuração mais comum é a grade bidimensional, mas também podem ser utilizados em grades unidimensionais ou tridimensionais. Para este trabalho, é utilizada uma grade bidimensional e os estados possíveis de uma célula são representados por componentes, que possuem significado físico, ou por vazios. As células interagem com suas vizinhas imediatas, que podem ser definidas de diferentes maneiras.
+Os autômatos celulares são frequentemente representados por uma grade multidimensional, onde cada célula pode assumir um de vários estados possíveis. A configuração mais comum é a grade bidimensional, mas também podem ser utilizados grades unidimensionais ou tridimensionais. Para este trabalho, são utilizadas grades bidimensionais e os estados possíveis de uma célula são representados por \textbf{componentes}, que possuem significado físico, ou por \textbf{vazios}. A Figura \ref{fig:grade_2d} ilustra uma grade 2D (bidimensional) 5 x 5, isto é, de 5 linhas e 5 colunas.
 
-A vizinhança mais comum é a \textit{vizinhança de von Neumann}, que inclui as quatro células adjacentes (cima, baixo, esquerda e direita) pintadas de azul na Figura \ref{fig:vizinhanca_von_neumann}. A \textit{vizinhança de von Neumann estendida}, por sua vez, inclui também as células pintadas de verde na Figura \ref{fig:vizinhanca_von_neumann_estendida}, totalizando oito células vizinhas. Também é possível definir outras vizinhanças, como a \textit{vizinhança de Moore}, que inclui todas as oito células adjacentes (cima, baixo, esquerda, direita e as quatro diagonais), como na Figura \ref{fig:vizinhanca_moore}. A escolha da vizinhança influencia diretamente a dinâmica do autômato celular e, consequentemente, o comportamento emergente do sistema simulado. Neste trabalho são utilizadas as vizinhanças de von Neumann e von Neumann estendida.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{grade_2d.png}
+    \caption{\small Exemplo de autômato celular 2D (5 x 5) com células representando vazios.}
+    \label{fig:grade_2d}
+\end{figure}
+
+As células interagem com suas vizinhas imediatas, que podem ser definidas de diferentes maneiras. A vizinhança mais comum é a \textit{vizinhança de von Neumann}, que inclui as quatro células adjacentes (cima, baixo, esquerda e direita) pintadas de azul na Figura \ref{fig:vizinhanca_von_neumann}. A \textit{vizinhança de von Neumann estendida}, por sua vez, inclui também as células pintadas de verde na Figura \ref{fig:vizinhanca_von_neumann_estendida}, totalizando oito células vizinhas. Também é possível definir outras vizinhanças, como a \textit{vizinhança de Moore}, que inclui todas as oito células adjacentes (cima, baixo, esquerda, direita e as quatro diagonais), como na Figura \ref{fig:vizinhanca_moore}. A escolha da vizinhança influencia diretamente a dinâmica do autômato celular e, consequentemente, o comportamento emergente do sistema simulado. Neste trabalho são utilizadas as vizinhanças de von Neumann e von Neumann estendida.
 
 \begin{figure}[H]
     \centering
@@ -366,21 +374,116 @@ A vizinhança mais comum é a \textit{vizinhança de von Neumann}, que inclui as
     \label{fig:vizinhanca_moore}
 \end{figure}
 
-Os modelos de autômato celular (AC) empregados neste trabalho seguem predominantemente o formalismo probabilístico descrito por Kier \cite{kier2005}. Cada ingrediente (molécula, íon ou vazio) ocupa uma célula de uma malha quadrada e interage apenas com as células de sua \textit{vizinhança de von Neumann estendida}. A dinâmica emerge da aplicação sincrônica, a cada iteração, (i) das \textbf{regras de movimentação} e (ii) das \textbf{regras de transição}. A seguir são definidos os quatro parâmetros fundamentais desses conjuntos de regras: $P_m$, $P_b$, $J$ e $P_r$.
+Os modelos de autômato celular (AC) empregados neste trabalho seguem predominantemente o formalismo probabilístico descrito por Kier \cite{kier2005}. Cada componente ou vazio ocupa uma célula de uma malha quadrada e interage apenas com as células de sua \textit{vizinhança de von Neumann estendida}. A dinâmica emerge da aplicação sincrônica, a cada iteração, (i) das \textbf{regras de movimentação} e (ii) das \textbf{regras de transição}. A seguir são definidos os quatro parâmetros fundamentais desses conjuntos de regras: $P_m$, $P_b$, $J$ e $P_r$.
 
 \subsubsection{Probabilidade de Movimentação Livre – \texorpdfstring{$P_m$}{Pm}}
 \label{sec:probabilidade_movimento_livre}
 
 \begin{itemize}
-    \item \textbf{Definição:} $P_m$ representa a chance de um ingrediente se mover para uma célula desocupada de sua vizinhança de von Neumann. Essa probabilidade é influenciada por fatores como a densidade de ingredientes nas células vizinhas e a natureza do próprio ingrediente.
+    \item \textbf{Definição:} $P_m$ representa a chance de um componente se mover para uma célula desocupada de sua vizinhança de von Neumann. Essa probabilidade é influenciada por fatores como a densidade de componentes nas células vizinhas e a natureza do próprio componente.
     \item \textbf{Intervalo:} $0 \le P_m \le 1$.
     \item \textbf{Interpretação física:} controla a \textit{mobilidade inerente}.
           Valores próximos de 1 reproduzem um passeio aleatório praticamente livre; valores
           menores simulam espécies mais lentas.
-    \item \textbf{Implementação:} para cada $A$, gera-se um número aleatório
-          $r\in[0,1]$; se $r \le P_m$ o deslocamento é tentado, respeitando
-          colisões e demais regras.
 \end{itemize}
+
+\subsubsection{Parâmetro de Junção – \texorpdfstring{$J$}{J}}
+\label{subsubsec:J}
+
+\begin{itemize}
+    \item \textbf{Definição:} $J(AB)$ modula a
+          \emph{propensão de movimento de $A$ na direção de $B$}
+          quando ambos estão separados por exatamente uma célula vazia.
+    \item \textbf{Valores típicos:}
+          \[
+              J(AB)=
+              \begin{cases}
+                  >1    & \text{atração curta distância}  \\[2pt]
+                  =1    & \text{deslocamento indiferente} \\[2pt]
+                  0<J<1 & \text{repulsão}                 \\[2pt]
+                  =0    & \text{movimento proibido}
+              \end{cases}
+          \]
+    \item \textbf{Significado químico:} descreve interações
+          hidrofóbicas/hidrofílicas, cargas opostas, etc.
+          Por exemplo, \citeauthor{kier2005} ajustam
+          $J(\mathrm{WW})>1$ para reproduzir a coesão da água líquida.
+\end{itemize}
+
+\subsubsection{Probabilidade de Quebra – \texorpdfstring{$P_b$}{Pb}}
+\label{subsubsec:Pb}
+
+\begin{itemize}
+    \item \textbf{Definição:} $P_b(AB)$ é a probabilidade de
+          \emph{separação} de dois componentes adjacentes $A$ e $B$
+          (``quebra de ligação'') em uma iteração.
+    \item \textbf{Intervalo:} $0 \le P_b \le 1$.
+    \item \textbf{Coesão:} $P_b=0$ \,($A$ e $B$ nunca se separam)
+          $\rightarrow$ forte coesão;
+          $P_b=1$ \,($A$ e $B$ sempre se separam) $\rightarrow$ ligação fraca.
+    \item \textbf{Dependência de coordenação:} se $A$ está ligado a
+          $n$ vizinhos do tipo $B$, a probabilidade conjunta de separação é
+          $P_b^{\,n}$; logo, múltiplos contatos estabilizam o agregado.
+    \item \textbf{Correspondência físico-química:}
+          em água, $P_b(\mathrm{WW})$ pode ser correlacionado com a temperatura:
+          valores maiores a temperaturas elevadas representam a maior
+          desordem da rede de ligações de hidrogênio \cite{kier2005}.
+\end{itemize}
+
+\subsection{Regras de Transição}
+\label{subsec:trans_rules}
+
+As transições simulam mudanças de estado químico
+(\textit{tautomerismo, ionização, reações A + B → C + D}, etc.).
+
+\subsubsection{Probabilidade de Reação – \texorpdfstring{$P_r$}{Pr}}
+\label{subsubsec:Pr}
+
+\begin{itemize}
+    \item \textbf{Definição:} $P_r$ (substitui o símbolo $P_t$ de
+          \citeauthor{kier2005}) é a probabilidade de conversão química
+          durante uma iteração.
+    \item \textbf{Casos de uso:}
+          \begin{enumerate}
+              \item \emph{Transição de primeira ordem:}
+                    $A \xrightarrow{P_r(A\rightarrow B)} B$.\\
+                    Se $P_r=1$ a transição é determinística;
+                    $0<P_r<1$ torna-a estocástica.
+              \item \emph{Reação de encontro (segunda ordem):}\\
+                    quando $A$ e $B$ tornam-se vizinhos,
+                    ocorre $A+B \xrightarrow{P_r(AB)} C+D$
+                    com probabilidade $P_r(AB)$.
+          \end{enumerate}
+    \item \textbf{Significado cinético:} $P_r$ pode ser relacionado a
+          uma constante de velocidade efetiva $k$
+          (\textit{via} calibração: $k = P_r/\Delta t$,
+          onde $\Delta t$ é a duração de uma iteração).
+    \item \textbf{Importância prática:}
+          em modelos enzimáticos, por exemplo, $P_r(\mathrm{AB})$
+          controla a etapa catalítica $\mathrm{ES}\rightarrow\mathrm{EP}$
+          e permite reproduzir curvas de Michaelis–Menten
+          \cite[cap.~9]{kier2005}.
+\end{itemize}
+
+\begin{table}[H]
+    \centering
+    \caption{\textbf{Parâmetros Fundamentais do Modelo de Autômato Celular}}
+    \vspace{0.2cm}
+    \begin{tabularx}{\textwidth}{X m{3cm} m{3cm}}
+        \hline
+        \textbf{Parâmetro}        & \textbf{Símbolo} & \textbf{Intervalo} \\
+        \hline
+        Probabilidade de movimentação livre  & $P_m$            & $0 \leq P_m \leq 1$ \\
+        Probabilidade de quebra (coesão)  & $P_b$            & $0 \leq P_b \leq 1$ \\
+        Parâmetro de junção               & $J$              & $0 \leq J < \infty$ \\
+        Probabilidade de reação/transição & $P_r$            & $0 \leq P_r \leq 1$ \\
+        \hline
+    \end{tabularx}
+
+    \vspace{0.2cm}
+    \makebox[\linewidth][l]{\small Fonte: Autoria própria}
+\end{table}
+
 
 \subsection{Breve Histórico, Aplicações e Exemplos}
 
