@@ -224,6 +224,9 @@ SILVA, Alex Matos da. \textbf{Desenvolvimento de Software para Simulação de Pr
     PFR \> Plug Flow Reactor \\
     TCC \> Trabalho de Conclusão de Curso \\
     UFRJ \> Universidade Federal do Rio de Janeiro \\
+    ACs \> Autômatos Celulares \\
+    CPU \> Unidade Central de Processamento \\
+    RAM \> Memória de Acesso Aleatório \\
 \end{tabbing}
 
 % Lista de símbolos
@@ -242,6 +245,10 @@ SILVA, Alex Matos da. \textbf{Desenvolvimento de Software para Simulação de Pr
     $P$ \> Probabilidade de transição em AC \\
     $N$ \> Número de células na grade do autômato \\
     $\Delta t$ \> Intervalo de tempo (s) \\
+    $P_m$ \> Probabilidade de movimentação livre \\
+    $P_b$ \> Probabilidade de quebra de ligação \\
+    $J$ \> Parâmetro de junção entre componentes \\
+    $P_r$ \> Probabilidade de reação química \\
 \end{tabbing}
 
 \newpage
@@ -477,12 +484,12 @@ As transições simulam mudanças de estado químico
     \vspace{0.2cm}
     \begin{tabularx}{\textwidth}{X m{3cm} m{3cm}}
         \hline
-        \textbf{Parâmetro}        & \textbf{Símbolo} & \textbf{Intervalo} \\
+        \textbf{Parâmetro}                  & \textbf{Símbolo} & \textbf{Intervalo}  \\
         \hline
-        Probabilidade de movimentação livre  & $P_m$            & $0 \leq P_m \leq 1$ \\
-        Probabilidade de quebra (coesão)  & $P_b$            & $0 \leq P_b \leq 1$ \\
-        Parâmetro de junção               & $J$              & $0 \leq J < \infty$ \\
-        Probabilidade de reação/transição & $P_r$            & $0 \leq P_r \leq 1$ \\
+        Probabilidade de movimentação livre & $P_m$            & $0 \leq P_m \leq 1$ \\
+        Probabilidade de quebra (coesão)    & $P_b$            & $0 \leq P_b \leq 1$ \\
+        Parâmetro de junção                 & $J$              & $0 \leq J < \infty$ \\
+        Probabilidade de reação/transição   & $P_r$            & $0 \leq P_r \leq 1$ \\
         \hline
     \end{tabularx}
 
@@ -577,6 +584,26 @@ Em síntese, o estudo de Seybold, Kier e Cheng \cite{seybold1997simulation} apre
 \section{Modelo do Autômato Celular}
 
 \subsection{Definição}
+
+O modelo de AC utilizado neste trabalho é baseado em uma grade 2D, composta por células que podem conter componentes químicos ou vazios. Cada célula pode interagir com suas vizinhas imediatas, definidas pela vizinhança de von Neumann estendida. As regras de movimentação e transição são aplicadas de forma síncrona a todas as células, permitindo que o sistema evolua ao longo do tempo. As regras de evolução são definidas pelos parâmetros $P_m$, $P_b$, $J$ e $P_r$.
+
+A grade é inicializada com uma distribuição aleatória de componentes e vazios. Durante cada iteração, as células são atualizadas conforme as regras do modelo, que consideram os estados das células vizinhas e os parâmetros definidos. O percurso da grade segue uma ordem sistemática: começa na célula superior esquerda (0, 0), avança horizontalmente até a última célula da linha (0, 3), e então prossegue para a primeira célula da próxima linha (1, 0). Esse padrão se repete até que todas as células da grade sejam processadas. Após a atualização completa da grade, uma iteração do autômato celular é concluída, e o processo reinicia, percorrendo novamente todas as células. Esse ciclo continua até atingir o número de iterações especificado. A Figura \ref{fig:percorre_grade} ilustra o percurso de uma grade 2D 4 x 4 durante uma iteração do autômato celular.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{percorre_grade.png}
+    \caption{\small Percurso da grade 2D durante as iterações do autômato celular.}
+    \label{fig:percorre_grade}
+\end{figure}
+
+A respeito da interação entre as células das bordas da malha, o modelo adota a condição de contorno toroidal, onde as células da borda se conectam às células opostas. Por exemplo, a célula (0, 0) está conectada à célula (0, 3) e, também, à celula (3, 0), fazendo parte de sua vizinhança de von Neumann. Essa abordagem garante que todas as células tenham vizinhos válidos, independentemente de sua posição na malha. Outras condições de contorno, como cilíndrica ou caixa, também são utilizadas em autômatos celulares, mas a toroidal é a mais comum, pois permite uma simulação contínua e sem bordas. A cilíndrica conecta as células da borda horizontalmente ou verticalmente, enquanto a caixa trata as bordas como paredes fixas, o que pode limitar a dinâmica do sistema. A Figura \ref{fig:torus} ilustra a condição de contorno toroidal aplicada ao modelo. A vizinhança de von Neumann da célula (0, 0) é composta pelas células (0, 1), (1, 0), (3, 0) e (0, 3).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{torus.png}
+    \caption{\small Condição de contorno toroidal aplicada ao modelo de autômato celular.}
+    \label{fig:torus}
+\end{figure}
 
 \subsection{Regras de Evolução}
 
