@@ -393,12 +393,19 @@ Os modelos de autômato celular (AC) empregados neste trabalho seguem predominan
 \label{sec:probabilidade_movimento_livre}
 
 \begin{itemize}
-    \item \textbf{Definição:} $P_m$ representa a chance de um componente se mover para uma célula desocupada de sua vizinhança de von Neumann. Essa probabilidade é influenciada por fatores como a densidade de componentes nas células vizinhas e a natureza do próprio componente.
+    \item \textbf{Definição:} $P_m$ representa a chance de um componente isolado se mover para uma célula desocupada de sua vizinhança de von Neumann (Figura \ref{fig:movimentacao_livre}). Essa probabilidade é influenciada por fatores como a densidade de componentes nas células vizinhas e a natureza do próprio componente.
     \item \textbf{Intervalo:} $0 \le P_m \le 1$.
     \item \textbf{Interpretação física:} controla a \textit{mobilidade inerente}.
           Valores próximos de 1 reproduzem um passeio aleatório praticamente livre; valores
           menores simulam espécies mais lentas.
 \end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Pm.png}
+    \caption{\small Exemplo de movimentação livre de um componente A para uma célula vazia da sua vizinhança de von Neumann.}
+    \label{fig:movimentacao_livre}
+\end{figure}
 
 \subsubsection{Parâmetro de Junção – \texorpdfstring{$J$}{J}}
 \label{subsubsec:J}
@@ -406,7 +413,7 @@ Os modelos de autômato celular (AC) empregados neste trabalho seguem predominan
 \begin{itemize}
     \item \textbf{Definição:} $J(AB)$ modula a
           \emph{propensão de movimento de $A$ na direção de $B$}
-          quando ambos estão separados por exatamente uma célula vazia.
+          quando ambos estão separados por exatamente uma célula vazia. A Figura \ref{fig:movimentacao_juncao} ilustra essa situação, onde $A$ possui um vazio em sua vizinhança de von Neumann e este vazio separa $A$ de $B$ que, por sua vez, está na vizinhança de von Neumann estendida de $A$.
     \item \textbf{Valores típicos:}
           \[
               J(AB)=
@@ -423,13 +430,20 @@ Os modelos de autômato celular (AC) empregados neste trabalho seguem predominan
           $J(\mathrm{WW})>1$ para reproduzir a coesão da água líquida.
 \end{itemize}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Jab.png}
+    \caption{\small Exemplo de movimentação de um componente A na direção de um componente B, separados por uma célula vazia, com propensão de movimento $J(AB)$.}
+    \label{fig:movimentacao_juncao}
+\end{figure}
+
 \subsubsection{Probabilidade de Quebra – \texorpdfstring{$P_b$}{Pb}}
 \label{subsubsec:Pb}
 
 \begin{itemize}
     \item \textbf{Definição:} $P_b(AB)$ é a probabilidade de
           \emph{separação} de dois componentes adjacentes $A$ e $B$
-          (``quebra de ligação'') em uma iteração.
+          (``quebra de ligação'') em uma iteração. A Figura \ref{fig:quebra_ligacao} ilustra essa situação, onde $B$ está em uma célula adjacente a $A$.
     \item \textbf{Intervalo:} $0 \le P_b \le 1$.
     \item \textbf{Coesão:} $P_b=0$ \,($A$ e $B$ nunca se separam)
           $\rightarrow$ forte coesão;
@@ -443,11 +457,12 @@ Os modelos de autômato celular (AC) empregados neste trabalho seguem predominan
           desordem da rede de ligações de hidrogênio \cite{kier2005}.
 \end{itemize}
 
-\subsection{Regras de Transição}
-\label{subsec:trans_rules}
-
-As transições simulam mudanças de estado químico
-(\textit{tautomerismo, ionização, reações A + B → C + D}, etc.).
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{PbAB.png}
+    \caption{\small Exemplo de quebra de ligação entre dois componentes A e B adjacentes, com probabilidade de quebra $P_b(AB)$.}
+    \label{fig:quebra_ligacao}
+\end{figure}
 
 \subsubsection{Probabilidade de Reação – \texorpdfstring{$P_r$}{Pr}}
 \label{subsubsec:Pr}
@@ -455,7 +470,13 @@ As transições simulam mudanças de estado químico
 \begin{itemize}
     \item \textbf{Definição:} $P_r$ (substitui o símbolo $P_t$ de
           \citeauthor{kier2005}) é a probabilidade de conversão química
-          durante uma iteração.
+          durante uma iteração. A Figura \ref{fig:reacao} ilustra essa situação, onde $A$ e $B$ estão em células adjacentes e podem reagir para formar $C$ e $D$.
+    \item \textbf{Intervalo:} $0 \le P_r \le 1$.
+    \item \textbf{Reações elementares:} $P_r$ é aplicado a
+          \emph{reações elementares} que ocorrem quando
+          dois componentes estão em células adjacentes.
+          Por exemplo, $A+B \xrightarrow{P_r(AB)} C+D$
+          representa a reação entre $A$ e $B$ para formar $C$ e $D$ com probabilidade $P_r(AB)$.
     \item \textbf{Casos de uso:}
           \begin{enumerate}
               \item \emph{Transição de primeira ordem:}
@@ -478,6 +499,13 @@ As transições simulam mudanças de estado químico
           \cite[cap.~9]{kier2005}.
 \end{itemize}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{reacao.png}
+    \caption{\small Exemplo de reação entre dois componentes A e B adjacentes, formando C e D com probabilidade de reação $P_r(AB)$.}
+    \label{fig:reacao}
+\end{figure}
+
 \begin{table}[H]
     \centering
     \caption{\textbf{Parâmetros Fundamentais do Modelo de Autômato Celular}}
@@ -487,9 +515,9 @@ As transições simulam mudanças de estado químico
         \textbf{Parâmetro}                  & \textbf{Símbolo} & \textbf{Intervalo}  \\
         \hline
         Probabilidade de movimentação livre & $P_m$            & $0 \leq P_m \leq 1$ \\
-        Probabilidade de quebra (coesão)    & $P_b$            & $0 \leq P_b \leq 1$ \\
+        Probabilidade de quebra             & $P_b$            & $0 \leq P_b \leq 1$ \\
         Parâmetro de junção                 & $J$              & $0 \leq J < \infty$ \\
-        Probabilidade de reação/transição   & $P_r$            & $0 \leq P_r \leq 1$ \\
+        Probabilidade de reação             & $P_r$            & $0 \leq P_r \leq 1$ \\
         \hline
     \end{tabularx}
 
@@ -585,9 +613,9 @@ Em síntese, o estudo de Seybold, Kier e Cheng \cite{seybold1997simulation} apre
 
 \subsection{Definição}
 
-O modelo de AC utilizado neste trabalho é baseado em uma grade 2D, composta por células que podem conter componentes químicos ou vazios. Cada célula pode interagir com suas vizinhas imediatas, definidas pela vizinhança de von Neumann estendida. As regras de movimentação e transição são aplicadas de forma síncrona a todas as células, permitindo que o sistema evolua ao longo do tempo. As regras de evolução são definidas pelos parâmetros $P_m$, $P_b$, $J$ e $P_r$.
+O modelo de AC utilizado neste trabalho é baseado em uma grade 2D, composta por células que podem conter componentes químicos ou vazios. Cada célula pode interagir com suas vizinhas imediatas, definidas pela vizinhança de von Neumann estendida. As regras de movimentação e reação são aplicadas de forma síncrona a todas as células, permitindo que o sistema evolua ao longo do tempo. As regras de evolução são definidas pelos parâmetros $P_m$, $P_b$, $J$ e $P_r$.
 
-A grade é inicializada com uma distribuição aleatória de componentes e vazios. Durante cada iteração, as células são atualizadas conforme as regras do modelo, que consideram os estados das células vizinhas e os parâmetros definidos. O percurso da grade segue uma ordem sistemática: começa na célula superior esquerda (0, 0), avança horizontalmente até a última célula da linha (0, 3), e então prossegue para a primeira célula da próxima linha (1, 0). Esse padrão se repete até que todas as células da grade sejam processadas. Após a atualização completa da grade, uma iteração do autômato celular é concluída, e o processo reinicia, percorrendo novamente todas as células. Esse ciclo continua até atingir o número de iterações especificado. A Figura \ref{fig:percorre_grade} ilustra o percurso de uma grade 2D 4 x 4 durante uma iteração do autômato celular.
+A grade é inicializada com uma distribuição aleatória de componentes e vazios. Durante cada iteração, as células são atualizadas conforme as regras do modelo, que consideram os estados das células vizinhas e os parâmetros definidos. O percurso da grade segue uma ordem sistemática: começa na célula superior esquerda (0, 0), avança horizontalmente até a última célula da linha, e então prossegue para a primeira célula da próxima linha (1, 0). Esse padrão se repete até que todas as células da grade sejam processadas. Após a atualização completa da grade, uma iteração do autômato celular é concluída, e o processo reinicia, percorrendo novamente todas as células. Esse ciclo continua até atingir o número de iterações especificado. A Figura \ref{fig:percorre_grade} ilustra o percurso de uma grade 2D 4 x 4 durante uma iteração do autômato celular. Nesse exemplo, a grade é percorrida da célula (0, 0) até a célula (0, 3), pulando para a próxima linha na célula (1, 0) e assim por diante, seguindo a ordem de leitura de uma matriz bidimensional.
 
 \begin{figure}[H]
     \centering
@@ -596,7 +624,7 @@ A grade é inicializada com uma distribuição aleatória de componentes e vazio
     \label{fig:percorre_grade}
 \end{figure}
 
-A respeito da interação entre as células das bordas da malha, o modelo adota a condição de contorno toroidal, onde as células da borda se conectam às células opostas. Por exemplo, a célula (0, 0) está conectada à célula (0, 3) e, também, à celula (3, 0), fazendo parte de sua vizinhança de von Neumann. Essa abordagem garante que todas as células tenham vizinhos válidos, independentemente de sua posição na malha. Outras condições de contorno, como cilíndrica ou caixa, também são utilizadas em autômatos celulares, mas a toroidal é a mais comum, pois permite uma simulação contínua e sem bordas. A cilíndrica conecta as células da borda horizontalmente ou verticalmente, enquanto a caixa trata as bordas como paredes fixas, o que pode limitar a dinâmica do sistema. A Figura \ref{fig:torus} ilustra a condição de contorno toroidal aplicada ao modelo. A vizinhança de von Neumann da célula (0, 0) é composta pelas células (0, 1), (1, 0), (3, 0) e (0, 3).
+A respeito da interação entre as células das bordas da malha, o modelo adota a condição de contorno \textbf{toroidal}, onde as células da borda interagem com as células opostas. Por exemplo, a célula (0, 0) está conectada à célula (0, 3) e, também, à celula (3, 0), fazendo parte de sua vizinhança de von Neumann. Essa abordagem garante que todas as células tenham vizinhos válidos, independentemente de sua posição na malha. Outras condições de contorno, como a cilíndrica e a caixa, também são utilizadas em autômatos celulares, embora neste trabalho a toroidal prevaleça a fim de garantir continuidade e evitar problemas de borda. A condição de contorno cilíndrica conecta as células da borda horizontalmente ou verticalmente, enquanto a caixa trata as bordas como paredes fixas, o que pode limitar a dinâmica do sistema. A Figura \ref{fig:torus} ilustra a condição de contorno toroidal aplicada ao modelo. Nota-se que a vizinhança de von Neumann da célula (0, 0) é composta pelas células (0, 1), (1, 0), (3, 0) e (0, 3).
 
 \begin{figure}[H]
     \centering
