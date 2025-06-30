@@ -231,17 +231,18 @@ SILVA, Alex Matos da. \textbf{Desenvolvimento de Software para Simulação de Pr
 
 % Lista de símbolos
 \chapter*{Lista de Símbolos}
+\addcontentsline{toc}{chapter}{Lista de Símbolos}
 \begin{tabbing}
-    $[E]$ \hspace{2cm} \= Concentração de enzima livre (mol L\textsuperscript{-1}) \\
-    $[S]$ \> Concentração de substrato (mol L\textsuperscript{-1}) \\
-    $[ES]$ \> Concentração do complexo enzima-substrato (mol L\textsuperscript{-1}) \\
-    $[P]$ \> Concentração de produto (mol L\textsuperscript{-1}) \\
-    $k_1$ \> Constante de velocidade da associação enzima-substrato (L mol\textsuperscript{-1} s\textsuperscript{-1}) \\
-    $k_{-1}$ \> Constante de velocidade da dissociação do complexo (s\textsuperscript{-1}) \\
-    $k_2$ \> Constante de velocidade de formação do produto (s\textsuperscript{-1}) \\
-    $K_m$ \> Constante de Michaelis-Menten (mol L\textsuperscript{-1}) \\
-    $V_{max}$ \> Velocidade máxima da reação (mol L\textsuperscript{-1} s\textsuperscript{-1}) \\
-    $r$ \> Taxa de reação (mol L\textsuperscript{-1} s\textsuperscript{-1}) \\
+    $[E]$ \hspace{2cm} \= Concentração de enzima livre \\
+    $[S]$ \> Concentração de substrato \\
+    $[ES]$ \> Concentração do complexo enzima-substrato \\
+    $[P]$ \> Concentração de produto \\
+    $k_1$ \> Constante de velocidade da associação enzima-substrato \\
+    $k_{-1}$ \> Constante de velocidade da dissociação do complexo \\
+    $k_2$ \> Constante de velocidade de formação do produto \\
+    $K_m$ \> Constante de Michaelis-Menten \\
+    $V_{max}$ \> Velocidade máxima da reação \\
+    $r$ \> Taxa de reação \\
     $P$ \> Probabilidade de transição em AC \\
     $N$ \> Número de células na grade do autômato \\
     $\Delta t$ \> Intervalo de tempo (s) \\
@@ -364,6 +365,17 @@ Os autômatos celulares são frequentemente representados por uma grade multidim
     \label{fig:grade_2d}
 \end{figure}
 
+Os componentes são entidades que efetivamente ocupam células da grade e podem representar diferentes espécies químicas, como enzimas, substratos ou produtos. Cada componente pode ter propriedades específicas, como taxa de reação, probabilidade de movimentação e afinidade por outros componentes. Os vazios representam células desocupadas na grade, onde componentes podem se mover ou interagir. A dinâmica do autômato celular é governada por regras de transição que determinam como os estados das células evoluem ao longo do tempo, com base nas interações entre componentes e vazios. Essas regras podem ser definidas de maneira a simular processos químicos, biológicos ou físicos, permitindo a modelagem de sistemas complexos de forma eficiente e intuitiva \cite{kier2005}.
+
+Células de componentes podem interagir com suas vizinhas por meio de regras válidas igualitariamente independente de uma orientação no espaço, mas também podem ser definidas regras que dependem da orientação. Quando se deseja definir diferentes regras de interação dependendo de uma orientação, é interessante utilizar um estado rotacionável, que pode assumir diferentes orientações. Dessa forma, pelo menos um lado de uma mesma célula pode interagir de forma distinta em comparação aos outros lados. A Figura \ref{fig:celula_rotacionavel} ilustra uma célula rotacionável com quatro orientações possíveis. O lado A1 pode interagir com regras e valores distintos dos outros três lados, identificados em conjunto com o rótulo A2.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{componente_rotaciona.png}
+    \caption{\small Exemplo de célula rotacionável com quatro orientações possíveis.}
+    \label{fig:celula_rotacionavel}
+\end{figure}
+
 As células interagem com suas vizinhas imediatas, que podem ser definidas de diferentes maneiras. A vizinhança mais comum é a \textit{vizinhança de von Neumann}, que inclui as quatro células adjacentes (cima, baixo, esquerda e direita) pintadas de azul na Figura \ref{fig:vizinhanca_von_neumann}. A \textit{vizinhança de von Neumann estendida}, por sua vez, inclui também as células pintadas de verde na Figura \ref{fig:vizinhanca_von_neumann_estendida}, totalizando oito células vizinhas. Também é possível definir outras vizinhanças, como a \textit{vizinhança de Moore}, que inclui todas as oito células adjacentes (cima, baixo, esquerda, direita e as quatro diagonais), como na Figura \ref{fig:vizinhanca_moore}. A escolha da vizinhança influencia diretamente a dinâmica do autômato celular e, consequentemente, o comportamento emergente do sistema simulado. Neste trabalho são utilizadas as vizinhanças de von Neumann e von Neumann estendida.
 
 \begin{figure}[H]
@@ -387,10 +399,10 @@ As células interagem com suas vizinhas imediatas, que podem ser definidas de di
     \label{fig:vizinhanca_moore}
 \end{figure}
 
-Os modelos de autômato celular (AC) empregados neste trabalho seguem predominantemente o formalismo probabilístico descrito por Kier \cite{kier2005}. Cada componente ou vazio ocupa uma célula de uma malha quadrada e interage apenas com as células de sua \textit{vizinhança de von Neumann estendida}. A dinâmica emerge da aplicação sincrônica, a cada iteração, (i) das \textbf{regras de movimentação} e (ii) das \textbf{regras de transição}. A seguir são definidos os quatro parâmetros fundamentais desses conjuntos de regras: $P_m$, $P_b$, $J$ e $P_r$.
+Os modelos de autômato celular (AC) empregados neste trabalho seguem predominantemente o formalismo probabilístico descrito por Kier \cite{kier2005}. Cada componente ou vazio ocupa uma célula de uma malha quadrada e interage apenas com as células de sua \textit{vizinhança de von Neumann estendida}. A dinâmica emerge da aplicação sincrônica, a cada iteração, (i) das \textbf{regras de movimentação} e (ii) das \textbf{regras de transição}. A seguir são definidos os cinco parâmetros fundamentais desses conjuntos de regras: $P_m$, $P_b$, $J$, $P_r$ e $P_{rot}$.
 
 \subsubsection{Probabilidade de Movimentação Livre – \texorpdfstring{$P_m$}{Pm}}
-\label{sec:probabilidade_movimento_livre}
+\label{subsubsec:Pm}
 
 \begin{itemize}
     \item \textbf{Definição:} $P_m$ representa a chance de um componente isolado se mover para uma célula desocupada de sua vizinhança de von Neumann (Figura \ref{fig:movimentacao_livre}). Essa probabilidade é influenciada por fatores como a densidade de componentes nas células vizinhas e a natureza do próprio componente.
@@ -506,18 +518,36 @@ Os modelos de autômato celular (AC) empregados neste trabalho seguem predominan
     \label{fig:reacao}
 \end{figure}
 
+\subsubsection{Probabilidade de Rotação – \texorpdfstring{$P_{rot}$}{Prot}}
+\label{subsubsec:Prot}
+
+\begin{itemize}
+    \item \textbf{Definição:} $P_{rot}$ é a probabilidade de um componente rotacionar sua orientação em uma iteração (Figura \ref{fig:rotacao}). Essa rotação pode ser necessária para alinhar o componente com outros vizinhos ou para otimizar a interação com o meio.
+    \item \textbf{Intervalo:} $0 \le P_{rot} \le 1$.
+    \item \textbf{Significado físico:} controla a flexibilidade do componente, permitindo que ele se adapte à configuração espacial dos vizinhos.
+    \item \textbf{Aplicações:} útil em simulações onde a orientação espacial dos componentes influencia suas interações, como sistemas biológicos complexos.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{rotacao.png}
+    \caption{\small Exemplo de rotação de um componente A com probabilidade de rotação $P_{rot}$.}
+    \label{fig:rotacao}
+\end{figure}
+
 \begin{table}[H]
     \centering
     \caption{\textbf{Parâmetros Fundamentais do Modelo de Autômato Celular}}
     \vspace{0.2cm}
     \begin{tabularx}{\textwidth}{X m{3cm} m{3cm}}
         \hline
-        \textbf{Parâmetro}                  & \textbf{Símbolo} & \textbf{Intervalo}  \\
+        \textbf{Parâmetro}                  & \textbf{Símbolo} & \textbf{Intervalo}      \\
         \hline
-        Probabilidade de movimentação livre & $P_m$            & $0 \leq P_m \leq 1$ \\
-        Probabilidade de quebra             & $P_b$            & $0 \leq P_b \leq 1$ \\
-        Parâmetro de junção                 & $J$              & $0 \leq J < \infty$ \\
-        Probabilidade de reação             & $P_r$            & $0 \leq P_r \leq 1$ \\
+        Probabilidade de movimentação livre & $P_m$            & $0 \leq P_m \leq 1$     \\
+        Probabilidade de quebra             & $P_b$            & $0 \leq P_b \leq 1$     \\
+        Parâmetro de junção                 & $J$              & $0 \leq J < \infty$     \\
+        Probabilidade de reação             & $P_r$            & $0 \leq P_r \leq 1$     \\
+        Probabilidade de rotação            & $P_{rot}$        & $0 \leq P_{rot} \leq 1$ \\
         \hline
     \end{tabularx}
 
@@ -613,7 +643,7 @@ Em síntese, o estudo de Seybold, Kier e Cheng \cite{seybold1997simulation} apre
 
 \subsection{Definição}
 
-O modelo de AC utilizado neste trabalho é baseado em uma grade 2D, composta por células que podem conter componentes químicos ou vazios. Cada célula pode interagir com suas vizinhas imediatas, definidas pela vizinhança de von Neumann estendida. As regras de movimentação e reação são aplicadas de forma síncrona a todas as células, permitindo que o sistema evolua ao longo do tempo. As regras de evolução são definidas pelos parâmetros $P_m$, $P_b$, $J$ e $P_r$.
+O modelo de AC utilizado neste trabalho é baseado em uma grade 2D, composta por células que podem conter componentes químicos ou vazios. Cada célula pode interagir com suas vizinhas imediatas, definidas pela vizinhança de von Neumann estendida. As regras de movimentação e reação são aplicadas de forma síncrona a todas as células, permitindo que o sistema evolua ao longo do tempo. As regras de evolução são definidas pelos parâmetros \hyperref[subsubsec:Pm]{$P_m$}, \hyperref[subsubsec:Pb]{$P_b$}, \hyperref[subsubsec:J]{$J$}, \hyperref[subsubsec:Pr]{$P_r$} e \hyperref[subsubsec:Prot]{$P_{rot}$}.
 
 A grade é inicializada com uma distribuição aleatória de componentes e vazios. Durante cada iteração, as células são atualizadas conforme as regras do modelo, que consideram os estados das células vizinhas e os parâmetros definidos. O percurso da grade segue uma ordem sistemática: começa na célula superior esquerda (0, 0), avança horizontalmente até a última célula da linha, e então prossegue para a primeira célula da próxima linha (1, 0). Esse padrão se repete até que todas as células da grade sejam processadas. Após a atualização completa da grade, uma iteração do autômato celular é concluída, e o processo reinicia, percorrendo novamente todas as células. Esse ciclo continua até atingir o número de iterações especificado. A Figura \ref{fig:percorre_grade} ilustra o percurso de uma grade 2D 4 x 4 durante uma iteração do autômato celular. Nesse exemplo, a grade é percorrida da célula (0, 0) até a célula (0, 3), pulando para a próxima linha na célula (1, 0) e assim por diante, seguindo a ordem de leitura de uma matriz bidimensional.
 
@@ -632,6 +662,10 @@ A respeito da interação entre as células das bordas da malha, o modelo adota 
     \caption{\small Condição de contorno toroidal aplicada ao modelo de autômato celular.}
     \label{fig:torus}
 \end{figure}
+
+% Falar das frações de células ocupadas por cada componente químico, como água, enzima, substrato, produto, etc. e a fração de células vazias.
+
+
 
 \subsection{Regras de Evolução}
 
