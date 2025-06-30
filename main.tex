@@ -615,7 +615,7 @@ propunham a seguinte relação linear na escala logarítmica \cite{kier2005}:
 Algumas formas úteis de (\ref{eq:J_PB}) são:
 
 \begin{align}
-    J   & = 10^{\,0.6 - 1.5\,P_B},                 \\[4pt]
+    J   & = 10^{\,0.6 - 1.5\,P_B},                \\[4pt]
     P_B & = \frac{0.6 - \log_{10} J}{1.5} \tag*{}
 \end{align}
 
@@ -633,7 +633,7 @@ Esta correlação garante que:
           tensão superficial e constante dielétrica \cite{kier2005}.
 \end{itemize}
 
-No contexto da subseção \hyperref[subsubsec:fracao_celulas_vazias]{\textbf{Frações de Células Vazias}}, a Eq.\,(\ref{eq:J_PB}) é aplicada
+No contexto da subseção \hyperref[subsubsec:fracao_celulas_vazias]{\textbf{Fração de Células Vazias}}, a Eq.\,(\ref{eq:J_PB}) é aplicada
 para gerar a dupla de regras $(J,P_B)$ que define cada “estado térmico” da
 água na grade, mantendo intacta a fração de 31\,\% de cavidades. Assim,
 qualquer simulação – inclusive de cinética enzimática – preserva
@@ -740,7 +740,9 @@ A grade é inicializada com uma distribuição aleatória de componentes e vazio
     \label{fig:percorre_grade}
 \end{figure}
 
-A respeito da interação entre as células das bordas da malha, o modelo adota a condição de contorno \textbf{toroidal}, onde as células da borda interagem com as células opostas. Por exemplo, uma célula que está na borda direita da malha está conectada à célula horizontalmente oposta, na borda esquerda da malha e vice-versa. Da mesma forma, uma célula na borda superior da malha conecta-se verticalmente a uma na borda inferior e vice-versa. Uma célula localizada em uma aresta, portanto, interage tanto com sua vizinha oposta horizontal quanto com aquela na vertical. Essa abordagem garante que todas as células tenham 4 vizinhos de von Neumann e 8 vizinhos von Neumann estendidos válidos, independentemente de sua posição na malha. Outras condições de contorno, como a cilíndrica e a caixa, também são utilizadas em autômatos celulares, embora neste trabalho a toroidal prevaleça a fim de garantir continuidade no sistema. A condição de contorno cilíndrica conecta as células da borda horizontalmente ou verticalmente, enquanto a caixa trata as bordas como paredes fixas, o que pode limitar a dinâmica do sistema. A Figura \ref{fig:torus} ilustra a condição de contorno toroidal aplicada ao modelo. Nota-se que a vizinhança de von Neumann da célula (0, 0) é composta pelas células (0, 1), (1, 0), (3, 0) e (0, 3).
+A respeito da interação entre as células das bordas da malha, o modelo adota a condição de contorno \textbf{toroidal}, onde as células da borda interagem com as células opostas. Por exemplo, uma célula que está na borda direita da malha está conectada à célula horizontalmente oposta, na borda esquerda da malha e vice-versa. Da mesma forma, uma célula na borda superior da malha conecta-se verticalmente a uma na borda inferior e vice-versa. Uma célula localizada em uma aresta, portanto, interage tanto com sua vizinha oposta horizontal quanto com aquela na vertical. Essa abordagem garante que todas as células tenham 4 vizinhos de von Neumann e 8 vizinhos von Neumann estendidos válidos, independentemente de sua posição na malha.
+
+Outras condições de contorno, como a cilíndrica e a caixa, também são utilizadas em autômatos celulares, embora neste trabalho a toroidal prevaleça a fim de garantir continuidade no sistema. A condição de contorno cilíndrica conecta as células da borda horizontalmente ou verticalmente, enquanto a caixa trata as bordas como paredes fixas, o que pode limitar a dinâmica do sistema. A Figura \ref{fig:torus} ilustra a condição de contorno toroidal aplicada ao modelo. Nota-se que a vizinhança de von Neumann da célula (0, 0) é composta pelas células (0, 1), (1, 0), (3, 0) e (0, 3).
 
 \begin{figure}[H]
     \centering
@@ -749,9 +751,9 @@ A respeito da interação entre as células das bordas da malha, o modelo adota 
     \label{fig:torus}
 \end{figure}
 
-A quantidade de células ocupadas por cada componente químico é definida por frações relativas, que representam a proporção de células ocupadas por cada tipo de componente em relação ao total de células de componentes da grade. Por exemplo, se a fração de células ocupadas por água for 0,6, isso significa que 60\% do total de componentes presentes na malha é composto por água, enquanto os 40\% restantes podem estar ocupados por outros componentes químicos
+A quantidade de células ocupadas por cada componente químico é definida por frações relativas, que representam a proporção de células ocupadas por cada tipo de componente em relação ao total de células de componentes da grade. Por exemplo, se a fração de células ocupadas por água for 0,6, isso significa que 60\% do total de componentes presentes na malha é composto por água, enquanto os 40\% restantes podem estar ocupados por outros componentes químicos.
 
-Estabelece-se, também, uma fração de células vazias, que representa a proporção de células que não representam nenhum componente químico. Essa fração é igual a 31\% no modelo, o que significa que 31\% das células da grade estão vazias e não ocupadas por nenhum componente químico. As frações de células ocupadas por cada componente químico são definidas como parâmetros do modelo e podem ser ajustadas conforme necessário para simular diferentes cenários, mas a fração de vazios é fixa.
+Estabelece-se, também, uma fração de células vazias, que representa a proporção de células que não representam nenhum componente químico. Essa fração é igual a 31\% no modelo, o que significa que 31\% das células da grade estão vazias e não ocupadas por nenhum componente químico (ver \hyperref[subsubsec:fracao_celulas_vazias]{\textbf{Fração de Células Vazias}}). As frações de células ocupadas por cada componente químico são definidas como parâmetros do modelo e podem ser ajustadas conforme necessário para simular diferentes cenários, mas a fração de vazios é fixa.
 
 
 \subsection{Regras de Evolução}
