@@ -15,6 +15,7 @@
 \usepackage[nottoc]{tocbibind}
 \usepackage[a4paper,top=3cm,bottom=2cm,left=3cm,right=2cm]{geometry}
 \usepackage{titlesec}
+\usepackage{enumitem}
 \usepackage{caption}
 \usepackage{setspace}
 \usepackage{lmodern}
@@ -24,6 +25,7 @@
 
 \usepackage[colorlinks=true, linkcolor=black, citecolor=black, urlcolor=blue]{hyperref}
 \usepackage{booktabs}
+\usepackage{siunitx}
 
 \setlength{\parindent}{2em}
 \setlength{\parskip}{0.5em}
@@ -555,6 +557,90 @@ Os modelos de autômato celular (AC) empregados neste trabalho seguem predominan
     \makebox[\linewidth][l]{\small Fonte: Autoria própria}
 \end{table}
 
+\subsubsection{Fração de Células Vazias}
+\label{subsubsec:fracao_celulas_vazias}
+
+Conforme discutido em \citeauthor*{kier2005}, modelos de água baseados em ACs devem reservar cerca de $31\,\%$ dos sítios da grade como
+cavidades vazias, mantendo os $69\,\%$ restantes ocupados por moléculas de
+H$_2$O (ou por outros ingredientes que venham a substituir parte da água).
+A seguir resumem--se as razões:
+
+\begin{enumerate}[label=\alph*]
+    \item \textbf{Ajuste volumétrico} – Estimativas estequiométricas indicam que
+          ocupações acima de $69\,\%$ resultariam em densidade maior que a da
+          água líquida, enquanto frações menores a subestimariam.
+
+    \item \textbf{Calibração estrutural} – O número médio de ligações de
+          hidrogênio simuladas (atributo $f_4$) coincide com o valor experimental
+          quando a grade contém $\approx69\,\%$ de água, implicando
+          $31\,\%$ de cavidades \cite{kier2005}.
+
+    \item \textbf{Mobilidade e difusão} – As cavidades garantem espaço livre
+          suficiente para que cada ingrediente execute um passo a cada iteração
+          ($P_m=1$), reproduzindo coeficientes de autodifusão realistas; valores
+          menores ``congestionam'' o sistema, e maiores diluem excessivamente as
+          interações.
+
+    \item \textbf{Validação empírica} – Em grades de $50\times50$, a alocação de
+          $1\,725$ células de água e $775$ cavidades reproduz experimentalmente a autodifusão da água \cite{kier2005}.
+
+    \item \textbf{Relevância para cinética enzimática} – Cada célula de
+          enzima ou substrato adicionada \emph{desloca uma célula de água},
+          mantendo inalterada a fração de $31\,\%$ de cavidades.  Essa prática é
+          crucial para que as velocidades iniciais obtidas em diferentes
+          concentrações de substrato reflitam somente a dinâmica
+          enzima--substrato, sem artefatos de mobilidade global do meio
+          \cite{kier2005}.  Consequentemente, os parâmetros cinéticos
+          calculados, por exemplo, $V_{\max}$ e $K_M$,
+          permanecem comparáveis entre simulações.
+\end{enumerate}
+
+Em suma, preservar \textbf{$31\,\%$ de cavidades vazias} equilibra densidade,
+mobilidade e conectividade intermolecular, garantindo que tanto propriedades
+estruturais da água quanto fenômenos dinâmicos — como a difusão necessária
+para colisões enzima--substrato — sejam reproduzidos com fidelidade.
+
+\subsubsection{Correlação empírica entre $J$ e $P_B$}
+\label{subsubsec:J-PB}
+
+Para manter coerência física entre a propensão de duas moléculas de água
+a se \emph{aproximarem} (parâmetro de junção $J$) e a probabilidade de elas
+\emph{separarem-se} (probabilidade de quebra $P_B$), Kier \emph{et al.}
+propunham a seguinte relação linear na escala logarítmica \cite{kier2005}:
+\begin{equation}
+    \label{eq:J_PB}
+    \log_{10} J \;=\; -\,1.5\,P_B \;+\; 0.6 .
+\end{equation}
+
+Algumas formas úteis de (\ref{eq:J_PB}) são:
+
+\begin{align}
+    J   & = 10^{\,0.6 - 1.5\,P_B},                 \\[4pt]
+    P_B & = \frac{0.6 - \log_{10} J}{1.5} \tag*{}
+\end{align}
+
+Esta correlação garante que:
+
+\begin{itemize}
+    \item valores \emph{pequenos} de $P_B$ (ligações \textit{fortes}) implicam
+          $J \gg 1$, promovendo atração de curto alcance e formação de clusters
+          extensos;
+    \item valores \emph{grandes} de $P_B$ (ligações \textit{fracas}) geram
+          $J < 1$, favorecendo repulsão e estados “isolados” da água;
+    \item a continuidade da curva permite calibrar a ``temperatura efetiva'' da
+          rede via $T\,[^{\circ}\mathrm{C}] \approx 100\,P_B$,
+          reproduzindo perfis experimentais de propriedades como viscosidade,
+          tensão superficial e constante dielétrica \cite{kier2005}.
+\end{itemize}
+
+No contexto da subseção \hyperref[subsubsec:fracao_celulas_vazias]{\textbf{Frações de Células Vazias}}, a Eq.\,(\ref{eq:J_PB}) é aplicada
+para gerar a dupla de regras $(J,P_B)$ que define cada “estado térmico” da
+água na grade, mantendo intacta a fração de 31\,\% de cavidades. Assim,
+qualquer simulação – inclusive de cinética enzimática – preserva
+simultaneamente (i) a densidade líquida correta, (ii) a rede de ligações de
+hidrogênio compatível com a temperatura simulada e (iii) a mobilidade
+necessária para colisões enzima–substrato confiáveis.
+
 \subsection{Simulação de Reações Químicas}
 
 A simulação de reações químicas é um campo crucial para a compreensão e otimização de processos industriais e biológicos. Tradicionalmente, a cinética química é modelada por meio de equações diferenciais ordinárias (EDOs) que descrevem a variação das concentrações dos reagentes e produtos ao longo do tempo. Essas abordagens, baseadas em leis de velocidade e constantes cinéticas, são eficazes para sistemas homogêneos e bem misturados, onde as concentrações podem ser consideradas uniformes em todo o volume reacional. No entanto, em sistemas heterogêneos, onde a difusão e os efeitos espaciais desempenham um papel significativo, as EDOs podem não ser suficientes para capturar a complexidade do sistema. Nesses casos, métodos baseados em simulação estocástica, como o algoritmo de Gillespie, ou abordagens baseadas em elementos finitos, que discretizam o espaço e resolvem equações diferenciais parciais, são frequentemente empregados para considerar a distribuição espacial das espécies químicas \cite{Gillespie1977}.
@@ -663,8 +749,9 @@ A respeito da interação entre as células das bordas da malha, o modelo adota 
     \label{fig:torus}
 \end{figure}
 
-% Falar das frações de células ocupadas por cada componente químico, como água, enzima, substrato, produto, etc. e a fração de células vazias.
+A quantidade de células ocupadas por cada componente químico é definida por frações relativas, que representam a proporção de células ocupadas por cada tipo de componente em relação ao total de células de componentes da grade. Por exemplo, se a fração de células ocupadas por água for 0,6, isso significa que 60\% do total de componentes presentes na malha é composto por água, enquanto os 40\% restantes podem estar ocupados por outros componentes químicos
 
+Estabelece-se, também, uma fração de células vazias, que representa a proporção de células que não representam nenhum componente químico. Essa fração é igual a 31\% no modelo, o que significa que 31\% das células da grade estão vazias e não ocupadas por nenhum componente químico. As frações de células ocupadas por cada componente químico são definidas como parâmetros do modelo e podem ser ajustadas conforme necessário para simular diferentes cenários, mas a fração de vazios é fixa.
 
 
 \subsection{Regras de Evolução}
