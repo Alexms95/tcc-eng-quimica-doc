@@ -229,6 +229,18 @@ SILVA, Alex Matos da. \textbf{Desenvolvimento de Software para Simulação de Pr
     ACs \> Autômatos Celulares \\
     CPU \> Unidade Central de Processamento \\
     RAM \> Memória de Acesso Aleatório \\
+    E \> Enzima \\
+    S \> Substrato \\
+    ES \> Complexo enzima-substrato \\
+    P \> Produto \\
+    E$_0$ \> Concentração total de enzima \\
+    Q \> Produto (em mecanismos ping-pong) \\
+    R$^2$ \> Coeficiente de determinação \\
+    E$_1$, E$_2$ \> Formas enzimáticas (mecanismo ping-pong) \\
+    EI \> Complexo enzima-inibidor \\
+    NumPy \> Numerical Python (biblioteca) \\
+    Pandas \> Biblioteca de análise de dados em Python \\
+    Matplotlib \> Biblioteca de gráficos em Python \\
 \end{tabbing}
 
 % Lista de símbolos
@@ -239,19 +251,25 @@ SILVA, Alex Matos da. \textbf{Desenvolvimento de Software para Simulação de Pr
     $[S]$ \> Concentração de substrato \\
     $[ES]$ \> Concentração do complexo enzima-substrato \\
     $[P]$ \> Concentração de produto \\
+    $[E]_0$ \> Concentração total de enzima \\
     $k_1$ \> Constante de velocidade da associação enzima-substrato \\
     $k_{-1}$ \> Constante de velocidade da dissociação do complexo \\
     $k_2$ \> Constante de velocidade de formação do produto \\
-    $K_m$ \> Constante de Michaelis-Menten \\
-    $V_{max}$ \> Velocidade máxima da reação \\
+    $K_m$, $K_M$ \> Constante de Michaelis-Menten \\
+    $V_{max}$, $V_{\max}$ \> Velocidade máxima da reação \\
     $r$ \> Taxa de reação \\
     $P$ \> Probabilidade de transição em AC \\
     $N$ \> Número de células na grade do autômato \\
     $\Delta t$ \> Intervalo de tempo (s) \\
-    $P_m$ \> Probabilidade de movimentação livre \\
-    $P_b$ \> Probabilidade de quebra de ligação \\
+    $P_M$ \> Probabilidade de movimentação livre \\
+    $P_B$ \> Probabilidade de quebra de ligação \\
     $J$ \> Parâmetro de junção entre componentes \\
-    $P_r$ \> Probabilidade de reação química \\
+    $P_R$ \> Probabilidade de reação química \\
+    $P_{rot}$ \> Probabilidade de rotação do componente \\
+    $A$, $B$, $C$, $D$ \> Componentes genéricos (exemplos) \\
+    $E'$ \> Enzima modificada (mecanismo ping-pong) \\
+    $Q$ \> Produto (mecanismo ping-pong) \\
+    $R^2$ \> Coeficiente de determinação \\
 \end{tabbing}
 
 \newpage
@@ -399,14 +417,14 @@ As células interagem com suas vizinhas imediatas, que podem ser definidas de di
     \label{fig:vizinhanca_moore}
 \end{figure}
 
-Os modelos de autômato celular (AC) empregados neste trabalho seguem predominantemente o formalismo probabilístico descrito por Kier \cite{kier2005}. Cada componente ou vazio ocupa uma célula de uma malha quadrada e interage apenas com as células de sua \textit{vizinhança de von Neumann estendida}. A dinâmica emerge da aplicação sincrônica, a cada iteração, (i) das \textbf{regras de movimentação} e (ii) das \textbf{regras de transição}. A seguir são definidos os cinco parâmetros fundamentais desses conjuntos de regras: $P_m$, $P_b$, $J$, $P_r$ e $P_{rot}$.
+Os modelos de autômato celular (AC) empregados neste trabalho seguem predominantemente o formalismo probabilístico descrito por Kier \cite{kier2005}. Cada componente ou vazio ocupa uma célula de uma malha quadrada e interage apenas com as células de sua \textit{vizinhança de von Neumann estendida}. A dinâmica emerge da aplicação sincrônica, a cada iteração, (i) das \textbf{regras de movimentação} e (ii) das \textbf{regras de transição}. A seguir são definidos os cinco parâmetros fundamentais desses conjuntos de regras: $P_M$, $P_B$, $J$, $P_R$ e $P_{rot}$.
 
-\subsubsection{Probabilidade de Movimentação Livre – \texorpdfstring{$P_m$}{Pm}}
+\subsubsection{Probabilidade de Movimentação Livre – \texorpdfstring{$P_M$}{Pm}}
 \label{subsubsec:Pm}
 
 \begin{itemize}
-    \item \textbf{Definição:} $P_m$ representa a chance de um componente isolado se mover para uma célula desocupada de sua vizinhança de von Neumann (Figura \ref{fig:movimentacao_livre}). Essa probabilidade é influenciada por fatores como a densidade de componentes nas células vizinhas e a natureza do próprio componente.
-    \item \textbf{Intervalo:} $0 \le P_m \le 1$.
+    \item \textbf{Definição:} $P_M$ representa a chance de um componente isolado se mover para uma célula desocupada de sua vizinhança de von Neumann (Figura \ref{fig:movimentacao_livre}). Essa probabilidade é influenciada por fatores como a densidade de componentes nas células vizinhas e a natureza do próprio componente.
+    \item \textbf{Intervalo:} $0 \le P_M \le 1$.
     \item \textbf{Interpretação física:} controla a \textit{mobilidade inerente}.
           Valores próximos de 1 reproduzem um passeio aleatório praticamente livre; valores
           menores simulam espécies mais lentas.
@@ -449,22 +467,22 @@ Os modelos de autômato celular (AC) empregados neste trabalho seguem predominan
     \label{fig:movimentacao_juncao}
 \end{figure}
 
-\subsubsection{Probabilidade de Quebra – \texorpdfstring{$P_b$}{Pb}}
+\subsubsection{Probabilidade de Quebra – \texorpdfstring{$P_B$}{Pb}}
 \label{subsubsec:Pb}
 
 \begin{itemize}
-    \item \textbf{Definição:} $P_b(AB)$ é a probabilidade de
+    \item \textbf{Definição:} $P_B(AB)$ é a probabilidade de
           \emph{separação} de dois componentes adjacentes $A$ e $B$
           (``quebra de ligação'') em uma iteração. A Figura \ref{fig:quebra_ligacao} ilustra essa situação, onde $B$ está em uma célula adjacente a $A$.
-    \item \textbf{Intervalo:} $0 \le P_b \le 1$.
-    \item \textbf{Coesão:} $P_b=0$ \,($A$ e $B$ nunca se separam)
+    \item \textbf{Intervalo:} $0 \le P_B \le 1$.
+    \item \textbf{Coesão:} $P_B=0$ \,($A$ e $B$ nunca se separam)
           $\rightarrow$ forte coesão;
-          $P_b=1$ \,($A$ e $B$ sempre se separam) $\rightarrow$ ligação fraca.
+          $P_B=1$ \,($A$ e $B$ sempre se separam) $\rightarrow$ ligação fraca.
     \item \textbf{Dependência de coordenação:} se $A$ está ligado a
           $n$ vizinhos do tipo $B$, a probabilidade conjunta de separação é
-          $P_b^{\,n}$; logo, múltiplos contatos estabilizam o agregado.
+          $P_B^{\,n}$; logo, múltiplos contatos estabilizam o agregado.
     \item \textbf{Correspondência físico-química:}
-          em água, $P_b(\mathrm{WW})$ pode ser correlacionado com a temperatura:
+          em água, $P_B(\mathrm{WW})$ pode ser correlacionado com a temperatura:
           valores maiores a temperaturas elevadas representam a maior
           desordem da rede de ligações de hidrogênio \cite{kier2005}.
 \end{itemize}
@@ -472,40 +490,40 @@ Os modelos de autômato celular (AC) empregados neste trabalho seguem predominan
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{PbAB.png}
-    \caption{\small Exemplo de quebra de ligação entre dois componentes A e B adjacentes, com probabilidade de quebra $P_b(AB)$.}
+    \caption{\small Exemplo de quebra de ligação entre dois componentes A e B adjacentes, com probabilidade de quebra $P_B(AB)$.}
     \label{fig:quebra_ligacao}
 \end{figure}
 
-\subsubsection{Probabilidade de Reação – \texorpdfstring{$P_r$}{Pr}}
+\subsubsection{Probabilidade de Reação – \texorpdfstring{$P_R$}{Pr}}
 \label{subsubsec:Pr}
 
 \begin{itemize}
-    \item \textbf{Definição:} $P_r$ (substitui o símbolo $P_t$ de
+    \item \textbf{Definição:} $P_R$ (substitui o símbolo $P_t$ de
           \citeauthor{kier2005}) é a probabilidade de conversão química
           durante uma iteração. A Figura \ref{fig:reacao} ilustra essa situação, onde $A$ e $B$ estão em células adjacentes e podem reagir para formar $C$ e $D$.
-    \item \textbf{Intervalo:} $0 \le P_r \le 1$.
-    \item \textbf{Reações elementares:} $P_r$ é aplicado a
+    \item \textbf{Intervalo:} $0 \le P_R \le 1$.
+    \item \textbf{Reações elementares:} $P_R$ é aplicado a
           \emph{reações elementares} que ocorrem quando
           dois componentes estão em células adjacentes.
-          Por exemplo, $A+B \xrightarrow{P_r(AB)} C+D$
-          representa a reação entre $A$ e $B$ para formar $C$ e $D$ com probabilidade $P_r(AB)$.
+          Por exemplo, $A+B \xrightarrow{P_R(AB)} C+D$
+          representa a reação entre $A$ e $B$ para formar $C$ e $D$ com probabilidade $P_R(AB)$.
     \item \textbf{Casos de uso:}
           \begin{enumerate}
               \item \emph{Transição de primeira ordem:}
-                    $A \xrightarrow{P_r(A\rightarrow B)} B$.\\
-                    Se $P_r=1$ a transição é determinística;
-                    $0<P_r<1$ torna-a estocástica.
+                    $A \xrightarrow{P_R(A\rightarrow B)} B$.\\
+                    Se $P_R=1$ a transição é determinística;
+                    $0<P_R<1$ torna-a estocástica.
               \item \emph{Reação de encontro (segunda ordem):}\\
                     quando $A$ e $B$ tornam-se vizinhos,
-                    ocorre $A+B \xrightarrow{P_r(AB)} C+D$
-                    com probabilidade $P_r(AB)$.
+                    ocorre $A+B \xrightarrow{P_R(AB)} C+D$
+                    com probabilidade $P_R(AB)$.
           \end{enumerate}
-    \item \textbf{Significado cinético:} $P_r$ pode ser relacionado a
+    \item \textbf{Significado cinético:} $P_R$ pode ser relacionado a
           uma constante de velocidade efetiva $k$
-          (\textit{via} calibração: $k = P_r/\Delta t$,
+          (\textit{via} calibração: $k = P_R/\Delta t$,
           onde $\Delta t$ é a duração de uma iteração).
     \item \textbf{Importância prática:}
-          em modelos enzimáticos, por exemplo, $P_r(\mathrm{AB})$
+          em modelos enzimáticos, por exemplo, $P_R(\mathrm{AB})$
           controla a etapa catalítica $\mathrm{ES}\rightarrow\mathrm{EP}$
           e permite reproduzir curvas de Michaelis–Menten
           \cite[cap.~9]{kier2005}.
@@ -514,7 +532,7 @@ Os modelos de autômato celular (AC) empregados neste trabalho seguem predominan
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{reacao.png}
-    \caption{\small Exemplo de reação entre dois componentes A e B adjacentes, formando C e D com probabilidade de reação $P_r(AB)$.}
+    \caption{\small Exemplo de reação entre dois componentes A e B adjacentes, formando C e D com probabilidade de reação $P_R(AB)$.}
     \label{fig:reacao}
 \end{figure}
 
@@ -543,10 +561,10 @@ Os modelos de autômato celular (AC) empregados neste trabalho seguem predominan
         \hline
         \textbf{Parâmetro}                  & \textbf{Símbolo} & \textbf{Intervalo}      \\
         \hline
-        Probabilidade de movimentação livre & $P_m$            & $0 \leq P_m \leq 1$     \\
-        Probabilidade de quebra             & $P_b$            & $0 \leq P_b \leq 1$     \\
+        Probabilidade de movimentação livre & $P_M$            & $0 \leq P_M \leq 1$     \\
+        Probabilidade de quebra             & $P_B$            & $0 \leq P_B \leq 1$     \\
         Parâmetro de junção                 & $J$              & $0 \leq J < \infty$     \\
-        Probabilidade de reação             & $P_r$            & $0 \leq P_r \leq 1$     \\
+        Probabilidade de reação             & $P_R$            & $0 \leq P_R \leq 1$     \\
         Probabilidade de rotação            & $P_{rot}$        & $0 \leq P_{rot} \leq 1$ \\
         \hline
     \end{tabularx}
@@ -575,7 +593,7 @@ A seguir resumem--se as razões:
 
     \item \textbf{Mobilidade e difusão} – As cavidades garantem espaço livre
           suficiente para que cada ingrediente execute um passo a cada iteração
-          ($P_m=1$), reproduzindo coeficientes de autodifusão realistas; valores
+          ($P_M=1$), reproduzindo coeficientes de autodifusão realistas; valores
           menores ``congestionam'' o sistema, e maiores diluem excessivamente as
           interações.
 
@@ -713,12 +731,12 @@ Estabelece-se, também, uma fração de células vazias, que representa a propor
 
 \subsection{Regras de Evolução}
 
-As regras de evolução do autômato celular são definidas por cinco parâmetros principais: \hyperref[subsubsec:Pm]{$P_m$}, \hyperref[subsubsec:Pb]{$P_b$}, \hyperref[subsubsec:J]{$J$}, \hyperref[subsubsec:Pr]{$P_r$} e \hyperref[subsubsec:Prot]{$P_{rot}$}. Cada um desses parâmetros desempenha um papel crucial na dinâmica do sistema, influenciando a movimentação dos componentes químicos, a formação de ligações, as reações químicas e a rotação dos componentes. A seguir, detalham-se as regras de evolução determinadas para o modelo:
+As regras de evolução do autômato celular são definidas por cinco parâmetros principais: \hyperref[subsubsec:Pm]{$P_M$}, \hyperref[subsubsec:Pb]{$P_B$}, \hyperref[subsubsec:J]{$J$}, \hyperref[subsubsec:Pr]{$P_R$} e \hyperref[subsubsec:Prot]{$P_{rot}$}. Cada um desses parâmetros desempenha um papel crucial na dinâmica do sistema, influenciando a movimentação dos componentes químicos, a formação de ligações, as reações químicas e a rotação dos componentes. A seguir, detalham-se as regras de evolução determinadas para o modelo:
 
 \subsubsection{Movimentação dos Componentes Químicos}
 \label{subsubsec:evolucao_movimentacao}
 
-A movimentação básica dos componentes químicos na grade é regida pelo parâmetro \textbf{probabilidade de movimentação livre} (\hyperref[subsubsec:Pm]{$P_m$}). Durante cada iteração do autômato celular, cada célula com um componente químico tem uma probabilidade $P_m$ de se mover para uma célula vizinha vazia dentro de sua vizinhança de von Neumann. Dado que um componente A em estudo irá se mover, com chance indicada pelo valor de $P_m (A)$, a movimentação ocorre de forma aleatória, escolhendo uma das quatro células vizinhas de von Neumann (superior, inferior, esquerda ou direita) para a qual o componente pode se mover. Isso indica que a movimentação é estocástica e que $P_m (A)$ é o mesmo para qualquer vizinho vazio (Figura \ref{fig:evolucao_Pm}). Caso não haja células vizinhas vazias, o componente permanece em sua posição atual.
+A movimentação básica dos componentes químicos na grade é regida pelo parâmetro \textbf{probabilidade de movimentação livre} (\hyperref[subsubsec:Pm]{$P_M$}). Durante cada iteração do autômato celular, cada célula com um componente químico tem uma probabilidade $P_M$ de se mover para uma célula vizinha vazia dentro de sua vizinhança de von Neumann. Dado que um componente A em estudo irá se mover, com chance indicada pelo valor de $P_M (A)$, a movimentação ocorre de forma aleatória, escolhendo uma das quatro células vizinhas de von Neumann (superior, inferior, esquerda ou direita) para a qual o componente pode se mover. Isso indica que a movimentação é estocástica e que $P_M (A)$ é o mesmo para qualquer vizinho vazio (Figura \ref{fig:evolucao_Pm}). Caso não haja células vizinhas vazias, o componente permanece em sua posição atual.
 
 \begin{figure}[H]
     \centering
@@ -727,12 +745,12 @@ A movimentação básica dos componentes químicos na grade é regida pelo parâ
     \label{fig:evolucao_Pm}
 \end{figure}
 
-Frequentemente, um componente possui um ou mais componentes em sua vizinhança de von Neumann e/ou von Neumann estendida. Nesse caso, diferentes efeitos são combinados e, portanto, a movimentação do componente é influenciada por outros parâmetros, como a probabilidade de quebra de ligações (\hyperref[subsubsec:Pb]{$P_b$}) e a propensão de junção (\hyperref[subsubsec:J]{$J$}). A Figura \ref{fig:evolucao_Pm_Pb_J} ilustra um cenário da movimentação de um componente A, que possui um componente B em sua vizinhança de von Neumann e um componente C em sua vizinhança de von Neumann estendida. Nesse caso, a movimentação do componente A é influenciada pela probabilidade de quebra da interação $P_b (AB)$ e pela propensão de junção $J(AC)$, além de seu próprio $P_m (A)$.
+Frequentemente, um componente possui um ou mais componentes em sua vizinhança de von Neumann e/ou von Neumann estendida. Nesse caso, diferentes efeitos são combinados e, portanto, a movimentação do componente é influenciada por outros parâmetros, como a probabilidade de quebra de ligações (\hyperref[subsubsec:Pb]{$P_B$}) e a propensão de junção (\hyperref[subsubsec:J]{$J$}). A Figura \ref{fig:evolucao_Pm_Pb_J} ilustra um cenário da movimentação de um componente A, que possui um componente B em sua vizinhança de von Neumann e um componente C em sua vizinhança de von Neumann estendida. Nesse caso, a movimentação do componente A é influenciada pela probabilidade de quebra da interação $P_B (AB)$ e pela propensão de junção $J(AC)$, além de seu próprio $P_M (A)$.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.5\textwidth]{evolucao_Pm_Pb_J.png}
-    \caption{\small Cenário de evolução da movimentação de A, que deve considerar os parâmetros $P_m (A)$, $P_b (AB)$ e $J(AC)$.}
+    \caption{\small Cenário de evolução da movimentação de A, que deve considerar os parâmetros $P_M (A)$, $P_B (AB)$ e $J(AC)$.}
     \label{fig:evolucao_Pm_Pb_J}
 \end{figure}
 
