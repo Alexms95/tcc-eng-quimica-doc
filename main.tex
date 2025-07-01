@@ -727,9 +727,9 @@ Em síntese, o estudo de Seybold, Kier e Cheng \cite{seybold1997simulation} apre
 
 \subsection{Definição}
 
-O modelo de AC utilizado neste trabalho é baseado em uma grade 2D, composta por células que podem conter componentes químicos ou vazios. Cada célula pode interagir com suas vizinhas imediatas, definidas pela vizinhança de von Neumann estendida. As regras de movimentação e reação são aplicadas de forma síncrona a todas as células, permitindo que o sistema evolua ao longo do tempo. As regras de evolução são definidas pelos parâmetros \hyperref[subsubsec:Pm]{$P_m$}, \hyperref[subsubsec:Pb]{$P_b$}, \hyperref[subsubsec:J]{$J$}, \hyperref[subsubsec:Pr]{$P_r$} e \hyperref[subsubsec:Prot]{$P_{rot}$}.
+O modelo de AC utilizado neste trabalho é baseado em uma grade 2D, composta por células que podem conter componentes químicos ou vazios. Cada célula pode interagir com suas vizinhas imediatas, definidas pela vizinhança de von Neumann estendida. As regras de movimentação e reação são aplicadas de forma síncrona a todas as células, permitindo que o sistema evolua ao longo do tempo. As regras de evolução são definidas pelos parâmetros \hyperref[subsubsec:Pm]{$P_M$}, \hyperref[subsubsec:Pb]{$P_B$}, \hyperref[subsubsec:J]{$J$}, \hyperref[subsubsec:Pr]{$P_R$} e \hyperref[subsubsec:Prot]{$P_{rot}$}.
 
-A grade é inicializada com uma distribuição aleatória de componentes e vazios. Durante cada iteração, as células são atualizadas conforme as regras do modelo, que consideram os estados das células vizinhas e os parâmetros definidos. O percurso da grade segue uma ordem sistemática: começa na célula superior esquerda (0, 0), avança horizontalmente até a última célula da linha, e então prossegue para a primeira célula da próxima linha (1, 0). Esse padrão se repete até que todas as células da grade sejam processadas. Após a atualização completa da grade, uma iteração do autômato celular é concluída, e o processo reinicia, percorrendo novamente todas as células. Esse ciclo continua até atingir o número de iterações especificado. A Figura \ref{fig:percorre_grade} ilustra o percurso de uma grade 2D 4 x 4 durante uma iteração do autômato celular. Nesse exemplo, a grade é percorrida da célula (0, 0) até a célula (0, 3), pulando para a próxima linha na célula (1, 0) e assim por diante, seguindo a ordem de leitura de uma matriz bidimensional.
+A grade é inicializada com uma distribuição aleatória de componentes e vazios. Durante cada iteração, as células são atualizadas conforme as regras do modelo, que consideram os estados das células vizinhas e os parâmetros definidos. O percurso da grade segue uma ordem sistemática: começa na célula superior esquerda (0, 0), avança horizontalmente até a última célula da linha, e então prossegue para a primeira célula da próxima linha (1, 0). Esse padrão se repete até que todas as células da grade sejam processadas. Após a atualização completa da grade, uma iteração do autômato celular é concluída, e o processo reinicia, percorrendo novamente todas as células. Esse ciclo continua até atingir o número de iterações especificado. A Figura \ref{fig:percorre_grade} ilustra o percurso de uma grade 2D $4 \times 4$ durante uma iteração do autômato celular. Nesse exemplo, a grade é percorrida da célula (0, 0) até a célula (0, 3), pulando para a próxima linha na célula (1, 0) e assim por diante, seguindo a ordem de leitura de uma matriz bidimensional.
 
 \begin{figure}[H]
     \centering
@@ -738,9 +738,7 @@ A grade é inicializada com uma distribuição aleatória de componentes e vazio
     \label{fig:percorre_grade}
 \end{figure}
 
-A respeito da interação entre as células das bordas da malha, o modelo adota a condição de contorno \textbf{toroidal}, onde as células da borda interagem com as células opostas. Por exemplo, uma célula que está na borda direita da malha está conectada à célula horizontalmente oposta, na borda esquerda da malha e vice-versa. Da mesma forma, uma célula na borda superior da malha conecta-se verticalmente a uma na borda inferior e vice-versa. Uma célula localizada em uma aresta, portanto, interage tanto com sua vizinha oposta horizontal quanto com aquela na vertical. Essa abordagem garante que todas as células tenham 4 vizinhos de von Neumann e 8 vizinhos von Neumann estendidos válidos, independentemente de sua posição na malha.
-
-Outras condições de contorno, como a cilíndrica e a caixa, também são utilizadas em autômatos celulares, embora neste trabalho a toroidal prevaleça a fim de garantir continuidade no sistema. A condição de contorno cilíndrica conecta as células da borda horizontalmente ou verticalmente, enquanto a caixa trata as bordas como paredes fixas, o que pode limitar a dinâmica do sistema. A Figura \ref{fig:torus} ilustra a condição de contorno toroidal aplicada ao modelo. Nota-se que a vizinhança de von Neumann da célula (0, 0) é composta pelas células (0, 1), (1, 0), (3, 0) e (0, 3).
+A respeito da interação entre as células das bordas da malha, o modelo adota a condição de contorno \textbf{toroidal}, no qual as células da borda interagem com as células opostas. Por exemplo, uma célula que está na borda direita da malha está conectada à célula horizontalmente oposta, na borda esquerda da malha, e vice-versa. Da mesma forma, uma célula na borda superior da malha conecta-se verticalmente a uma na borda inferior e vice-versa. Uma célula localizada em uma aresta, portanto, interage tanto com sua vizinha oposta horizontal quanto com aquela na vertical. A Figura \ref{fig:torus} ilustra a condição de contorno toroidal aplicada ao modelo. Nota-se que a vizinhança de von Neumann da célula (0, 0) é composta pelas células (0, 1), (1, 0), (3, 0) e (0, 3).
 
 \begin{figure}[H]
     \centering
@@ -751,10 +749,62 @@ Outras condições de contorno, como a cilíndrica e a caixa, também são utili
 
 A quantidade de células ocupadas por cada componente químico é definida por frações relativas, que representam a proporção de células ocupadas por cada tipo de componente em relação ao total de células de componentes da grade. Por exemplo, se a fração de células ocupadas por água for 0,6, isso significa que 60\% do total de componentes presentes na malha é composto por água, enquanto os 40\% restantes podem estar ocupados por outros componentes químicos.
 
-Estabelece-se, também, uma fração de células vazias, que representa a proporção de células que não representam nenhum componente químico. Essa fração é igual a 31\% no modelo, o que significa que 31\% das células da grade estão vazias e não ocupadas por nenhum componente químico (ver \hyperref[subsubsec:fracao_celulas_vazias]{\textbf{Fração de Células Vazias}}). As frações de células ocupadas por cada componente químico são definidas como parâmetros do modelo e podem ser ajustadas conforme necessário para simular diferentes cenários, mas a fração de vazios é fixa.
+Estabelece-se, também, uma fração de células vazias, que representa a proporção de células que não representam nenhum componente químico. Essa fração é igual a 31\% no modelo, o que significa que 31\% das células da grade estão vazias e não ocupadas por nenhum componente (ver \hyperref[subsubsec:fracao_celulas_vazias]{\textbf{Fração de Células Vazias}}). As frações de células ocupadas por cada componente químico são definidas como parâmetros do modelo e podem ser ajustadas conforme necessário para simular diferentes cenários, mas a fração de vazios é fixa.
 
 
 \subsection{Regras de Evolução}
+
+As regras de evolução do autômato celular são definidas por cinco parâmetros principais: \hyperref[subsubsec:Pm]{$P_m$}, \hyperref[subsubsec:Pb]{$P_b$}, \hyperref[subsubsec:J]{$J$}, \hyperref[subsubsec:Pr]{$P_r$} e \hyperref[subsubsec:Prot]{$P_{rot}$}. Cada um desses parâmetros desempenha um papel crucial na dinâmica do sistema, influenciando a movimentação dos componentes químicos, a formação de ligações, as reações químicas e a rotação dos componentes. A seguir, detalham-se as regras de evolução determinadas para o modelo:
+
+\subsubsection{Movimentação dos Componentes Químicos}
+\label{subsubsec:evolucao_movimentacao}
+
+A movimentação básica dos componentes químicos na grade é regida pelo parâmetro \textbf{probabilidade de movimentação livre} (\hyperref[subsubsec:Pm]{$P_m$}). Durante cada iteração do autômato celular, cada célula com um componente químico tem uma probabilidade $P_m$ de se mover para uma célula vizinha vazia dentro de sua vizinhança de von Neumann. Dado que um componente A em estudo irá se mover, com chance indicada pelo valor de $P_m (A)$, a movimentação ocorre de forma aleatória, escolhendo uma das quatro células vizinhas de von Neumann (superior, inferior, esquerda ou direita) para a qual o componente pode se mover. Isso indica que a movimentação é estocástica e que $P_m (A)$ é o mesmo para qualquer vizinho vazio (Figura \ref{fig:evolucao_Pm}). Caso não haja células vizinhas vazias, o componente permanece em sua posição atual.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{evolucao_Pm.png}
+    \caption{\small Exemplo de movimentação livre de um componente A para uma célula vazia da sua vizinhança de von Neumann.}
+    \label{fig:evolucao_Pm}
+\end{figure}
+
+Frequentemente, um componente possui um ou mais componentes em sua vizinhança de von Neumann e/ou von Neumann estendida. Nesse caso, diferentes efeitos são combinados e, portanto, a movimentação do componente é influenciada por outros parâmetros, como a probabilidade de quebra de ligações (\hyperref[subsubsec:Pb]{$P_b$}) e a propensão de junção (\hyperref[subsubsec:J]{$J$}). A Figura \ref{fig:evolucao_Pm_Pb_J} ilustra um cenário da movimentação de um componente A, que possui um componente B em sua vizinhança de von Neumann e um componente C em sua vizinhança de von Neumann estendida. Nesse caso, a movimentação do componente A é influenciada pela probabilidade de quebra da interação $P_b (AB)$ e pela propensão de junção $J(AC)$, além de seu próprio $P_m (A)$.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{evolucao_Pm_Pb_J.png}
+    \caption{\small Cenário de evolução da movimentação de A, que deve considerar os parâmetros $P_m (A)$, $P_b (AB)$ e $J(AC)$.}
+    \label{fig:evolucao_Pm_Pb_J}
+\end{figure}
+
+Dadas as propriedades básicas de probabilidade, a probabilidade total de movimentação de um componente $\alpha$ pode ser expressa como:
+
+\begin{equation}
+    \label{eq:pmov_total}
+    P_\text{total}(\alpha) =
+    \begin{cases}
+        0,                                                                                            & \text{se } \left| V(\alpha) \right| = 4, \\[2ex]
+        P_\text{M}(\alpha)\ \cdot \displaystyle\prod_{\beta \in V(\alpha)} P_\text{B}(\alpha, \beta), & \text{caso contrário}
+    \end{cases}
+\end{equation}
+
+onde $P_\text{M}(\alpha)$ é a probabilidade de movimentação livre do componente $\alpha$, $V(\alpha)$ representa o conjunto de componentes vizinhos de von Neumann de $\alpha$, e $P_\text{B}(\alpha, \beta)$ é a probabilidade de quebra da interação entre $\alpha$ e cada vizinho $\beta$. Assim, a movimentação do componente $\alpha$ ocorre com probabilidade $P_\text{total}(\alpha)$, que depende tanto de sua mobilidade intrínseca quanto do produto das probabilidades de quebra das ligações com seus vizinhos imediatos. Caso todas as células vizinhas estejam ocupadas (ou seja, $\alpha$ possui quatro componentes vizinhos), o componente permanece em sua posição original.
+
+No exemplo da Figura \ref{fig:evolucao_Pm_Pb_J}, portanto, a probabilidade do componente A se mover para uma célula vizinha vazia é dada por:
+\begin{equation}
+    P_\text{total}(A) = P_M(A) \cdot P_B(AB)
+\end{equation}
+
+Ainda nesse exemplo, a condição para que A se movimente é dada por $P_\text{total}(A)$, mas a direção do movimento é influenciada pelo parâmetro $J(AC)$, que determina a propensão de A se juntar a C. Define-se, portanto, que a célula vizinha vazia escolhida para o movimento de um componente genérico $\alpha$ será aquela que maximiza a propensão de junção de $\alpha$, ou seja, a célula vizinha vazia $v$ tal que:
+
+\begin{equation}
+    v^* = \underset{v \in \mathcal{V}_0(\alpha)}{\arg\max} \left\{ \max_{\beta \in \mathcal{V}_\text{ext}(\alpha)} J(\alpha, \beta) \right\}, se \, J(\alpha, \beta) \geq 1
+\end{equation}
+
+Isso significa que, se $\alpha$ tem múltiplas células vizinhas vazias adjacentes e dado que o movimento ocorrerá, a célula escolhida para o movimento será aquela na direção da maior propensão de junção de $\alpha$ com um dos componentes da sua vizinhança externa. A vizinhança externa $\mathcal{V}_\text{ext}(v)$ de um componente é definida pelas 4 células mais distantes dentro da sua vizinhança de von Neumann estendida.
+
+Ao assumir valores entre 0 e 1, o parâmetro $J$ revela repulsão entre componentes. Logo, define-se que a movimentação de um componente na direção de outro é permitida apenas se $J(\alpha, \beta) \geq 1$, ou seja, se a propensão de junção for maior ou igual a 1. Caso contrário, o componente $\alpha$ não se movimenta na direção de $\beta$. Células vazias da vizinhança externa são consideradas neutras, ou seja, elas são preteridas em junção caso haja qualquer outra célula com $J(\alpha, \beta) \geq 1$ e serão favorecidas se $0 < J(\alpha, \beta) < 1$ para todas as células vizinhas externas. O modelo, especialmente no lado computacional, interpreta células vazias com $J = 0$.
+
 
 \section{Implementação Computacional}
 
@@ -777,26 +827,26 @@ Estabelece-se, também, uma fração de células vazias, que representa a propor
 % Performance do código (tempo de execução, uso de memória, etc.).
 
 
-\begin{table}[H]
-    \centering
-    \caption{\textbf{Interpretação da probabilidade ($P_B$)}}
-    \vspace{0.2cm}
-    \begin{tabularx}{\textwidth}{m{3.5cm} X}
-        \hline
-        \multicolumn{2}{c}{$\mathbf{0 \leq P_B(\mathbf{x}_i, \mathbf{x}_j) \leq 1}$} \\
-        \hline
-        \textbf{Valores} & \textbf{Significado}                                      \\
-        \hline
-        $P_B = 0$        & Os componentes permanecem sempre unidos                   \\
-        $P_B \to 0^+$    & Tendência de permanecerem sempre unidos                   \\
-        $P_B \to 1^-$    & Tendência de permanecerem sempre separados                \\
-        $P_B = 1$        & Os componentes permanecem sempre separados                \\
-        \hline
-    \end{tabularx}
+% \begin{table}[H]
+%     \centering
+%     \caption{\textbf{Interpretação da probabilidade ($P_B$)}}
+%     \vspace{0.2cm}
+%     \begin{tabularx}{\textwidth}{m{3.5cm} X}
+%         \hline
+%         \multicolumn{2}{c}{$\mathbf{0 \leq P_B(\mathbf{x}_i, \mathbf{x}_j) \leq 1}$} \\
+%         \hline
+%         \textbf{Valores} & \textbf{Significado}                                      \\
+%         \hline
+%         $P_B = 0$        & Os componentes permanecem sempre unidos                   \\
+%         $P_B \to 0^+$    & Tendência de permanecerem sempre unidos                   \\
+%         $P_B \to 1^-$    & Tendência de permanecerem sempre separados                \\
+%         $P_B = 1$        & Os componentes permanecem sempre separados                \\
+%         \hline
+%     \end{tabularx}
 
-    \vspace{0.2cm}
-    \makebox[\linewidth][l]{\small Fonte: Autoria própria}
-\end{table}
+%     \vspace{0.2cm}
+%     \makebox[\linewidth][l]{\small Fonte: Autoria própria}
+% \end{table}
 
 \chapter{RESULTADOS}
 % Conteúdo dos resultados...
