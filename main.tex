@@ -727,7 +727,7 @@ Em síntese, o estudo de Seybold, Kier e Cheng \cite{seybold1997simulation} apre
 
 \subsection{Definição}
 
-O modelo de AC utilizado neste trabalho é baseado em uma grade 2D, composta por células que podem conter componentes químicos ou vazios. Cada célula pode interagir com suas vizinhas imediatas, definidas pela vizinhança de von Neumann estendida. As regras de movimentação e reação são aplicadas de forma síncrona a todas as células, permitindo que o sistema evolua ao longo do tempo. As regras de evolução são definidas pelos parâmetros \hyperref[subsubsec:Pm]{$P_M$}, \hyperref[subsubsec:Pb]{$P_B$}, \hyperref[subsubsec:J]{$J$}, \hyperref[subsubsec:Pr]{$P_R$} e \hyperref[subsubsec:Prot]{$P_{rot}$}.
+O modelo de AC utilizado neste trabalho é baseado em uma grade 2D, composta por células que podem conter componentes químicos ou vazios. Cada célula pode interagir com suas vizinhas próximas, definidas pela vizinhança de von Neumann estendida. As regras de movimentação e reação são aplicadas de forma síncrona a todas as células, permitindo que o sistema evolua ao longo do tempo. As regras de evolução são definidas pelos parâmetros \hyperref[subsubsec:Pm]{$P_M$}, \hyperref[subsubsec:Pb]{$P_B$}, \hyperref[subsubsec:J]{$J$}, \hyperref[subsubsec:Pr]{$P_R$} e \hyperref[subsubsec:Prot]{$P_{rot}$}.
 
 A grade é inicializada com uma distribuição aleatória de componentes e vazios. Durante cada iteração, as células são atualizadas conforme as regras do modelo, que consideram os estados das células vizinhas e os parâmetros definidos. O percurso da grade segue uma ordem sistemática: começa na célula superior esquerda (0, 0), avança horizontalmente até a última célula da linha, e então prossegue para a primeira célula da próxima linha (1, 0). Esse padrão se repete até que todas as células da grade sejam processadas. Após a atualização completa da grade, uma iteração do autômato celular é concluída, e o processo reinicia, percorrendo novamente todas as células. Esse ciclo continua até atingir o número de iterações especificado. A Figura \ref{fig:percorre_grade} ilustra o percurso de uma grade 2D $4 \times 4$ durante uma iteração do autômato celular. Nesse exemplo, a grade é percorrida da célula (0, 0) até a célula (0, 3), pulando para a próxima linha na célula (1, 0) e assim por diante, seguindo a ordem de leitura de uma matriz bidimensional.
 
@@ -804,6 +804,17 @@ Ainda nesse exemplo, a condição para que A se movimente é dada por $P_\text{t
 Isso significa que, se $\alpha$ tem múltiplas células vizinhas vazias adjacentes e dado que o movimento ocorrerá, a célula escolhida para o movimento será aquela na direção da maior propensão de junção de $\alpha$ com um dos componentes da sua vizinhança externa. A vizinhança externa $\mathcal{V}_\text{ext}(v)$ de um componente é definida pelas 4 células mais distantes dentro da sua vizinhança de von Neumann estendida.
 
 Ao assumir valores entre 0 e 1, o parâmetro $J$ revela repulsão entre componentes. Logo, define-se que a movimentação de um componente na direção de outro é permitida apenas se $J(\alpha, \beta) \geq 1$, ou seja, se a propensão de junção for maior ou igual a 1. Caso contrário, o componente $\alpha$ não se movimenta na direção de $\beta$. Células vazias da vizinhança externa são consideradas neutras, ou seja, elas são preteridas em junção caso haja qualquer outra célula com $J(\alpha, \beta) \geq 1$ e serão favorecidas se $0 < J(\alpha, \beta) < 1$ para todas as células vizinhas externas. O modelo, especialmente no lado computacional, interpreta células vazias com $J = 0$.
+
+No exemplo da Figura \ref{fig:evolucao_Pm_Pb_J}, se A se mover e $J(AC) \geq 1$, a célula escolhida será aquela que maximiza $J$, ou seja, a célula vizinha vazia mais próxima de C. Caso contrário, se $0 < J(AC) < 1$, A não se movimenta na direção de C devido à repulsão, e a célula escolhida poderá ser aleatoriamente qualquer das outras células vizinhas vazias em que não há componentes na vizinhança externa ($J = 0$). A Figura \ref{fig:evolucao_A} ilustra as diferentes possibilidades de movimentação de A.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{evolucao_A.png}
+    \caption{\small Possibilidades de movimentação do componente A. Se $J(AC) \geq 1$, A se movimenta na direção de C (para cima). Se $0 < J(AC) < 1$, A se movimenta para a direita ou para baixo.}
+    \label{fig:evolucao_A}
+\end{figure}
+
+O modelo de AC adotado também considera a dependência entre $J$ e $P_B$ dada pela Eq. \ref{eq:J_PB}. Isso significa que, se a probabilidade de quebra de ligação entre dois componentes for alta, a propensão de junção entre eles será baixa, e vice-versa. Essa definição traz a vantagem de reduzir a quantidade de parâmetros obrigatórios solicitados ao usuário do software, uma vez que basta definir as entradas de $J$ que os valores de $P_B$ poderão ser calculados automaticamente.
 
 
 \section{Implementação Computacional}
