@@ -598,47 +598,6 @@ mobilidade e conectividade intermolecular, garantindo que tanto propriedades
 estruturais da água quanto fenômenos dinâmicos — como a difusão necessária
 para colisões enzima--substrato — sejam reproduzidos com fidelidade.
 
-\subsubsection{Correlação empírica entre $J$ e $P_B$}
-\label{subsubsec:J-PB}
-
-Para manter coerência física entre a propensão de duas moléculas de água
-a se \emph{aproximarem} (parâmetro de junção $J$) e a probabilidade de elas
-\emph{separarem-se} (probabilidade de quebra $P_B$), Kier \emph{et al.}
-propunham a seguinte relação linear na escala logarítmica \cite{kier2005}:
-\begin{equation}
-    \label{eq:J_PB}
-    \log_{10} J \;=\; -\,1.5\,P_B \;+\; 0.6 .
-\end{equation}
-
-Algumas formas úteis de (\ref{eq:J_PB}) são:
-
-\begin{align}
-    J   & = 10^{\,0.6 - 1.5\,P_B},                \\[4pt]
-    P_B & = \frac{0.6 - \log_{10} J}{1.5} \tag*{}
-\end{align}
-
-Esta correlação garante que:
-
-\begin{itemize}
-    \item valores \emph{pequenos} de $P_B$ (ligações \textit{fortes}) implicam
-          $J \gg 1$, promovendo atração de curto alcance e formação de clusters
-          extensos;
-    \item valores \emph{grandes} de $P_B$ (ligações \textit{fracas}) geram
-          $J < 1$, favorecendo repulsão e estados “isolados” da água;
-    \item a continuidade da curva permite calibrar a ``temperatura efetiva'' da
-          rede via $T\,[^{\circ}\mathrm{C}] \approx 100\,P_B$,
-          reproduzindo perfis experimentais de propriedades como viscosidade,
-          tensão superficial e constante dielétrica \cite{kier2005}.
-\end{itemize}
-
-No contexto da subseção \hyperref[subsubsec:fracao_celulas_vazias]{\textbf{Fração de Células Vazias}}, a Eq.\,(\ref{eq:J_PB}) é aplicada
-para gerar a dupla de regras $(J,P_B)$ que define cada “estado térmico” da
-água na grade, mantendo intacta a fração de 31\,\% de cavidades. Assim,
-qualquer simulação – inclusive de cinética enzimática – preserva
-simultaneamente (i) a densidade líquida correta, (ii) a rede de ligações de
-hidrogênio compatível com a temperatura simulada e (iii) a mobilidade
-necessária para colisões enzima–substrato confiáveis.
-
 \subsection{Simulação de Reações Químicas}
 
 A simulação de reações químicas é um campo crucial para a compreensão e otimização de processos industriais e biológicos. Tradicionalmente, a cinética química é modelada por meio de equações diferenciais ordinárias (EDOs) que descrevem a variação das concentrações dos reagentes e produtos ao longo do tempo. Essas abordagens, baseadas em leis de velocidade e constantes cinéticas, são eficazes para sistemas homogêneos e bem misturados, onde as concentrações podem ser consideradas uniformes em todo o volume reacional. No entanto, em sistemas heterogêneos, onde a difusão e os efeitos espaciais desempenham um papel significativo, as EDOs podem não ser suficientes para capturar a complexidade do sistema. Nesses casos, métodos baseados em simulação estocástica, como o algoritmo de Gillespie, ou abordagens baseadas em elementos finitos, que discretizam o espaço e resolvem equações diferenciais parciais, são frequentemente empregados para considerar a distribuição espacial das espécies químicas \cite{Gillespie1977}.
@@ -814,8 +773,23 @@ No exemplo da Figura \ref{fig:evolucao_Pm_Pb_J}, se A se mover e $J(AC) \geq 1$,
     \label{fig:evolucao_A}
 \end{figure}
 
-O modelo de AC adotado também considera a dependência entre $J$ e $P_B$ dada pela Eq. \ref{eq:J_PB}. Isso significa que, se a probabilidade de quebra de ligação entre dois componentes for alta, a propensão de junção entre eles será baixa, e vice-versa. Essa definição traz a vantagem de reduzir a quantidade de parâmetros obrigatórios solicitados ao usuário do software, uma vez que basta definir as entradas de $J$ que os valores de $P_B$ poderão ser calculados automaticamente.
+Há uma relação conceitual importante entre a propensão de junção $J$ e a probabilidade de quebra de ligação $P_B$. Levando em consideração aspectos de atração/repulsão e interações intermoleculares, é natural imaginar que quanto maior a propensão de junção entre dois componentes, menor será a probabilidade de quebra da ligação entre eles e vice-versa. Assim, propõe-se para o modelo uma relação matemática entre $J$ e $P_B$, dada por:
 
+\begin{equation}
+    \label{eq:J_PB}
+    P_B(\alpha, \beta) = \frac{1.5}{J(\alpha, \beta) + 1.5}, \quad (\alpha, \beta \in \mathcal{C})
+\end{equation}
+onde $\alpha$ e $\beta$ representam componentes do sistema, $P_B(\alpha, \beta)$ é a probabilidade de quebra da ligação entre os componentes $\alpha$ e $\beta$, e $J(\alpha, \beta)$ é a propensão de junção entre eles. Quando $J(\alpha, \beta) = 0$, temos $P_B(\alpha, \beta) = 1$, indicando que não há propensão de junção e a ligação é sempre quebrada. Por outro lado, quando $J(\alpha, \beta) \to \infty$, temos $P_B(\alpha, \beta) \to 0$, indicando que a ligação é sempre mantida.
+
+Essa definição traz a vantagem de reduzir a quantidade de parâmetros obrigatórios solicitados ao usuário do software, uma vez que basta definir as entradas de $J$ que os valores de $P_B$ poderão ser calculados automaticamente. A constante $1.5$ é um refinamento aplicado a fim de tanto obter probabilidades de quebra um pouco maiores, o que auxilia no aumento da dinâmica do sistema, quanto suavizar a variação de $P_B$ frente a mudanças em $J$, especialmente na região do domínio onde $J$ é maior porém próximo de 1, o que facilita o controle sobre as alterações que esses parâmetros causam no sistema.
+
+\subsubsection{Reação e Rotação dos Componentes}
+
+A fim de simular reações de cinética enzimática, em especial pelo mecanismo de Michaelis-Menten, o modelo trata melhor reações do tipo $E + S \rightleftharpoons ES \rightarrow E + P$, onde $E$ representa a enzima, $S$ o substrato, $ES$ o complexo enzima-substrato e $P$ o produto formado. Independentemente dos identificadores dos componentes, a reação básica mencionada é aquela estabelecida como a principal que o modelo é especializado em simular. As reações são regidas por parâmetros $P_R$, que podem tanto representar reações diretas quanto inversas.
+
+O parâmetro $P_{rot}$ é utilizado para controlar a rotação de um dos componentes do sistema e também determina a possibilidade de atribuir diferentes comportamentos ao mesmo componente dependendo da direção de sua orientação. Essa característica é especialmente útil para simular o comportamento de surfactantes no sistema de cinética enzimática, visto que uma molécula de surfactante é conhecida por possuir um lado polar e uma cauda apolar. Uma combinação de parâmetros $J$, portanto, pode ser utilizada para simular uma dinâmica de atração do lado polar por espécies químicas polares, bem como a atração da cauda apolar por espécies apolares.
+
+Dado que uma rotação irá ocorrer, a próxima orientação do componente rotacionável será aleatória, não dependendo de outros fatores ou parâmetros. Além disso, a rotação de um componente poderá ocorrer somente se não houver nenhum outro componente em sua vizinhança de von Neumann. Isso evita que a rotação cause quebras indesejadas de interações já estabelecidas por outros parâmetros e garante que as responsabilidades de movimentação/interação e rotação sejam bem definidas.
 
 \section{Implementação Computacional}
 
