@@ -757,7 +757,7 @@ No exemplo da Figura \ref{fig:evolucao_Pm_Pb_J}, portanto, a probabilidade do co
 Ainda nesse exemplo, a condição para que A se movimente é dada por $P_\text{total}(A)$, mas a direção do movimento é influenciada pelo parâmetro $J(AC)$, que determina a propensão de A se juntar a C. Define-se, portanto, que a célula vizinha vazia escolhida para o movimento de um componente genérico $\alpha$ será aquela que maximiza a propensão de junção de $\alpha$, ou seja, a célula vizinha vazia $v$ tal que:
 
 \begin{equation}
-    v^* = \underset{v \in \mathcal{V}_0(\alpha)}{\arg\max} \left\{ \max_{\beta \in \mathcal{V}_\text{ext}(\alpha)} J(\alpha, \beta) \right\}, se \, J(\alpha, \beta) \geq 1
+    v^* = \underset{v \in \mathcal{V}_0(\alpha)}{\arg\max} \; J(\alpha, \beta_v), \quad \text{se } J(\alpha, \beta_v) \geq 1
 \end{equation}
 
 Isso significa que, se $\alpha$ tem múltiplas células vizinhas vazias adjacentes e dado que o movimento ocorrerá, a célula escolhida para o movimento será aquela na direção da maior propensão de junção de $\alpha$ com um dos componentes da sua vizinhança externa. A vizinhança externa $\mathcal{V}_\text{ext}(v)$ de um componente é definida pelas 4 células mais distantes dentro da sua vizinhança de von Neumann estendida.
