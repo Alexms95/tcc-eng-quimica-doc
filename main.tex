@@ -906,8 +906,8 @@ A intenção dessa análise é reproduzir o comportamento clássico da cinética
         Fração de Células de Produto           & 0\%              \\
         Fração de Células de Água              & 82\%             \\
         $P_R$ da reação $E + S \rightarrow ES$ & 1                \\
-        $P_R$ da reação $ES \rightarrow E + P$ & 0{,}001            \\
-        $P_R$ da reação $ES \rightarrow E + S$ & 0{,}0001           \\
+        $P_R$ da reação $ES \rightarrow E + P$ & 0{,}001          \\
+        $P_R$ da reação $ES \rightarrow E + S$ & 0{,}0001         \\
         $P_R$ da reação $E + P \rightarrow ES$ & 0                \\
         \hline
     \end{tabularx}
@@ -930,6 +930,10 @@ A intenção dessa análise é reproduzir o comportamento clássico da cinética
     \label{fig:michaelis_menten_reaction}
 \end{figure}
 
+A escolha de 15000 iterações foi feita para garantir que, próximo do final da execução da simulação, o sistema já tenha pouquíssima ou nenhuma reação, com concentração de substrato próxima de zero, o que indica que a enzima já não está mais reagindo com o substrato. Uma malha de $100 \times 100$ células (10000 células no total) é suficiente para observar graficamente o comportamento do sistema e ao mesmo tempo simular a presença de uma quantidade considerável de espécies químicas sem comprometer muito o tempo de execução total da simulação. As frações relativas foram escolhidas para simular um experimento real, onde a enzima está presente em quantidade bem abaixo do substrato em um meio aquoso.
+
+Em relação aos parâmetros de reação, definiu-se que sempre que substrato e enzima se encontrarem, eles irão formar o complexo enzima-substrato, entrando com o $P_R$ dessa etapa igual a 1. A reação inversa, onde o complexo se decompõe em enzima e substrato, ocorre com probabilidade $P_R = 0{,}001$, o que simula uma reação reversível onde a formação do complexo é favorecida. A conversão do complexo em produto ocorre com probabilidade $P_R = 0{,}0001$, o que simula a etapa lenta da reação geral e favorece a formação do produto. O mecanismo clássico de Michaelis-Menten propõe que a reação entre enzima e produto para formação do complexo não ocorre, portanto, o $P_R$ dessa etapa é 0.
+
 Definiu-se da forma abaixo os parâmetros de movimentação dos componentes:
 
 \begin{table}[H]
@@ -940,20 +944,20 @@ Definiu-se da forma abaixo os parâmetros de movimentação dos componentes:
         \hline
         \textbf{Parâmetro} & \textbf{Valor} \\
         \hline
-        $P_M$ (E) & 0{,}98 \\
-        $P_M$ (S) & 0{,}99 \\
-        $P_M$ (P) & 0{,}99 \\
-        $P_M$ (W) & 1 \\
-        $J$ (E$|$E) & 0 \\
-        $J$ (E$|$S) & 1{,}7 \\
-        $J$ (S$|$S) & 1{,}7 \\
-        $J$ (E$|$P) & 1{,}4 \\
-        $J$ (S$|$P) & 1{,}7 \\
-        $J$ (P$|$P) & 1{,}7 \\
-        $J$ (E$|$W) & 1{,}7 \\
-        $J$ (S$|$W) & 1{,}7 \\
-        $J$ (P$|$W) & 1{,}7 \\
-        $J$ (W$|$W) & 2{,}5 \\
+        $P_M$ (E)          & 0{,}98         \\
+        $P_M$ (S)          & 0{,}99         \\
+        $P_M$ (P)          & 0{,}99         \\
+        $P_M$ (W)          & 1              \\
+        $J$ (E$|$E)        & 0              \\
+        $J$ (E$|$S)        & 1{,}7          \\
+        $J$ (S$|$S)        & 1{,}7          \\
+        $J$ (E$|$P)        & 1{,}4          \\
+        $J$ (S$|$P)        & 1{,}7          \\
+        $J$ (P$|$P)        & 1{,}7          \\
+        $J$ (E$|$W)        & 1{,}7          \\
+        $J$ (S$|$W)        & 1{,}7          \\
+        $J$ (P$|$W)        & 1{,}7          \\
+        $J$ (W$|$W)        & 2{,}5          \\
         \hline
     \end{tabularx}
     \vspace{0.2cm}
