@@ -972,6 +972,12 @@ Definiu-se da forma abaixo os parâmetros de movimentação dos componentes:
     \label{fig:michaelis_menten_movement}
 \end{figure}
 
+Esses valores de movimentação e interação foram escolhidos para simular um sistema bastante dinâmico, dados os valores altos de $P_M$ e baixos de $J$, considerando seus limites estabelecidos. Intuitivamente, $P_M$ para a enzima foi escolhido como 0{,}98, sendo o menor valor entre os componentes imaginando sua molécula realisticamente mais pesada entre todos eles. $P_M = 0{,}99$ para o substrato e 0{,}99 para o produto indicam facilidade de movimentação comparativamente intermediária. A água é definida como um componente altamente móvel, com $P_M = 1$, o que simula um meio líquido formado por moléculas bastante leves.
+
+Com o objetivo de simular um sistema em que substrato e enzima são solúveis em água e se aproximar mais das condições para a modelagem pela cinética clássica de Michaelis-Menten, a interação da enzima, do substrato e do produto com a água são definidas como favoráveis à atração, com valores de $J$ de 1{,}7. A interação entre enzima e substrato é definida, também, como atrativa, com $J = 1{,}7$, o que possibilita a formação do complexo enzima-substrato. Nota-se, também, pelos mesmos motivos, a boa interação entre enzima e água, além da diferença entre a ligação da enzima com o substrato e dela com o produto. Enzima-substrato foi pensada para ser uma interação maior no sentido de favorecer a formação do complexo, em detrimento da interação com o produto que, segundo a cinética em estudo, não gera reação. O valor de $J (E|P)$ ser um pouco mais baixo também vem da ideia que, após uma reação completa, o produto ``se descola'' da enzima, sugerindo uma interação mais fraca entre eles (com $P_B (E,P)$ um pouco maior, dada a relação inversa entre $J$ e $P_B$).
+
+Com esses parâmetros, a simulação foi executada e o arquivo CSV resultante foi analisado. A seguir, apresenta-se o gráfico da fração relativa de cada componente ao longo das iterações:
+
 \chapter{CONCLUSÕES}
 % Conclusões finais...
 
