@@ -882,7 +882,70 @@ O tempo de execução pode ser reduzido significativamente com a implementação
 % \end{table}
 
 \chapter{RESULTADOS}
-% Conteúdo dos resultados...
+
+Foram executadas diversas simulações utilizando o modelo de autômato celular implementado, com o objetivo de analisar o comportamento do sistema sob diferentes condições e parâmetros. As simulações foram configuradas para explorar a dinâmica de reações enzimáticas, considerando a movimentação dos componentes químicos, as reações entre eles e a rotação dos componentes rotacionáveis. Após executar cada simulação, os resultados referentes às frações relativas de componentes ao longo de todas as iterações foram baixados pela função do próprio software como arquivo CSV e, então, analisados.
+
+A análise dos resultados foi realizada com o auxílio das bibliotecas \textit{Pandas}, \textit{Matplotlib} e \textit{Scikit-learn} do Python. \textit{Pandas} é uma biblioteca bastante conhecida no ambiente de tratamento de dados, pois permite a leitura e manipulação de dados de forma eficiente e intuitiva. \textit{Matplotlib} é uma biblioteca de visualização de dados que permite a criação de gráficos e plots de forma simples, permitindo criar gráficos dos mais variados tipos e estilos, além de integrar muito bem com \textit{Pandas}. \textit{Scikit-learn} é uma biblioteca bastante útil para análise estatística e aprendizado de máquina, que oferece diversas ferramentas para análise de dados, incluindo regressão, classificação e clustering. Essas bibliotecas foram utilizadas para processar os dados de frações relativas das simulações, gerar gráficos e realizar análises estatísticas dos resultados.
+
+\section{Cinética Clássica de Michaelis-Menten}
+
+A intenção dessa análise é reproduzir o comportamento clássico da cinética de Michaelis-Menten, onde a enzima se liga ao substrato em uma reação reversível para formar um complexo enzima-substrato, que posteriormente se converte em produto em uma reação irreversível. Para isso, foram definidos os seguintes parâmetros básicos e reacionais:
+
+\begin{table}
+    \centering
+    \caption{\textbf{Parâmetros da Simulação de Cinética Clássica de Michaelis-Menten}}
+    \vspace{0.2cm}
+    \begin{tabularx}{\textwidth}{X m{5cm}}
+        \hline
+        \textbf{Parâmetro}                     & \textbf{Valor}   \\
+        \hline
+        Número de iterações                    & 15000            \\
+        Dimensões da malha                     & $100 \times 100$ \\
+        Fração de Células de Enzima            & 3\%              \\
+        Fração de Células de Substrato         & 15\%             \\
+        Fração de Células de Produto           & 0\%              \\
+        Fração de Células de Água              & 82\%             \\
+        $P_R$ da reação $E + S \rightarrow ES$ & 1                \\
+        $P_R$ da reação $ES \rightarrow E + P$ & 0{,}001            \\
+        $P_R$ da reação $ES \rightarrow E + S$ & 0{,}0001           \\
+        $P_R$ da reação $E + P \rightarrow ES$ & 0                \\
+        \hline
+    \end{tabularx}
+    \vspace{0.2cm}
+    \makebox[\linewidth][l]{\small Fonte: Autoria própria}
+    \label{tab:params_michaelis_menten}
+\end{table}
+
+Definiu-se da forma abaixo os parâmetros de movimentação dos componentes:
+
+\begin{table}[H]
+    \centering
+    \caption{\textbf{Parâmetros de Movimento Utilizados na Simulação}}
+    \vspace{0.2cm}
+    \begin{tabularx}{\textwidth}{X m{5cm}}
+        \hline
+        \textbf{Parâmetro} & \textbf{Valor} \\
+        \hline
+        $P_M$ (E) & 0{,}98 \\
+        $P_M$ (S) & 0{,}99 \\
+        $P_M$ (P) & 0{,}99 \\
+        $P_M$ (W) & 1 \\
+        $J$ (E$|$E) & 0 \\
+        $J$ (E$|$S) & 1{,}7 \\
+        $J$ (S$|$S) & 1{,}7 \\
+        $J$ (E$|$P) & 1{,}4 \\
+        $J$ (S$|$P) & 1{,}7 \\
+        $J$ (P$|$P) & 1{,}7 \\
+        $J$ (E$|$W) & 1{,}7 \\
+        $J$ (S$|$W) & 1{,}7 \\
+        $J$ (P$|$W) & 1{,}7 \\
+        $J$ (W$|$W) & 2{,}5 \\
+        \hline
+    \end{tabularx}
+    \vspace{0.2cm}
+    \makebox[\linewidth][l]{\small Fonte: Autoria própria}
+    \label{tab:params_movimento}
+\end{table}
 
 \chapter{CONCLUSÕES}
 % Conclusões finais...
