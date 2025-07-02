@@ -985,6 +985,44 @@ Com esses parâmetros, a simulação foi executada e o arquivo CSV resultante fo
     \label{fig:MM_conc}
 \end{figure}
 
+Importantes tendências são observadas no gráfico da Figura \ref{fig:MM_conc}. Nota-se diminuição abrupta em [S] e [E] com simultâneo aumento em [ES] e [P] durante primeiras iterações, o que indica que a enzima está reagindo com o substrato para formar o complexo enzima-substrato e, posteriormente, o produto. Já por volta de 1000 iterações, observa-se tendência de dinimuição de [ES] e aumento em [E] com aumento de [P], o que indica que o complexo enzima-substrato está se convertendo em produto e disponibilizando novamente a enzima. Por volta de 8000 iterações, [ES] começa a se estabilizar em valores próximos de 0, enquanto [E] vai se tornando assintótica para aproximadamente o valor de sua concentração inicial de 3\% e [P] se estabiliza em torno de 15\%, que é igual à concentração de substrato inicial. Isso indica que, após um certo tempo, a enzima não está mais reagindo com o substrato, pois a concentração de substrato já é praticamente zero. A enzima, portanto, não está mais sendo utilizada e o produto formado permanece no sistema. [ES], por sua vez, se estabiliza em torno de 0, indicando que praticamente todo o complexo enzima-substrato foi convertido em produto.
+
+Esse resultado é consistente com o mecanismo de Michaelis-Menten para cinética enzimática, uma vez que o comportamento das concentrações dos componentes ao longo do tempo segue as tendências esperadas.
+
+Outra análise interessante é a geração da curva de Michaelis-Menten, que relaciona a taxa da reação, que pode ser entendida como a taxa de formação de produto, com a concentração do substrato. Para isso, utilizou-se os dados de concentração do produto ao longo das iterações para fazer uma regressão não-linear, na qual a curva de ajuste é aquela referente à concentração de produto pelo tempo na cinética de Michaelis-Menten, dada por:
+
+\begin{equation}
+    \label{eq:produto_MM}
+    P(t) = C_1 \left(\frac{1 - e^{C_2 t}}{1 + e^{C_3 t}}\right)
+\end{equation}
+onde $C_1$, $C_2$ e $C_3$ são constantes a serem ajustadas. A regressão foi realizada utilizando a biblioteca \textit{Scikit-learn} do Python, que oferece ferramentas para ajuste de modelos não-lineares. Após o ajuste, foi possível obter a derivada da curva de formação de produto com o tempo, ou seja, a curva de taxa de formação de produto, que é descrita pela Eq. \ref{eq:taxa_MM} como:
+
+\begin{equation}
+    \label{eq:taxa_MM}
+    \frac{dP(t)}{dt} = -C_1 C_2 \frac{e^{C_2 t}}{1 + e^{C_3 t}} - C_1 C_3 \frac{(1 - e^{C_2 t}) e^{C_3 t}}{(1 + e^{C_3 t})^2}
+\end{equation}
+onde $C_1$, $C_2$ e $C_3$ são os mesmos parâmetros ajustados na regressão da curva de formação de produto.
+
+Essa derivada pode ser calculada em Python utilizando a biblioteca \textit{SymPy}, que permite manipulação simbólica de expressões matemáticas. A seguir, apresenta-se o gráfico da concentração de produto e de sua derivada, a taxa da reação, ao longo das iterações:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{MM_rate.png}
+    \caption{\small Curva de concentração de produto e taxa da reação na cinética clássica de Michaelis-Menten.}
+    \label{fig:MM_rate}
+\end{figure}
+
+A equação encontrada para a curva de concentração de produto foi:
+
+\begin{equation}
+    P(t) = 0{,}1516 \left(\frac{1 - e^{-4 \cdot 10^{-4} t}}{1 + e^{-5 \cdot 10^{-4} t}}\right)
+\end{equation}
+com $R^2 = 0{,}9991$, indicando um excelente ajuste. A derivada dessa curva, que representa a taxa de formação de produto, é aproximadamente dada por:
+
+\begin{equation}
+    P'(t) = 5{,}812 \cdot 10^{-5} \left(\frac{e^{-3{,}834 \cdot 10^{-4} t}}{1 + e^{-4{,}815 \cdot 10^{-4} t}}\right) + 7{,}299 \cdot 10^{-5} \left(\frac{(1 - e^{-3{,}834 \cdot 10^{-4} t}) e^{-4{,}815 \cdot 10^{-4} t}}{(1 + e^{-4{,}815 \cdot 10^{-4} t})^2}\right)
+\end{equation}
+
 \chapter{CONCLUSÕES}
 % Conclusões finais...
 
