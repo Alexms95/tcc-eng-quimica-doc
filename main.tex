@@ -938,7 +938,7 @@ Definiu-se da forma abaixo os parâmetros de movimentação dos componentes:
 
 \begin{table}[H]
     \centering
-    \caption{\textbf{Parâmetros de Movimento Utilizados na Simulação}}
+    \caption{\textbf{Parâmetros de Movimento para Simulação de Cinética Clássica de Michaelis-Menten}}
     \vspace{0.2cm}
     \begin{tabularx}{\textwidth}{X m{5cm}}
         \hline
@@ -1022,6 +1022,143 @@ com $R^2 = 0{,}9991$, indicando um excelente ajuste. A derivada dessa curva, que
 \begin{equation}
     P'(t) = 5{,}812 \cdot 10^{-5} \left(\frac{e^{-3{,}834 \cdot 10^{-4} t}}{1 + e^{-4{,}815 \cdot 10^{-4} t}}\right) + 7{,}299 \cdot 10^{-5} \left(\frac{(1 - e^{-3{,}834 \cdot 10^{-4} t}) e^{-4{,}815 \cdot 10^{-4} t}}{(1 + e^{-4{,}815 \cdot 10^{-4} t})^2}\right)
 \end{equation}
+
+De posse da taxa de reação, obtem-se o gráfico de Michaelis-Menten, que relaciona a taxa de formação de produto com a concentração de substrato. A seguir, apresenta-se o gráfico da curva de Michaelis-Menten:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{MM_curve.png}
+    \caption{\small Curva de Michaelis-Menten: taxa de formação de produto em função da concentração de substrato.}
+    \label{fig:MM_curve}
+\end{figure}
+
+A curva de Michaelis-Menten obtida se apresenta de forma muito semelhante ao comportamento típico, onde a taxa de formação de produto aumenta com a concentração de substrato até atingir um platô. O platô revela a $V_{max}$, que é a taxa máxima de formação de produto, com valor muito próximo de $3 \cdot 10^{-5}$. A concentração de substrato na qual a taxa de formação de produto (taxa de reação) atinge metade do valor máximo é conhecida como $K_m$, que é uma medida da afinidade da enzima pelo substrato. No caso desta simulação, $K_m \approx 0{,}0238$.
+
+Em resumo, a tabela \ref{tab:params_MM} apresenta os valores das constantes de Michaelis-Menten obtidas a partir da simulação.
+
+\begin{table}[H]
+    \centering
+    \caption{Constantes de Michaelis-Menten na Simulação de Cinética Clássica}
+    \vspace{0.2cm}
+    \begin{tabularx}{\textwidth}{X m{5cm}}
+        \hline
+        \textbf{Constante} & \textbf{Valor}         \\
+        \hline
+        $V_{max}$          & $3{,}01 \cdot 10^{-5}$ \\
+        $K_m$              & $0{,}0238$             \\
+        \hline
+    \end{tabularx}
+    \vspace{0.2cm}
+    \makebox[\linewidth][l]{\small Fonte: Autoria própria}
+    \label{tab:params_MM}
+\end{table}
+
+\section{Cinética com Substrato Apolar}
+
+A intenção dessa análise é reproduzir o comportamento da cinética de Michaelis-Menten, mas agora considerando a presença de um substrato com característica apolar. Para isso, é razoável imaginar que, para uma comparação justa, tanto os parâmetros básicos do modelo quanto os parâmetros de reação sejam os mesmos da simulação anterior, mas com alterações nos parâmetros de movimentação e interação dos componentes. A seguir, apresenta-se a tabela com os parâmetros $P_M$ e $J$ utilizados:
+
+\begin{table}[H]
+    \centering
+    \caption{Parâmetros de Movimento para Simulação de Cinética com Substrato Apolar}
+    \vspace{0.2cm}
+    \begin{tabularx}{\textwidth}{X m{5cm}}
+        \hline
+        \textbf{Parâmetro} & \textbf{Valor} \\
+        \hline
+        $P_M$ (E)          & 0{,}98         \\
+        $P_M$ (S)          & 0{,}99         \\
+        $P_M$ (P)          & 0{,}99         \\
+        $P_M$ (W)          & 1              \\
+        $J$ (E$|$E)        & 0              \\
+        $J$ (E$|$S)        & 1{,}1          \\
+        $J$ (S$|$S)        & 1{,}7          \\
+        $J$ (E$|$P)        & 1{,}4          \\
+        $J$ (S$|$P)        & 1{,}7          \\
+        $J$ (P$|$P)        & 1{,}7          \\
+        $J$ (E$|$W)        & 1{,}7          \\
+        $J$ (S$|$W)        & 0{,}5          \\
+        $J$ (P$|$W)        & 0{,}5          \\
+        $J$ (W$|$W)        & 2{,}5          \\
+        \hline
+    \end{tabularx}
+    \vspace{0.2cm}
+    \makebox[\linewidth][l]{\small Fonte: Autoria própria}
+    \label{tab:params_movimento_apolar}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{movement_MM_apolar.png}
+    \caption{\small Parâmetros de movimentação dos componentes da simulação de cinética com substrato apolar.}
+    \label{fig:michaelis_menten_movement_apolar}
+\end{figure}
+
+Comparando com a simulação para Michaelis-Menten clássica, nota-se que foi definido $J (E|S) = 1{,}1$, o que indica uma interação um pouco menos favorável entre enzima e substrato, visto que o substrato agora é apolar. Além disso, $J (S|W) = 0{,}5$ e $J (P|W) = 0{,}5$, o que indica que o substrato e a água se repelem em termos de interação e, dessa forma, é lógico pensar que o produto também será apolar e terá repulsão com a água. Os outros parâmetros são os mesmos da simulação anterior, o que permite uma comparação adequada entre os dois cenários.
+
+Após a execução completa dessa simulação e a análise do arquivo CSV gerado, tem-se os seguintes resultados, começando pelos gráficos de frações relativas de cada componente ao longo das iterações:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{MM_apolar_conc.png}
+    \caption{\small Fração relativa (concentração) de cada componente ao longo das iterações na cinética com substrato apolar.}
+    \label{fig:MM_apolar_conc}
+\end{figure}
+
+As curvas são semelhantes às da simulação anterior, com poucas diferenças notáveis. Observa-se que, desta vez, o sistema começa a se estabilizar somente por volta de 10000 iterações, enquanto na simulação anterior a estabilização ocorreu por volta de 8000 iterações. Isso indica que o sistema com substrato apolar é mais lento mesmo mantidos os parâmetros de reação, possivelmente devido à menor interação entre enzima e substrato.
+
+Repetindo o cálculo de regressão não-linear para obter a equação e a curva de concentração de produto, a equação encontrada é:
+\begin{equation}
+    P(t) = 0{,}1544 \left(\frac{1 - e^{-3 \cdot 10^{-4} t}}{1 + e^{-4 \cdot 10^{-4} t}}\right)
+    \label{eq:produto_MM_apolar}
+\end{equation}
+com $R^2 = 0{,}9993$.
+
+A derivada dessa curva, que representa a taxa de formação de produto, é aproximadamente dada por:
+\begin{equation}
+    P'(t) = 4{,}734 \cdot 10^{-5} \left(\frac{e^{-3{,}067 \cdot 10^{-4} t}}{1 + e^{-4{,}138 \cdot 10^{-4} t}}\right) + 6{,}387 \cdot 10^{-5} \left(\frac{(1 - e^{-3{,}067 \cdot 10^{-4} t}) e^{-4{,}138 \cdot 10^{-4} t}}{(1 + e^{-4{,}138 \cdot 10^{-4} t})^2}\right)
+    \label{eq:taxa_MM_apolar}
+\end{equation}
+
+A seguir, apresenta-se o gráfico da curva de concentração de produto e de sua derivada, a taxa da reação, para a cinética com substrato apolar:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{MM_apolar_rate.png}
+    \caption{\small Curvas de concentração de produto e taxa da reação na cinética com substrato apolar.}
+    \label{fig:MM_apolar_rate}
+\end{figure}
+
+O gráfico de Michaelis-Menten, que relaciona a taxa de formação de produto com a concentração de substrato, é apresentado a seguir:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{MM_apolar_curve.png}
+    \caption{\small Curva de Michaelis-Menten para substrato apolar.}
+    \label{fig:MM_apolar_curve}
+\end{figure}
+
+A curva de Michaelis-Menten obtida se apresenta, também, de forma semelhante ao comportamento típico, mas os valores de $V_{max}$ e $K_m$ são notadamente distintos em comparação com a cinética clássica (substrato polar). Aqui, $V_{max} \approx 2{,}5 \cdot 10^{-5}$ e $K_m \approx 0{,}0226$. A tabela \ref{tab:params_MM_apolar} apresenta os valores das constantes de Michaelis-Menten obtidas a partir da simulação com substrato apolar.
+
+\begin{table}[H]
+    \centering
+    \caption{Constantes de Michaelis-Menten na simulação de cinética com substrato apolar}
+    \vspace{0.2cm}
+    \begin{tabularx}{\textwidth}{X m{5cm}}
+        \hline
+        \textbf{Constante} & \textbf{Valor}         \\
+        \hline
+        $V_{max}$          & $2{,}5 \cdot 10^{-5}$  \\
+        $K_m$              & $0{,}0226$             \\
+        \hline
+    \end{tabularx}
+    \vspace{0.2cm}
+    \makebox[\linewidth][l]{\small Fonte: Autoria própria}
+    \label{tab:params_MM_apolar}
+\end{table}
+
+Comparando esses resultados com os da tabela \ref{tab:params_MM} da simulação de cinética clássica, nota-se que tanto $V_{max}$ quanto $K_m$ são menores no caso do substrato apolar. A diminuição de $V_{max}$ indica que a taxa máxima de formação de produto cai devido à tendência do substrato em se aglomerar, uma vez que ele desta vez não se solubiliza em água. Levando em consideração que a enzima possui boa afinidade com a água, a reação com o substrato ocorre com menos frequência, o que também corrobora a diminuição da afinidade da enzima com o substrato ($K_m$). Isso indica que a enzima tem maior dificuldade em se ligar ao substrato apolar, o que é consistente com o comportamento esperado para substratos apolares em sistemas aquosos.
+
+Embora o modelo de Michaelis-Menten não considere a presença de substratos apolares, os resultados obtidos com o modelo de autômato celular implementado mostram que é possível simular o comportamento da cinética enzimática mesmo em condições não ideais, gerando resultados que confirmam teorias. Isso demonstra a flexibilidade e a utilidade do modelo para estudar diferentes cenários e condições reacionais.
 
 \chapter{CONCLUSÕES}
 % Conclusões finais...
