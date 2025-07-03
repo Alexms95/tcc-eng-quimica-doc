@@ -9,3 +9,5 @@
 * Réplicas das simulações
 
 * Na simulação com substrato apolar, J(AC) deveria ser igual a J(AB) = 1.1
+* Sempre numerar as tabelas e figuras ao citá-las.
+* Parâmetros da interação do surfactante com o substrato

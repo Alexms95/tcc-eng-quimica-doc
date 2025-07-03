@@ -1055,7 +1055,7 @@ Em resumo, a tabela \ref{tab:params_MM} apresenta os valores das constantes de M
 
 \section{Cinética com Substrato Apolar}
 
-A intenção dessa análise é reproduzir o comportamento da cinética de Michaelis-Menten, mas agora considerando a presença de um substrato com característica apolar. Para isso, é razoável imaginar que, para uma comparação justa, tanto os parâmetros básicos do modelo quanto os parâmetros de reação sejam os mesmos da simulação anterior, mas com alterações nos parâmetros de movimentação e interação dos componentes. A seguir, apresenta-se a tabela com os parâmetros $P_M$ e $J$ utilizados:
+A intenção dessa análise é reproduzir o comportamento da cinética de Michaelis-Menten, mas agora considerando a presença de um substrato com característica apolar. Para isso, é razoável imaginar que, para uma comparação justa, tanto os parâmetros básicos do modelo quanto os parâmetros de reação sejam os mesmos da simulação anterior, mas com alterações nos parâmetros de movimentação e interação dos componentes. A seguir, apresenta-se a Tabela \ref{tab:params_movimento_apolar} e a Figura \ref{fig:michaelis_menten_movement_apolar} com os parâmetros $P_M$ e $J$ utilizados:
 
 \begin{table}[H]
     \centering
@@ -1145,10 +1145,10 @@ A curva de Michaelis-Menten obtida se apresenta, também, de forma semelhante ao
     \vspace{0.2cm}
     \begin{tabularx}{\textwidth}{X m{5cm}}
         \hline
-        \textbf{Constante} & \textbf{Valor}         \\
+        \textbf{Constante} & \textbf{Valor}        \\
         \hline
-        $V_{max}$          & $2{,}5 \cdot 10^{-5}$  \\
-        $K_m$              & $0{,}0226$             \\
+        $V_{max}$          & $2{,}5 \cdot 10^{-5}$ \\
+        $K_m$              & $0{,}0226$            \\
         \hline
     \end{tabularx}
     \vspace{0.2cm}
@@ -1159,6 +1159,119 @@ A curva de Michaelis-Menten obtida se apresenta, também, de forma semelhante ao
 Comparando esses resultados com os da tabela \ref{tab:params_MM} da simulação de cinética clássica, nota-se que tanto $V_{max}$ quanto $K_m$ são menores no caso do substrato apolar. A diminuição de $V_{max}$ indica que a taxa máxima de formação de produto cai devido à tendência do substrato em se aglomerar, uma vez que ele desta vez não se solubiliza em água. Levando em consideração que a enzima possui boa afinidade com a água, a reação com o substrato ocorre com menos frequência, o que também corrobora com a diminuição da afinidade da enzima com o substrato ($K_m$). Isso indica que a enzima tem maior dificuldade em se ligar ao substrato apolar, o que é consistente com o comportamento esperado para substratos apolares em sistemas aquosos.
 
 Embora o modelo de Michaelis-Menten não considere a presença de substratos apolares, os resultados obtidos com o modelo de autômato celular implementado mostram que é possível simular o comportamento da cinética enzimática mesmo em condições não ideais, gerando resultados que confirmam teorias. Isso demonstra a flexibilidade e a utilidade do modelo para estudar diferentes cenários e condições reacionais.
+
+\section{Cinética com Substrato Apolar e Surfactante}
+
+A intenção dessa análise é reproduzir o comportamento da cinética de Michaelis-Menten com substrato apolar, mas agora considerando a presença de um surfactante que pode alterar a dinâmica do sistema. O surfactante é uma substância que reduz a tensão superficial entre dois líquidos ou entre um líquido e um sólido, facilitando a mistura de substâncias apolares em meios aquosos. Para isso, foram definidos os parâmetros básicos ilustrados na Tabela \ref{tab:params_apolar_surfactante} e na Figura \ref{fig:apolar_surfactante}.
+
+\begin{table}[H]
+    \centering
+    \caption{Parâmetros da Simulação de Cinética com Surfactante}
+    \vspace{0.2cm}
+    \begin{tabularx}{\textwidth}{X m{5cm}}
+        \hline
+        \textbf{Parâmetro}                     & \textbf{Valor}   \\
+        \hline
+        Número de iterações                    & 15000            \\
+        Dimensões da malha                     & $100 \times 100$ \\
+        Fração de Células de Enzima            & 3\%              \\
+        Fração de Células de Substrato         & 15\%             \\
+        Fração de Células de Produto           & 0\%              \\
+        Fração de Células de Água              & 79\%             \\
+        Fração de Células de Surfactante       & 3\%              \\
+        $P_R$ da reação $E + S \rightarrow ES$ & 1                \\
+        $P_R$ da reação $ES \rightarrow E + P$ & 0{,}001          \\
+        $P_R$ da reação $ES \rightarrow E + S$ & 0{,}0001         \\
+        $P_R$ da reação $E + P \rightarrow ES$ & 0                \\
+        \hline
+    \end{tabularx}
+    \vspace{0.2cm}
+    \makebox[\linewidth][l]{\small Fonte: Autoria própria}
+    \label{tab:params_apolar_surfactante}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{MM_surf.png}
+    \caption{\small Configuração básica e frações relativas de componentes da simulação de cinética com surfactante.}
+    \label{fig:apolar_surfactante}
+\end{figure}
+
+Para essa simulação, foram mantidos os dados de frações relativas de todos os componentes, exceto a água, que agora ocupa 79\% dos componentes, e o surfactante, que ocupa 3\%. Os dados de entrada de reações permanecem os mesmos das simulações anteriores a fim de manter a consistência comparativa, entretanto o comportamento bipolar do surfactante é simulado pela configuração de rotação ilustrada na Figura \ref{fig:rotation_surfactant} e na Tabela \ref{tab:rotation_surfactant}.
+
+\begin{table}[H]
+    \centering
+    \caption{Parâmetros de Rotação do Surfactante}
+    \vspace{0.2cm}
+    \begin{tabularx}{\textwidth}{X m{5cm}}
+        \hline
+        \textbf{Parâmetro}                     & \textbf{Valor}   \\
+        \hline
+        Component & Surfactant \\
+        $P_{rot}$ & 0{,}8 \\
+        \hline
+    \end{tabularx}
+    \vspace{0.2cm}
+    \makebox[\linewidth][l]{\small Fonte: Autoria própria}
+    \label{tab:rotation_surfactant}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{rotation_surfactant.png}
+    \caption{\small Parâmetros de rotação atribuídos ao surfactante.}
+    \label{fig:rotation_surfactant}
+\end{figure}
+
+Os parâmetros de movimentação e interação dos componentes são definidos na Tabela \ref{tab:params_movimento_surfactante} e ilustrados na Figura \ref{fig:michaelis_menten_movement_surfactante}.
+
+\begin{table}[H]
+    \centering
+    \caption{Parâmetros de Movimento para Simulação de Cinética com Surfactante}
+    \vspace{0.2cm}
+    \begin{tabularx}{\textwidth}{X m{5cm}}
+        \hline
+        \textbf{Parâmetro} & \textbf{Valor} \\
+        \hline
+        $P_M$ (E)                & 0{,}98        \\
+        $P_M$ (S)                & 0{,}99        \\
+        $P_M$ (P)                & 0{,}99        \\
+        $P_M$ (W)                & 1             \\
+        $P_M$ (F)                & 0{,}99        \\
+        $J$ (E$|$E)              & 0             \\
+        $J$ (E$|$S)              & 1{,}1         \\
+        $J$ (S$|$S)              & 1{,}7         \\
+        $J$ (E$|$P)              & 1{,}4         \\
+        $J$ (S$|$P)              & 1{,}7         \\
+        $J$ (P$|$P)              & 1{,}7         \\
+        $J$ (E$|$W)              & 1{,}7         \\
+        $J$ (S$|$W)              & 0{,}5         \\
+        $J$ (P$|$W)              & 0{,}5         \\
+        $J$ (W$|$W)              & 2{,}5         \\
+        $J$ (E$|F_1$)            & 1{,}7         \\
+        $J$ (S$|F_1$)            & 1{,}7         \\
+        $J$ (P$|F_1$)            & 1{,}7         \\
+        $J$ (W$|F_1$)            & 1{,}7         \\
+        $J$ (E$|F_2$)            & 1{,}1         \\
+        $J$ (S$|F_2$)            & 1{,}7         \\
+        $J$ (P$|F_2$)            & 1{,}7         \\
+        $J$ (W$|F_2$)            & 0{,}5         \\
+        $J$ ($F_1|F_2$)          & 0{,}8         \\
+        $J$ ($F_1|F_1$)          & 1{,}7         \\
+        $J$ ($F_2|F_2$)          & 1{,}7         \\
+        \hline
+    \end{tabularx}
+    \vspace{0.2cm}
+    \makebox[\linewidth][l]{\small Fonte: Autoria própria}
+    \label{tab:params_movimento_surfactante}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{movement_MM_surfactant.png}
+    \caption{\small Parâmetros de movimentação dos componentes da simulação de cinética com surfactante.}
+    \label{fig:michaelis_menten_movement_surfactante}
+\end{figure}
 
 \chapter{CONCLUSÕES}
 % Conclusões finais...
