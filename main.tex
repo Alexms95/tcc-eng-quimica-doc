@@ -1275,6 +1275,78 @@ Os parâmetros de movimentação e interação dos componentes são definidos na
     \label{fig:michaelis_menten_movement_surfactante}
 \end{figure}
 
+Diferenças notáveis nessa simulação são a inclusão de valores distintos de $J$ para diferentes lados da célula de surfactante, representados por $F_1$ e $F_2$. $F_1$, o menor lado, é o lado polar, enquanto que $F_2$ representa o lado apolar. Note que os valores foram escolhidos de forma a simular esse comportamento bipolar do surfactante, como por exemplo repulsão do lado apolar com a água ($J (W|F_2) = 0{,}5$) e atração do lado polar com a água ($J (W|F_1) = 1{,}7$).
+
+Após a execução completa dessa simulação e a análise do arquivo CSV gerado, tem-se os seguintes resultados, começando pelos gráficos de frações relativas de cada componente ao longo das iterações, ilustrados na Figura \ref{fig:MM_surf_conc}:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{MM_surf_conc.png}
+    \caption{\small Fração relativa (concentração) de cada componente ao longo das iterações na cinética com surfactante.}
+    \label{fig:MM_surf_conc}
+\end{figure}
+
+Não se nota grandes diferenças entre os gráficos da dinâmica com surfactante e sem, da simulação anterior. A estabilização do sistema começa a acontecer, também, por volta de 10000 iterações.
+
+Utilizando os dados de concentração do produto ao longo das iterações, foi realizada a regressão não-linear para obter a equação e a curva de concentração de produto. A equação encontrada é:
+
+\begin{equation}
+    P(t) = 0{,}1530 \left(\frac{1 - e^{-3 \cdot 10^{-4} t}}{1 + e^{-4 \cdot 10^{-4} t}}\right)
+    \label{eq:produto_MM_surfactant}
+\end{equation}
+com $R^2 = 0{,}9993$.
+
+A derivada dessa curva, que representa a taxa da reação, é aproximadamente dada por:
+
+\begin{equation}
+    P'(t) = 5{,}258 \cdot 10^{-5} \left(\frac{e^{-3{,}438 \cdot 10^{-4} t}}{1 + e^{-3{,}613 \cdot 10^{-4} t}}\right) + 5{,}527 \cdot 10^{-5} \left(\frac{(1 - e^{-3{,}438 \cdot 10^{-4} t}) e^{-3{,}613 \cdot 10^{-4} t}}{(1 + e^{-3{,}613 \cdot 10^{-4} t})^2}\right)
+    \label{eq:taxa_MM_surfactant}
+\end{equation}
+
+Na Figura \ref{fig:MM_surf_rate}, apresenta-se o gráfico da curva de concentração de produto e de sua derivada, a taxa da reação, para a cinética com surfactante:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{MM_surf_rate.png}
+    \caption{\small Curvas de concentração de produto e taxa da reação na cinética com surfactante.}
+    \label{fig:MM_surf_rate}
+\end{figure}
+
+O gráfico de Michaelis-Menten, que relaciona a taxa de formação de produto com a concentração de substrato, é apresentado na Figura \ref{fig:MM_surf_curve}:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{MM_surf_curve.png}
+    \caption{\small Curva de Michaelis-Menten para cinética com surfactante.}
+    \label{fig:MM_surf_curve}
+\end{figure}
+
+Os valores das constantes $V_{max}$ e $K_m$ obtidos a partir da simulação com surfactante são apresentados na Tabela \ref{tab:params_MM_surfactant}.
+
+\begin{table}[H]
+    \centering
+    \caption{Constantes de Michaelis-Menten na simulação de cinética com surfactante}
+    \vspace{0.2cm}
+    \begin{tabularx}{\textwidth}{X m{5cm}}
+        \hline
+        \textbf{Constante} & \textbf{Valor}          \\
+        \hline
+        $V_{max}$          & $2{,}635 \cdot 10^{-5}$ \\
+        $K_m$              & $0{,}0268$              \\
+        \hline
+    \end{tabularx}
+    \vspace{0.2cm}
+    \makebox[\linewidth][l]{\small Fonte: Autoria própria}
+    \label{tab:params_MM_surfactant}
+\end{table}
+
+Comparando esses resultados com os da Tabela \ref{tab:params_MM_apolar} da simulação de cinética com substrato apolar, nota-se que tanto $V_{max}$ quanto $K_m$ são maiores no caso do surfactante. $V_{max}$ é maior, o que indica que o surfactante auxiliou na formação de produto durante as primeiras iterações. A presença de uma molécula bipolar substituindo uma polar, como a água, pode ter facilitado a interação entre enzima e substrato, aumentando a taxa de reação. 
+
+Por outro lado, $K_m$ é maior, o que indica que a afinidade da enzima pelo substrato diminuiu. Isso pode ser explicado pelo fato de que o surfactante, apesar de auxiliar na formação do produto, determinou uma inibição. Pelos parâmetros de interação, tanto $J (E|S)$ quanto $J (E|F_1)$ e $J (E|F_2)$ são iguais a $1{,}1$, logo o surfactante pode ter
+agido como um inibidor competitivo, dificultando o encontro entre enzima e substrato ao longo do tempo.
+
+Cabe ressaltar, novamente, que o modelo de Michaelis-Menten não considera a presença de espécies como surfactantes e as constantes calculadas aqui são $aparentes$. Entretanto, o modelo de AC foi capaz de simular o comportamento da cinética enzimática mesmo com a complexidade adicional do surfactante. A heterogeneidade do sistema e a dinâmica de interação entre os componentes foram bem capturadas, permitindo fazer análises e comparações com teorias conhecidas.
+
 \chapter{CONCLUSÕES}
 % Conclusões finais...
 
