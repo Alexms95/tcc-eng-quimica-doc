@@ -838,7 +838,57 @@ Depois de toda essa análise, o programa passa para a próxima célula caso haja
 
 
 \subsection{Interface do Usuário}
-% explicar como você construiu a interface para o usuário (prints de tela são bem-vindos), inclusive com os detalhes de input/output.
+
+O software deste trabalho tem um foco grande em tornar a experiência do usuário a mais simples possível, permitindo que usuários com pouca ou nenhuma experiência em programação consigam executar simulações de autômatos celulares e analisar os resultados. Para isso, foi desenvolvida uma interface gráfica amigável, utilizando a biblioteca especializada na construção de interfaces gráficas executadas em navegadores web, o \textit{React}.
+
+A interface, portanto, foi projetada para ser executada em um navegador web, permitindo que o usuário interaja com o modelo de autômato celular por meio de uma aplicação web. Dessa forma, o usuário pode utilizar as ferramentas do software em um ambiente bastante familiar.
+
+Assim que a aplicação é iniciada, o usuário é apresentado à tela inicial da Figura \ref{fig:interface_inicial}, onde pode criar uma nova simulação ou acessar simulações já existentes. Há um botão em destaque no canto superior direito para dar início a uma nova simulação. Simulações já existentes são visualizadas nessa tela com algumas informações básicas, como o nome, o número de iterações e o tamanho da grade. O usuário pode abrir, editar, excluir ou criar uma cópia de uma simulação salva.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{interface_inicial.png}
+    \caption{\small Tela inicial da interface do usuário do simulador de autômatos celulares.}
+    \label{fig:interface_inicial}
+\end{figure}
+
+Ao criar uma nova simulação do início, o usuário é direcionado para um formulário de configuração conforme as Figuras \ref{fig:interface_configuracao1} e \ref{fig:interface_configuracao2}, onde pode definir o nome da simulação, o tamanho da grade (número de células na horizontal e vertical), o número de iterações, as frações relativas de cada componente químico, a probabilidade de movimentação livre, a probabilidade de quebra de ligações, a propensão de junção e a probabilidade de reação. O usuário também pode escolher se deseja ativar ou não a rotação de um dos componentes e inserir uma probabilidade de rotação.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{interface_configuracao.png}
+    \caption{\small Primeira parte do formulário de configuração de uma nova simulação.}
+    \label{fig:interface_configuracao1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{interface_configuracao2.png}
+    \caption{\small Segunda parte do formulário de configuração de uma nova simulação.}
+    \label{fig:interface_configuracao2}
+\end{figure}
+
+O formulário é intuitivo e possui diversas validações para garantir que os dados inseridos pelo usuário sejam consistentes. Por exemplo, o tamanho da grade deve ser um número inteiro positivo, o número de iterações deve ser um inteiro positivo, as frações relativas devem somar 1, e as probabilidades devem estar entre 0 e 1. Os parâmetros $J$ aceitam valores positivos. Caso o usuário insira dados inválidos, mensagens de erro são exibidas para orientá-lo a corrigir os valores. A Figura \ref{fig:validacao} ilustra um exemplo de erro de validação, onde o usuário está inserindo uma fração relativa de 50\% mas há somente um componente naquele momento e a soma das frações relativas deve ser igual a 100\%.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{validacao.png}
+    \caption{\small Exemplo de erro de validação ao tentar inserir uma fração relativa inválida.}
+    \label{fig:validacao}
+\end{figure}
+
+Outra informação que pode auxiliar o usuário a entender melhor o que está sendo inserido é a quantidade de células total que serão geradas de acordo com o tamanho da grade e a quantidade aproximada de células que serão ocupadas por cada componente. Essas informações são atualizadas dinamicamente conforme o usuário preenche os campos do formulário, permitindo que ele tenha uma visão clara do que está configurando. A Figura \ref{fig:informacoes} ilustra essas informações adicionais. Note que já são mostradas a quantidade total de células na grade (10000 células) e a quantidade aproximada de células ocupadas por cada componente, considerando as frações relativas inseridas pelo usuário.
+
+Os valores de células ocupadas são aproximados pois o número total de células é fixo, mas as frações relativas podem não ser inteiras. Além disso, a fração de células vazias é sempre 31\% do total e a aplicação já calcula a quantidade correta de componentes e vazios automaticamente, considerando que as frações são calculadas sobre a quantidade total de células \textbf{ocupadas}.
+
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{calculo_celulas.png}
+    \caption{\small Informações adicionais sobre a simulação, como o número total de células e a quantidade aproximada de células ocupadas por cada componente.}
+    \label{fig:informacoes}
+\end{figure}
 
 \subsection{Ambiente Computacional}
 
@@ -1340,7 +1390,7 @@ Os valores das constantes $V_{max}$ e $K_m$ obtidos a partir da simulação com 
     \label{tab:params_MM_surfactant}
 \end{table}
 
-Comparando esses resultados com os da Tabela \ref{tab:params_MM_apolar} da simulação de cinética com substrato apolar, nota-se que tanto $V_{max}$ quanto $K_m$ são maiores no caso do surfactante. $V_{max}$ é maior, o que indica que o surfactante auxiliou na formação de produto durante as primeiras iterações. A presença de uma molécula bipolar substituindo uma polar, como a água, pode ter facilitado a interação entre enzima e substrato, aumentando a taxa de reação. 
+Comparando esses resultados com os da Tabela \ref{tab:params_MM_apolar} da simulação de cinética com substrato apolar, nota-se que tanto $V_{max}$ quanto $K_m$ são maiores no caso do surfactante. $V_{max}$ é maior, o que indica que o surfactante auxiliou na formação de produto durante as primeiras iterações. A presença de uma molécula bipolar substituindo uma polar, como a água, pode ter facilitado a interação entre enzima e substrato, aumentando a taxa de reação.
 
 Por outro lado, $K_m$ é maior, o que indica que a afinidade da enzima pelo substrato diminuiu. Isso pode ser explicado pelo fato de que o surfactante, apesar de auxiliar na formação do produto, determinou uma inibição. Pelos parâmetros de interação, tanto $J (E|S)$ quanto $J (E|F_1)$ e $J (E|F_2)$ são iguais a $1{,}1$, logo o surfactante pode ter
 agido como um inibidor competitivo, dificultando o encontro entre enzima e substrato ao longo do tempo.
