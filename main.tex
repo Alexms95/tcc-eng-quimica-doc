@@ -1274,6 +1274,15 @@ Mais uma diferença a ser notada é a tendência observada de produto e substrat
     \label{fig:MM_apolar_3000it}
 \end{figure}
 
+A Figura \ref{fig:MM_apolar_10000it} mostra o estado da malha na iteração 10000, evidenciando a baixa presença de substrato e a formação de aglomerados de produto, devido à sua baixa solubilidade provocada pela escolha dos valores dos parâmetros de movimentação e interação.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{apolar_10000.png}
+    \caption{\small Estado da malha na iteração 10000 da simulação de cinética com substrato apolar.}
+    \label{fig:MM_apolar_10000it}
+\end{figure}
+
 Repetindo o cálculo de regressão não-linear para obter a equação e a curva de concentração de produto, a equação encontrada é:
 \begin{equation}
     P(t) = 0{,}1544 \left(\frac{1 - e^{-3 \cdot 10^{-4} t}}{1 + e^{-4 \cdot 10^{-4} t}}\right)
