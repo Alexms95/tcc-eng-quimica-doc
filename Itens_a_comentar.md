@@ -4,6 +4,7 @@
 * Acompanhamento do progresso da simulação
 * Mostrar o código que calcula as equações e constantes relevantes da cinética
 * Testes unitários
+* Tentar executar uma simulação no meu note pessoal
 
 * Na simulação com substrato apolar, J(AC) deveria ser igual a J(AB) = 1.1
 * Sempre numerar as tabelas e figuras ao citá-las.
