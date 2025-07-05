@@ -13,7 +13,7 @@
 
 ### Prioridades
 * Colocar gráfico de concentrações e de Velocidade na revisão
-* Equação de ajuste da formação de produto com o tempo
+* Equação de ajuste da formação de produto com o tempo, explicar
 * Adicionar imagens das grades geradas
 * Réplicas das simulações
 * Texto descrevendo os Pr, corrigir

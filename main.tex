@@ -881,14 +881,43 @@ Outra informação que pode auxiliar o usuário a entender melhor o que está se
 
 Os valores de células ocupadas são aproximados pois o número total de células é fixo, mas as frações relativas podem não ser inteiras. Além disso, a fração de células vazias é sempre 31\% do total e a aplicação já calcula a quantidade correta de componentes e vazios automaticamente, considerando que as frações são calculadas sobre a quantidade total de células \textbf{ocupadas}.
 
-
-
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{calculo_celulas.png}
     \caption{\small Informações adicionais sobre a simulação, como o número total de células e a quantidade aproximada de células ocupadas por cada componente.}
     \label{fig:informacoes}
 \end{figure}
+
+Após a configuração básica e das frações, o usuário pode adicionar uma reação e configurá-la. A Figura \ref{fig:interface_reacao} ilustra os dados de uma reação já configurada para o cálculo de cinética enzimática. Note a configuração dos componentes envolvidos e as probabilidades de reação direta e inversa.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{reacao_config.png}
+    \caption{\small Configuração de uma reação no formulário de configuração da simulação.}
+    \label{fig:interface_reacao}
+\end{figure}
+
+A possibilidade de adicionar um componente rotacionável é apresentada na seção de parâmetros de rotação, ilustada na Figura \ref{fig:interface_rotacao}. O usuário escolhe um dos componentes já cadastrados para ser rotacionável e define a probabilidade de rotação. A rotação é uma característica opcional, mas pode ser ativada para simular comportamentos específicos de componentes químicos, como surfactantes.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{rotacao_config.png}
+    \caption{\small Configuração de um componente rotacionável no formulário de configuração da simulação.}
+    \label{fig:interface_rotacao}
+\end{figure}
+
+Logo abaixo no formulário começa a configuração da movimentação, onde são definidos $P_M$ e $J$ para cada componente previamente inserido. Note que o software já fornece dinamicamente os campos necessários para a configuração de cada parâmetro de cada componente. Os componentes são identificados de forma genérica por uma letra em ordem alfabética, como A, B, C, etc., e é possível conferir a qualquer momento qual letra corresponde a qual componente através do elemento de informação, geralmente chamado de \textit{tooltip}, que aparece ao passar o mouse sobre o ícone \textit{i}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{mov_config.png}
+    \caption{\small Configuração dos parâmetros de movimentação e propensão de junção no formulário de configuração da simulação.}
+    \label{fig:interface_movimentacao}
+\end{figure}
+
+A fim de facilitar a criação de simulações, o software permite que o usuário baixe e importe arquivos de configuração pré-definidos, que contêm todos os parâmetros necessários para uma simulação. Esses arquivos são salvos no formato \textit{JSON} e podem ser facilmente editados em qualquer editor de texto. A Figura \ref{fig:interface_movimentacao} mostra o botão \textbf{Export Config File} para exportar esse arquivo a partir de uma simulação já preenchida e a Figura \ref{fig:interface_configuracao1} mostra o botão \textbf{Escolher Arquivo} para opcionalmente importar um arquivo de configuração previamente baixado. Isso permite que o usuário crie simulações complexas rapidamente, reutilizando configurações já testadas e validadas, ou ainda transfira esse arquivo para outro usuário poder importar em seu computador e executar a mesma simulação, sem a necessidade de preencher todos os campos manualmente.
+
+Preenchidos e validados todos os dados obrigatórios, o usuário pode salvar a simulação pelo botão \textbf{Save} no canto inferior direito do formulário. Após salvar, o usuário é redirecionado para a tela inicial, onde a nova simulação já aparece na lista de simulações disponíveis.
 
 \subsection{Ambiente Computacional}
 
