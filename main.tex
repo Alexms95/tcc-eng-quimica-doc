@@ -919,6 +919,47 @@ A fim de facilitar a criação de simulações, o software permite que o usuári
 
 Preenchidos e validados todos os dados obrigatórios, o usuário pode salvar a simulação pelo botão \textbf{Save} no canto inferior direito do formulário. Após salvar, o usuário é redirecionado para a tela inicial, onde a nova simulação já aparece na lista de simulações disponíveis.
 
+Ao abrir uma simulação da lista de simulações existentes, o usuário é direcionado para a área de visualização da simulação. Caso ela não tenha sido executada ainda, é mostrada uma mensagem informando que a simulação ainda não foi executada e o usuário pode iniciar a execução clicando no botão \textbf{Run Simulation}. A Figura \ref{fig:interface_simulacao} ilustra essa tela de visualização de uma simulação ainda não executada.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{empty_simulacao.png}
+    \caption{\small Tela de visualização de uma simulação ainda não executada.}
+    \label{fig:interface_simulacao}
+\end{figure}
+
+Ao executar a simulação, o usuário recebe informações sobre o progresso da execução em termos de porcentagem no canto superior direito. Nesse momento, o usuário pode realizar outras tarefas no computador que a simulação continuará sendo executada e terminará após atingir 100\% de progresso, salvando e exibindo resultados atualizados automaticamente. A Figura \ref{fig:interface_simulacao_executando} ilustra a mensagem de progresso de uma simulação em execução.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{running_simulacao.png}
+    \caption{\small Tela de visualização de uma simulação em execução.}
+    \label{fig:interface_simulacao_executando}
+\end{figure}
+
+Na mesma tela, terminada a execução, o usuário visualiza os resultados da simulação ilustrados na forma de malhas para cada iteração, com uma legenda ao lado para identificação dos componentes distintos por cores. Rolando a malha para baixo é possível conferir as próximas iterações e utilizando o campo de seleção de página no lado direito é possível navegar entre conjuntos de iterações, com cada conjunto contendo até 1000 iterações. A Figura \ref{fig:interface_simulacao_resultados} ilustra a tela de visualização dos resultados de uma simulação já executada.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{result_simulacao.png}
+    \caption{\small Tela de visualização dos resultados de uma simulação já executada.}
+    \label{fig:interface_simulacao_resultados}
+\end{figure}
+
+A separação da visualização das iterações em páginas é uma estratégia para melhorar a performance da interface, visto que a quantidade de dados a ser renderizada na tela pode ser muito grande, o que tornaria a renderização lenta e pesada se todas as iterações fossem carregadas de uma vez. Assim, o usuário pode navegar pelas iterações conforme necessário, sem comprometer a fluidez da interface.
+
+O botão \textbf{Download Results} permite que o usuário baixe os resultados de frações de todos os componentes da simulação em um arquivo CSV, que pode ser aberto em qualquer editor de planilhas, como o Microsoft Excel ou o Google Sheets, ou até mesmo em qualquer editor de texto, como o Bloco de Notas do sistema operacional. Isso facilita a análise dos dados e a criação de gráficos e tabelas para visualização dos resultados. A
+Figura \ref{fig:interface_simulacao_download} ilustra um arquivo CSV de exemplo baixado pelo software, aberto no Microsoft Excel.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{example_csv.png}
+    \caption{\small Exemplo de arquivo CSV baixado pelo software, aberto no Microsoft Excel.}
+    \label{fig:interface_simulacao_download}
+\end{figure}
+
+As colunas são formadas pelo número da iteração (iteração 0 é o estado inicial) e cada componente é uma coluna, com a respectiva fração relativa relacionada à quantidade total de células ocupadas.
+
 \subsection{Ambiente Computacional}
 
 O ambiente computacional utilizado para as simulações foi um computador com as seguintes especificações:
