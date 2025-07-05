@@ -17,4 +17,4 @@
 * Equação de ajuste da formação de produto com o tempo, explicar
 * Adicionar imagens das grades geradas
 * Réplicas das simulações
-* Texto descrevendo os Pr, corrigir
+* Texto descrevendo os Pr, corrigir - OK
