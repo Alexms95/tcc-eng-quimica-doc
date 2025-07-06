@@ -1454,7 +1454,18 @@ Os parâmetros de movimentação e interação dos componentes são definidos na
 
 Diferenças notáveis nessa simulação são a inclusão de valores distintos de $J$ para diferentes lados da célula de surfactante, representados por $F_1$ e $F_2$. $F_1$, o menor lado, é o lado polar, enquanto que $F_2$ representa o lado apolar. Note que os valores foram escolhidos de forma a simular esse comportamento bipolar do surfactante, como por exemplo repulsão do lado apolar com a água ($J (W|F_2) = 0{,}5$) e atração do lado polar com a água ($J (W|F_1) = 1{,}7$).
 
-Após a execução completa dessa simulação e a análise do arquivo CSV gerado, tem-se os seguintes resultados, começando pelos gráficos de frações relativas de cada componente ao longo das iterações, ilustrados na Figura \ref{fig:MM_surf_conc}:
+Após a execução completa dessa simulação, a matriz inicial gerada é ilustrada na Figura \ref{fig:michaelis_menten_movement_surfactante}. Note as células de surfactante (F) identificadas por meio da legenda e o direcionamento aleatório atribuído a elas, definido pela orientação da ponta do triângulo.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{MM_surf_initial.png}
+    \hspace{0.5cm}
+    \includegraphics[width=0.15\textwidth]{legend_surf.png}
+    \caption{\small Estado inicial da malha na simulação de cinética com surfactante.}
+    \label{fig:MM_surf_initial}
+\end{figure}
+
+Da análise do arquivo CSV gerado, tem-se os seguintes resultados, começando pelos gráficos de frações relativas de cada componente ao longo das iterações, ilustrados na Figura \ref{fig:MM_surf_conc}:
 
 \begin{figure}[H]
     \centering
