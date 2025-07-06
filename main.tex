@@ -1474,7 +1474,14 @@ Da análise do arquivo CSV gerado, tem-se os seguintes resultados, começando pe
     \label{fig:MM_surf_conc}
 \end{figure}
 
-Não se nota grandes diferenças entre os gráficos da dinâmica com surfactante e sem, da simulação anterior. A estabilização do sistema começa a acontecer, também, por volta de 10000 iterações.
+Não se nota grandes diferenças entre os gráficos da dinâmica com surfactante e sem, da simulação anterior. A estabilização do sistema começa a acontecer, também, por volta de 10000 iterações. A 3000 iterações, o estado da malha é apresentado na Figura \ref{fig:MM_surf_3000it}, onde se nota a presença de produto (P) e substrato (S) aglomerados e o surfactante (F) nesse meio, inclusive, muitas vezes fazendo interface com as células de água. Esse comportamento está destacado em vermelho na Figura \ref{fig:MM_surf_3000it}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{surf_3000.png}
+    \caption{\small Estado da malha na iteração 3000 da simulação de cinética com surfactante, com destaque para efeitos de interface.}
+    \label{fig:MM_surf_3000it}
+\end{figure}
 
 Utilizando os dados de concentração do produto ao longo das iterações, foi realizada a regressão não-linear para obter a equação e a curva de concentração de produto. A equação encontrada é:
 
