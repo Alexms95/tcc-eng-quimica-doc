@@ -330,11 +330,35 @@ sendo $[E]_0$ a concentração total da enzima. Já $K_m$ é a constante de Mich
 
 Essa abordagem permite que a cinética enzimática seja diretamente incorporada ao balanço de massa em reatores, facilitando o dimensionamento e a análise de processos industriais que utilizam biocatalisadores \cite{FOGLER_2016}.
 
+No modelo de Michaelis-Menten, é tipico observar gráficos das concentrações dos componentes (substrato, produto, complexo e enzima) com o tempo na forma mostrada na Figura \ref{fig:concentracoes_michaelis_menten}. Esses gráficos são fundamentais para entender a dinâmica da reação enzimática ao longo do tempo, permitindo a visualização de como as concentrações evoluem até atingir o estado estacionário, onde as taxas de formação e consumo se equilibram.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{conc_time.png}
+    \caption{\small Tendências típicas das concentrações de enzima, substrato, complexo e produto ao longo do tempo em uma reação enzimática de Michaelis-Menten. Fonte: \citetitle{libretexts_michaelis_menten}.}
+    \label{fig:concentracoes_michaelis_menten}
+\end{figure}
+
+Experimentalmente, é comum tentar determinar os parâmetros cinéticos de uma enzima, como $V_{max}$ e $K_m$, por meio da chamada \textit{Curva de Michaelis-Menten}, que é um gráfico da taxa da reação (ou taxa de formação de produto) contra a concentração de substrato, ou pelo chamado método de \textit{Lineweaver-Burk}, que lineariza a correlação entre as mesmas duas variáveis. As Figuras \ref{fig:MM_plot} e \ref{fig:lineweaver_burk} mostram, respectivamente, a curva de Michaelis-Menten e o gráfico de Lineweaver-Burk típicos.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{Vmax_Km.png}
+    \caption{\small Curva de Michaelis-Menten típica, utilizada para determinar as constantes $K_M$ e $V_{max}$. Fonte: \citetitle{libretexts_michaelis_menten}.}
+    \label{fig:MM_plot}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{LB.png}
+    \caption{\small Gráfico típico Lineweaver-Burk, utilizado para determinar as constantes $K_M$ e $V_{max}$. Fonte: \citetitle{libretexts_michaelis_menten}.}
+    \label{fig:lineweaver_burk}
+\end{figure}
+
 Além do modelo básico de Michaelis-Menten, é fundamental considerar os efeitos de inibidores, que podem estar presentes no meio reacional, seja como contaminantes, subprodutos ou aditivos intencionais. Os principais tipos de inibição são: competitiva, não competitiva e acompetitiva. Na inibição competitiva, o inibidor compete com o substrato pelo sítio ativo da enzima, elevando o valor aparente de
 $K_m$ sem alterar $V_{max}$ \cite{FOGLER_2016}.
 
 Já na inibição não competitiva, o inibidor se liga a um sítio diferente do sítio ativo, reduzindo $V_{max}$ sem afetar $K_m$. Na inibição acompetitiva, o inibidor se liga apenas ao complexo $ES$, reduzindo tanto $V_{max}$ quanto $K_m$ \cite{FOGLER_2016}.
-
 
 Outro mecanismo relevante, especialmente em reações envolvendo múltiplos substratos e produtos, é o mecanismo ping-pong-bi-bi. Nesse mecanismo, a enzima alterna entre diferentes estados intermediários, transferindo grupos funcionais de um substrato para outro em etapas sequenciais. O esquema geral pode ser representado como:
 
@@ -1202,6 +1226,17 @@ Em resumo, a tabela \ref{tab:params_MM} apresenta os valores das constantes de M
     \makebox[\linewidth][l]{\small Fonte: Autoria própria}
     \label{tab:params_MM}
 \end{table}
+
+Foi possível obter, também, o gráfico típico de Lineweaver-Burk, que é uma representação linear da relação entre a taxa de reação e a concentração de substrato, e é mostrado na Figura \ref{fig:MM_lineweaver_burk}. No entanto, essa representação envolve o ajuste linear dos dados, o que ao longo dos experimentos com as simulações não se mostrou tão confiável, embora o coeficiente de correlação tenha sido próximo de 0{,}9, apresentando muita variação de acordo com a faixa de iterações em que a dependência entre a taxa de reação e a concentração de substrato é linear.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{lineweaver_burk_plot.png}
+    \caption{\small Gráfico de Lineweaver-Burk: taxa de reação em função da concentração de substrato.}
+    \label{fig:MM_lineweaver_burk}
+\end{figure}
+
+Por esse método, o coeficiente linear da equação, $b$, é utilizado para encontrar o valor de $V_{max}$, que é dado por $V_{max} = \frac{1}{b} \approx 2{,}48 \cdot 10^{-5}$. O coeficiente angular, $a$, é utilizado para encontrar o valor de $K_M$, que é dado por $K_M = \frac{a}{b} \approx 0{,}0162$. Pela razão descrita anteriormente, esse método será desconsiderado para outras simulações.
 
 \section{Cinética com Substrato Apolar}
 
