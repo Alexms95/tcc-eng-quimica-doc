@@ -579,7 +579,7 @@ Os modelos de autômato celular (AC) empregados neste trabalho seguem predominan
 
 \begin{table}[H]
     \centering
-    \caption{\textbf{Parâmetros Fundamentais do Modelo de Autômato Celular}}
+    \caption{Parâmetros Fundamentais do Modelo de Autômato Celular}
     \vspace{0.2cm}
     \begin{tabularx}{\textwidth}{X m{3cm} m{3cm}}
         \hline
@@ -1003,28 +1003,6 @@ De fato, sempre que uma simulação longa está sendo processada, o uso de CPU p
 
 O tempo de execução pode ser reduzido significativamente com a implementação de técnicas de paralelização, como o uso de \textit{multiprocessing}, que permite a execução simultânea de múltiplas iterações ou células, aproveitando melhor os recursos do processador.
 
-
-% \begin{table}[H]
-%     \centering
-%     \caption{\textbf{Interpretação da probabilidade ($P_B$)}}
-%     \vspace{0.2cm}
-%     \begin{tabularx}{\textwidth}{m{3.5cm} X}
-%         \hline
-%         \multicolumn{2}{c}{$\mathbf{0 \leq P_B(\mathbf{x}_i, \mathbf{x}_j) \leq 1}$} \\
-%         \hline
-%         \textbf{Valores} & \textbf{Significado}                                      \\
-%         \hline
-%         $P_B = 0$        & Os componentes permanecem sempre unidos                   \\
-%         $P_B \to 0^+$    & Tendência de permanecerem sempre unidos                   \\
-%         $P_B \to 1^-$    & Tendência de permanecerem sempre separados                \\
-%         $P_B = 1$        & Os componentes permanecem sempre separados                \\
-%         \hline
-%     \end{tabularx}
-
-%     \vspace{0.2cm}
-%     \makebox[\linewidth][l]{\small Fonte: Autoria própria}
-% \end{table}
-
 \chapter{RESULTADOS}
 
 Foram executadas diversas simulações utilizando o modelo de autômato celular implementado, com o objetivo de analisar o comportamento do sistema sob diferentes condições e parâmetros. As simulações foram configuradas para explorar a dinâmica de reações enzimáticas, considerando a movimentação dos componentes químicos, as reações entre eles e a rotação dos componentes rotacionáveis. Após executar cada simulação, os resultados referentes às frações relativas de componentes ao longo de todas as iterações foram baixados pela função do próprio software como arquivo CSV e, então, analisados.
@@ -1037,7 +1015,7 @@ A intenção dessa análise é reproduzir o comportamento clássico da cinética
 
 \begin{table}
     \centering
-    \caption{\textbf{Parâmetros da Simulação de Cinética Clássica de Michaelis-Menten}}
+    \caption{Parâmetros da Simulação de Cinética Clássica de Michaelis-Menten}
     \vspace{0.2cm}
     \begin{tabularx}{\textwidth}{X m{5cm}}
         \hline
@@ -1082,7 +1060,7 @@ Definiu-se da forma abaixo os parâmetros de movimentação dos componentes:
 
 \begin{table}[H]
     \centering
-    \caption{\textbf{Parâmetros de Movimento para Simulação de Cinética Clássica de Michaelis-Menten}}
+    \caption{Parâmetros de Movimento para Simulação de Cinética Clássica de Michaelis-Menten}
     \vspace{0.2cm}
     \begin{tabularx}{\textwidth}{X m{5cm}}
         \hline
