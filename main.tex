@@ -290,7 +290,7 @@ Nesse contexto, a simulação de processos químicos e enzimáticos é de grande
 
 Os processos enzimáticos tornam-se significativamente mais complexos quando envolvem surfactantes, devido à interação multifásica que esses compostos promovem. Surfactantes podem atuar como inibidores enzimáticos ao se associarem à superfície da enzima ou ao substrato, modificando sua disponibilidade ou alterando sua conformação. Nesses casos, o modelo clássico de cinética enzimática, como o de Michaelis-Menten, torna-se insuficiente, exigindo a incorporação de fenômenos interfaciais, transporte de massa e variações espaciais de concentração. Isso implica a necessidade de modelagem baseada em equações diferenciais parciais que considerem o ambiente heterogêneo, a presença de interfaces e possíveis gradientes de concentração ao longo do sistema, exigindo volume maior de dados experimentais mais detalhados para calibração e validação, além de um esforço matemático imensurável na resolução e na interpretação das equações associadas \cite{vandermeer2001}.
 
-Diante das limitações dos modelos clássicos para simular processos enzimáticos em sistemas multifásicos com surfactantes, uma proposta promissora é a utilização de autômatos celulares como abordagem computacional alternativa. Eles permitem representar o sistema como uma grade ou malha discreta em que cada célula evolui ao longo do tempo segundo regras locais, possibilitando a modelagem de comportamentos complexos emergentes a partir de interações simples. Essa metodologia é particularmente adequada para capturar efeitos espaciais e interfaciais, pois lida naturalmente com heterogeneidades, variações de concentração em diferentes regiões do domínio e dinâmicas acopladas entre componentes químicos. Além disso, autômatos celulares apresentam boa escalabilidade computacional e flexibilidade para incorporação de novos parâmetros, como a presença e a atuação de surfactantes. Assim, ao adotar autômatos celulares, torna-se viável desenvolver modelos mais realistas e adaptáveis para descrever a cinética enzimática em ambientes complexos, superando as limitações das abordagens contínuas tradicionais.
+Diante das limitações dos modelos clássicos para simular processos enzimáticos em sistemas multifásicos com surfactantes, uma proposta promissora é a utilização de autômatos celulares como abordagem computacional alternativa. Eles permitem representar o sistema como uma grade ou malha discreta em que cada célula evolui ao longo do tempo segundo regras locais, possibilitando a modelagem de comportamentos complexos emergentes a partir de interações simples. Essa metodologia é particularmente adequada para capturar efeitos espaciais e interfaciais, pois lida naturalmente com heterogeneidades, variações de concentração em diferentes regiões do domínio e dinâmicas acopladas entre componentes químicos. Além disso, autômatos celulares apresentam boa escalabilidade computacional e flexibilidade para incorporação de novos parâmetros, como a presença e a atuação de surfactantes. Assim, ao adotar autômatos celulares, torna-se viável desenvolver modelos mais realistas e adaptáveis para descrever a cinética enzimática em ambientes complexos, superando as limitações das abordagens contínuas tradicionais \cite{kier2005}.
 
 O objetivo geral deste trabalho é desenvolver um código computacional para simular a cinética enzimática em meios multifásicos utilizando autômatos celulares, com ênfase na representação adequada de sistemas contendo surfactantes. Para atingir esse objetivo, serão perseguidos alguns objetivos específicos: (i) revisar e aprimorar rotinas já existentes, tornando o código mais eficiente, modular e sustentável, utilizando Python como a linguagem de programação principal; (ii) implementar melhorias estruturais, como a criação de uma interface gráfica que facilite a visualização e a manipulação dos parâmetros da simulação; (iii) desenvolver e integrar testes unitários para garantir a robustez e a confiabilidade do sistema; e (iv) expandir o modelo de forma a incorporar explicitamente a presença e os efeitos dos surfactantes na dinâmica do sistema. Com isso, espera-se fornecer uma ferramenta computacional que não apenas represente com maior fidelidade a realidade dos sistemas enzimáticos heterogêneos, mas que também seja extensível, acessível e validável para futuras aplicações acadêmicas ou industriais.
 
@@ -306,27 +306,34 @@ No setor farmacêutico, as enzimas desempenham papel fundamental na síntese de 
 
 \subsection{Mecanismos Relevantes}
 
-A compreensão dos mecanismos de ação das enzimas é essencial para o desenvolvimento e a otimização de processos industriais. O modelo cinético mais clássico e amplamente utilizado para descrever a catálise enzimática é o modelo de Michaelis-Menten. Esse modelo parte do pressuposto de que a enzima ($E$) se associa reversivelmente ao substrato ($S$) para formar um complexo enzima-substrato ($ES$), que posteriormente se decompõe para liberar o produto ($P$) e regenerar a enzima livre. O esquema pode ser representado da seguinte forma:
+A compreensão detalhada dos mecanismos de ação das enzimas é imprescindível para o projeto e a otimização de processos bioquímicos em escala industrial. Entre os modelos disponíveis, o de Michaelis--Menten permanece o arcabouço mais utilizado para reações envolvendo um único substrato. Nesse modelo, a enzima livre ($E$) associa-se reversivelmente ao substrato ($S$) formando o complexo enzima–substrato ($ES$), o qual se decompõe, liberando produto ($P$) e regenerando a enzima (Eq.~\ref{eq:MM-mecanismo}) \cite{bisswanger2017}.
 
 \begin{equation}
+    \label{eq:MM-mecanismo}
     E + S \overset{k_1}{\underset{k_{-1}}{\rightleftharpoons}} ES \xrightarrow{k_2} E + P
 \end{equation}
 
-A equação de Michaelis-Menten pode ser expressa em termos de taxa de reação ($r$), que é a forma mais comum em engenharia de reações químicas. Considerando a reação acima, a equação toma a forma:
+Aplicando a condição de \emph{estado quasi-estacionário} proposta por Briggs e Haldane (1925), admite-se que a concentração de $ES$ permanece aproximadamente constante após um breve período inicial (pré-steady-state). A resolução das equações diferenciais resulta na equação de velocidade
 
 \begin{equation}
-    r = \frac{V_{\text{max}} [S]}{K_m + [S]}
+    \label{eq:MM-equacao}
+    v \;=\; \frac{V_{\mathrm{max}}[S]}{K_\mathrm{M} + [S]},
 \end{equation}
-em que $V_{max}$ representa a velocidade (ou taxa) máxima de reação (quando a enzima está saturada pelo substrato) e é definida por:
+
+onde $V_{\mathrm{max}} = k_{2}[E]_0$ é a velocidade máxima — obtida quando toda a enzima está saturada — e
+
+\[
+    K_\mathrm{M} \;=\; \frac{k_{-1}+k_{2}}{k_{1}}
+\]
+
+é a constante de Michaelis. Note-se que $K_\mathrm{M}$ coincide com a constante de dissociação ($K_\mathrm{d} = k_{-1}/k_{1}$) apenas no limite em que $k_{2}\!\ll\!k_{-1}$, hipótese empregada na versão de equilíbrio rápido de Michaelis e Menten (1913). Dados experimentais mostram que essa igualdade raramente se verifica, reforçando a superioridade do tratamento de steady-state para a maioria das enzimas industriais \cite{bisswanger2017}.
+
+A equação de Michaelis-Menten pode ser expressa em termos de taxa de reação ($r$), que é a forma mais comum em engenharia de reações químicas \cite{FOGLER_2016}. Considerando a reação acima, a equação toma a forma:
 
 \begin{equation}
-    V_{max} = k_2[E]_0
+    r = \frac{V_{\text{max}} [S]}{K_M + [S]}
 \end{equation}
-sendo $[E]_0$ a concentração total da enzima. Já $K_m$ é a constante de Michaelis, que reflete a afinidade da enzima pelo substrato e é dada por:
-
-\begin{equation}
-    K_m = \frac{k_{-1} + k_2}{k_1}
-\end{equation}
+em que $V_{max}$ representa a velocidade (ou taxa) máxima de reação (quando a enzima está saturada pelo substrato).
 
 Essa abordagem permite que a cinética enzimática seja diretamente incorporada ao balanço de massa em reatores, facilitando o dimensionamento e a análise de processos industriais que utilizam biocatalisadores \cite{FOGLER_2016}.
 
@@ -374,7 +381,11 @@ O conhecimento detalhado desses mecanismos permite a modelagem matemática preci
 
 \subsection{Reações Enzimáticas em Meios Multifásicos}
 
-O uso de reações enzimáticas em meios multifásicos representa uma estratégia fundamental para ampliar o escopo de aplicações industriais da catálise enzimática, especialmente quando se trabalha com substratos hidrofóbicos ou produtos de baixa solubilidade em água. Em sistemas bifásicos aquoso-orgânicos, por exemplo, a enzima geralmente permanece dissolvida na fase aquosa, enquanto o substrato e/ou o produto podem estar preferencialmente na fase orgânica. Essa configuração permite a utilização de substratos insolúveis em água, além de facilitar a separação dos produtos ao final do processo. No entanto, a eficiência global da reação depende fortemente da transferência de massa entre as fases, da estabilidade da enzima e da manutenção de sua atividade catalítica na presença de solventes orgânicos \cite{schmid2002enzyme}.
+As reações enzimáticas em sistemas multifásicos, especialmente em meios aquoso-orgânicos, representam uma abordagem consolidada para ampliar o alcance de substratos processáveis, particularmente aqueles de natureza hidrofóbica ou com baixa solubilidade em água. Nesses sistemas, a enzima permanece majoritariamente na fase aquosa, enquanto o substrato e/ou produto se concentram preferencialmente na fase orgânica, facilitando tanto o uso de compostos insolúveis quanto a separação in situ dos produtos. Entretanto, a eficiência global da transformação depende não apenas da transferência de massa entre as fases, mas também da manutenção da estrutura conformacional da enzima, a qual é fortemente influenciada pela quantidade e pela atividade termodinâmica de água no meio.
+
+Estudos pioneiros de Klibanov \cite{klibanov} e colaboradores demonstraram que enzimas mantêm atividade catalítica significativa mesmo em solventes praticamente anidros, desde que se preserve uma monocamada de água firmemente adsorvida à superfície proteica – fenômeno conhecido como “pH-memory” – e se controlem parâmetros como a atividade de água (a\textsubscript{w}) e o log P do solvente, que afetam diretamente a flexibilidade intrínseca do biocatalisador e, consequentemente, sua atividade catalítica \cite{klibanov}.
+
+Adicionalmente, a escolha do solvente orgânico exerce papel decisivo: solventes com log P elevado (\textgreater 4) tendem a ser menos desnaturantes, enquanto solventes de polaridade intermediária ($0 < log P < 2$) podem provocar rápida inativação enzimática. A engenharia de solventes, portanto, possibilita modular não só a estabilidade térmica, mas também a especificidade estereo-, regio- e quimiosseletiva da enzima, tornando viável a obtenção de rendimentos e produtividades competitivos em escala industrial. Assim, a adoção de sistemas bifásicos ou mesmo de meios predominantemente orgânicos – quando devidamente ajustados quanto à a\textsubscript{w}, à força iônica residual e à presença de eventuais co-solventes ou aditivos protetores – oferece uma plataforma robusta para a síntese de intermediários finos, fragrâncias, fármacos e polímeros, expandindo consideravelmente o campo de aplicação da catálise enzimática além do escopo tradicionalmente aquoso \cite{klibanov}.
 
 A interface entre as fases assume papel central nesses sistemas, pois é nela que ocorre a transferência de substrato da fase orgânica para a fase aquosa, onde a enzima está ativa. A área interfacial disponível, a natureza química das fases e a presença de agentes interfaciais influenciam diretamente a taxa de reação. Em muitos casos, a transferência de massa pode se tornar o fator limitante do processo, especialmente quando a solubilidade do substrato na fase aquosa é muito baixa. Para contornar esse desafio, técnicas como agitação vigorosa, uso de reatores especiais (como reatores de leito fluidizado) e, principalmente, a adição de surfactantes são empregadas para aumentar a área interfacial e promover emulsificação \cite{schmid2002enzyme}.
 

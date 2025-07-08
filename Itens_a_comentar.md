@@ -13,8 +13,10 @@
 
 
 ### Prioridades
-* Colocar gráfico de concentrações e de Velocidade na revisão
+* Colocar gráfico de concentrações e de Velocidade na revisão - OK
 * Equação de ajuste da formação de produto com o tempo, explicar
-* Adicionar imagens das grades geradas
+* Adicionar imagens das grades geradas - OK
 * Réplicas das simulações
 * Texto descrevendo os Pr, corrigir - OK
+* Unidades
+* J = 0 em MM para S/S e P/P
