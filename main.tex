@@ -1083,10 +1083,10 @@ Definiu-se da forma abaixo os parâmetros de movimentação dos componentes:
         $P_M$ (W)          & 1              \\
         $J$ (E$|$E)        & 0              \\
         $J$ (E$|$S)        & 1{,}7          \\
-        $J$ (S$|$S)        & 1{,}7          \\
+        $J$ (S$|$S)        & 0              \\
         $J$ (E$|$P)        & 1{,}4          \\
         $J$ (S$|$P)        & 1{,}7          \\
-        $J$ (P$|$P)        & 1{,}7          \\
+        $J$ (P$|$P)        & 0              \\
         $J$ (E$|$W)        & 1{,}7          \\
         $J$ (S$|$W)        & 1{,}7          \\
         $J$ (P$|$W)        & 1{,}7          \\
@@ -1100,20 +1100,24 @@ Definiu-se da forma abaixo os parâmetros de movimentação dos componentes:
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{img/movement_MM.png}
+    \includegraphics[width=1\textwidth]{img/movement_MM_S0.png}
     \caption{\small Parâmetros de movimentação dos componentes da simulação de cinética clássica de Michaelis-Menten.}
     \label{fig:michaelis_menten_movement}
 \end{figure}
 
 Esses valores de movimentação e interação foram escolhidos para simular um sistema bastante dinâmico, dados os valores altos de $P_M$ e baixos de $J$, considerando seus limites estabelecidos. Intuitivamente, $P_M$ para a enzima foi escolhido como 0{,}98, sendo o menor valor entre os componentes imaginando sua molécula realisticamente mais pesada entre todos eles. $P_M = 0{,}99$ para o substrato e 0{,}99 para o produto indicam facilidade de movimentação comparativamente intermediária. A água é definida como um componente altamente móvel, com $P_M = 1$, o que simula um meio líquido formado por moléculas bastante leves.
 
-Com o objetivo de simular um sistema em que substrato e enzima são solúveis em água e se aproximar mais das condições para a modelagem pela cinética clássica de Michaelis-Menten, a interação da enzima, do substrato e do produto com a água são definidas como favoráveis à atração, com valores de $J$ de 1{,}7. A interação entre enzima e substrato é definida, também, como atrativa, com $J = 1{,}7$, o que possibilita a formação do complexo enzima-substrato. Nota-se, também, pelos mesmos motivos, a boa interação entre enzima e água, além da diferença entre a ligação da enzima com o substrato e dela com o produto. Enzima-substrato foi pensada para ser uma interação maior no sentido de favorecer a formação do complexo, em detrimento da interação com o produto que, segundo a cinética em estudo, não gera reação. O valor de $J (E|P)$ ser um pouco mais baixo também vem da ideia que, após uma reação completa, o produto ``se descola'' da enzima, sugerindo uma interação mais fraca entre eles (com $P_B (E,P)$ um pouco maior, dada a relação inversa entre $J$ e $P_B$).
+Com o objetivo de simular um sistema em que substrato e enzima são solúveis em água e se aproximar mais das condições para a modelagem pela cinética clássica de Michaelis-Menten, a interação da enzima, do substrato e do produto com a água são definidas como favoráveis à atração, com valores de $J$ de 1{,}7. A interação entre enzima e substrato é definida, também, como atrativa, com $J = 1{,}7$, o que possibilita a formação do complexo enzima-substrato.
+
+Nota-se, pelos mesmos motivos, a boa interação entre enzima e água, além da diferença entre a ligação da enzima com o substrato e dela com o produto. Enzima-substrato foi pensada para ser uma interação maior no sentido de favorecer a formação do complexo, em detrimento da interação com o produto que, segundo a cinética em estudo, não gera reação. O valor de $J (E|P)$ ser um pouco mais baixo também vem da ideia que, após uma reação completa, o produto ``se descola'' da enzima, sugerindo uma interação mais fraca entre eles (com $P_B (E,P)$ um pouco maior, dada a relação inversa entre $J$ e $P_B$).
+
+Os parâmetros $J (S|S)$, $J (P|P)$ e $J (E|E)$ foram definidos como 0, o que significa que não há interação entre células do mesmo tipo, ou seja, enzimas não se atraem entre si, substratos não se atraem entre si e produtos não se atraem entre si. Isso simula um sistema onde as moléculas de cada um desses componentes estão solubilizados em água, sem formação de aglomerados.
 
 Com esses parâmetros, a simulação foi executada e o arquivo CSV resultante foi analisado. O estado inicial da malha, gerado de forma aleatória, é apresentado na Figura \ref{fig:MM_initial}, onde é possível observar a distribuição inicial dos componentes químicos, com enzima (E) em verde, substrato (S) em roxo, produto (P) em rosa, água (W) em azul e intermediário (complexo ES) em amarelo. Células em cinza representam vazios.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{img/MM_initial.png}
+    \includegraphics[width=0.6\textwidth]{img/MM_initial_S0.png}
     \includegraphics[width=0.2\textwidth]{img/legend.png}
     \caption{\small Estado inicial da malha na simulação de cinética clássica de Michaelis-Menten.}
     \label{fig:MM_initial}
@@ -1134,7 +1138,7 @@ Importantes tendências são observadas no gráfico da Figura \ref{fig:MM_conc}.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{img/MM_1000it.png}
+    \includegraphics[width=0.7\textwidth]{img/MM_1000it_S0.png}
     \caption{\small Estado da malha na iteração 1000 da simulação de cinética clássica de Michaelis-Menten.}
     \label{fig:MM_1000it}
 \end{figure}
@@ -1145,7 +1149,7 @@ A Figura \ref{fig:MM_8000it} mostra o estado da malha na iteração 8000, onde s
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{img/MM_8000it.png}
+    \includegraphics[width=0.7\textwidth]{img/MM_8000it_S0.png}
     \caption{\small Estado da malha na iteração 8000 da simulação de cinética clássica de Michaelis-Menten.}
     \label{fig:MM_8000it}
 \end{figure}
@@ -1197,7 +1201,7 @@ De posse da taxa de reação, obtem-se o gráfico de Michaelis-Menten, que relac
 
 A curva de Michaelis-Menten obtida se apresenta de forma muito semelhante ao comportamento típico, onde a taxa de formação de produto aumenta com a concentração de substrato até atingir um platô. O platô revela a $V_{max}$, que é a taxa máxima de formação de produto, com valor muito próximo de $3 \cdot 10^{-5}$. A concentração de substrato na qual a taxa de formação de produto (taxa de reação) atinge metade do valor máximo é conhecida como $K_m$, que é uma medida da afinidade da enzima pelo substrato. No caso desta simulação, $K_m \approx 0{,}0238$.
 
-Em resumo, a tabela \ref{tab:params_MM} apresenta os valores das constantes de Michaelis-Menten obtidas a partir da simulação.
+Em resumo, a tabela \ref{tab:params_MM} apresenta os valores das constantes de Michaelis-Menten obtidas a partir da simulação. A unidade de medida de $V_{max}$ é fração molar por iteração, que pode ser representada como inverso de iteração ($it^{-1}$), enquanto $K_M$ é uma fração molar.
 
 \begin{table}[H]
     \centering
@@ -1205,10 +1209,10 @@ Em resumo, a tabela \ref{tab:params_MM} apresenta os valores das constantes de M
     \vspace{0.2cm}
     \begin{tabularx}{\textwidth}{X m{5cm}}
         \hline
-        \textbf{Constante} & \textbf{Valor}         \\
+        \textbf{Constante} & \textbf{Valor}                    \\
         \hline
-        $V_{max}$          & $3{,}01 \cdot 10^{-5}$ \\
-        $K_m$              & $0{,}0238$             \\
+        $V_{max}$          & $3{,}01 \cdot 10^{-5} \, it^{-1}$ \\
+        $K_M$              & $0{,}0238 \, mol/mol$             \\
         \hline
     \end{tabularx}
     \vspace{0.2cm}
@@ -1225,7 +1229,7 @@ Foi possível obter, também, o gráfico típico de Lineweaver-Burk, que é uma 
     \label{fig:MM_lineweaver_burk}
 \end{figure}
 
-Por esse método, o coeficiente linear da equação, $b$, é utilizado para encontrar o valor de $V_{max}$, que é dado por $V_{max} = \frac{1}{b} \approx 2{,}48 \cdot 10^{-5}$. O coeficiente angular, $a$, é utilizado para encontrar o valor de $K_M$, que é dado por $K_M = \frac{a}{b} \approx 0{,}0162$. Pela razão descrita anteriormente, esse método será desconsiderado para outras simulações.
+Por esse método, o coeficiente linear da equação, $b$, é utilizado para encontrar o valor de $V_{max}$, que é dado por $V_{max} = \frac{1}{b} \approx 2{,}48 \cdot 10^{-5} \, it^{-1}$. O coeficiente angular, $a$, é utilizado para encontrar o valor de $K_M$, que é dado por $K_M = \frac{a}{b} \approx 0{,}0162$. Pela razão descrita anteriormente, esse método será desconsiderado para outras simulações.
 
 \section{Cinética com Substrato Apolar}
 
@@ -1338,7 +1342,7 @@ O gráfico de Michaelis-Menten, que relaciona a taxa de formação de produto co
     \label{fig:MM_apolar_curve}
 \end{figure}
 
-A curva de Michaelis-Menten obtida se apresenta, também, de forma semelhante ao comportamento típico, mas os valores de $V_{max}$ e $K_m$ são notadamente distintos em comparação com a cinética clássica (substrato polar). Aqui, $V_{max} \approx 2{,}5 \cdot 10^{-5}$ e $K_m \approx 0{,}0226$. A tabela \ref{tab:params_MM_apolar} apresenta os valores das constantes de Michaelis-Menten obtidas a partir da simulação com substrato apolar.
+A curva de Michaelis-Menten obtida se apresenta, também, de forma semelhante ao comportamento típico, mas os valores de $V_{max}$ e $K_m$ são notadamente distintos em comparação com a cinética clássica (substrato polar). Aqui, $V_{max} \approx 2{,}5 \cdot 10^{-5} \, it^{-1}$ e $K_M \approx 0{,}0226$. A tabela \ref{tab:params_MM_apolar} apresenta os valores das constantes de Michaelis-Menten obtidas a partir da simulação com substrato apolar.
 
 \begin{table}[H]
     \centering
@@ -1348,8 +1352,8 @@ A curva de Michaelis-Menten obtida se apresenta, também, de forma semelhante ao
         \hline
         \textbf{Constante} & \textbf{Valor}        \\
         \hline
-        $V_{max}$          & $2{,}5 \cdot 10^{-5}$ \\
-        $K_M$              & $0{,}0226$            \\
+        $V_{max}$          & $2{,}5 \cdot 10^{-5} \, it^{-1}$ \\
+        $K_M$              & $0{,}0226 \, mol/mol$            \\
         \hline
     \end{tabularx}
     \vspace{0.2cm}
@@ -1560,8 +1564,8 @@ Os valores das constantes $V_{max}$ e $K_m$ obtidos a partir da simulação com 
         \hline
         \textbf{Constante} & \textbf{Valor}          \\
         \hline
-        $V_{max}$          & $2{,}635 \cdot 10^{-5}$ \\
-        $K_m$              & $0{,}0268$              \\
+        $V_{max}$          & $2{,}635 \cdot 10^{-5} \, it^{-1}$ \\
+        $K_m$              & $0{,}0268 \, mol/mol$              \\
         \hline
     \end{tabularx}
     \vspace{0.2cm}
@@ -1569,12 +1573,12 @@ Os valores das constantes $V_{max}$ e $K_m$ obtidos a partir da simulação com 
     \label{tab:params_MM_surfactant}
 \end{table}
 
-Comparando esses resultados com os da Tabela \ref{tab:params_MM_apolar} da simulação de cinética com substrato apolar, nota-se que tanto $V_{max}$ quanto $K_m$ são maiores no caso do surfactante. $V_{max}$ é maior, o que indica que o surfactante auxiliou na formação de produto durante as primeiras iterações. A presença de uma molécula assimétrica de dois polos distintos substituindo uma polar, como a água, pode ter facilitado a interação entre enzima e substrato, aumentando a taxa de reação.
+Comparando esses resultados com os da Tabela \ref{tab:params_MM_apolar} da simulação de cinética com substrato apolar, nota-se que tanto $V_{max}$ quanto $K_M$ são maiores no caso do surfactante. $V_{max}$ é maior, o que indica que o surfactante auxiliou na formação de produto durante as primeiras iterações. A presença de uma molécula assimétrica de dois polos distintos substituindo uma polar, como a água, pode ter facilitado a interação entre enzima e substrato, aumentando a taxa de reação.
 
-Por outro lado, $K_m$ é maior, o que indica que a afinidade da enzima pelo substrato diminuiu. Isso pode ser explicado pelo fato de que o surfactante, apesar de auxiliar na formação do produto, determinou uma inibição. Pelos parâmetros de interação, tanto $J (E|S)$ quanto $J (E|F_1)$ e $J (E|F_2)$ são iguais a $1{,}1$, logo o surfactante pode ter
+Por outro lado, $K_M$ é maior, o que indica que a afinidade da enzima pelo substrato diminuiu. Isso pode ser explicado pelo fato de que o surfactante, apesar de auxiliar na formação do produto, determinou uma inibição. Pelos parâmetros de interação, tanto $J (E|S)$ quanto $J (E|F_1)$ e $J (E|F_2)$ são iguais a $1{,}1$, logo o surfactante pode ter
 agido como um inibidor competitivo, dificultando o encontro entre enzima e substrato ao longo do tempo.
 
-Cabe ressaltar, novamente, que o modelo de Michaelis-Menten não considera a presença de espécies como surfactantes e as constantes calculadas aqui são $aparentes$. Entretanto, o modelo de AC foi capaz de simular o comportamento da cinética enzimática mesmo com a complexidade adicional do surfactante. A heterogeneidade do sistema e a dinâmica de interação entre os componentes foram bem capturadas, permitindo fazer análises e comparações com teorias conhecidas.
+Cabe ressaltar, novamente, que o modelo de Michaelis-Menten não considera a presença de espécies como surfactantes e as constantes calculadas aqui são \textbf{aparentes}. Entretanto, o modelo de AC foi capaz de simular o comportamento da cinética enzimática mesmo com a complexidade adicional do surfactante. A heterogeneidade do sistema e a dinâmica de interação entre os componentes foram bem capturadas, permitindo fazer análises e comparações com teorias conhecidas.
 
 \chapter{CONCLUSÕES}
 % Conclusões finais...
