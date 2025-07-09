@@ -1032,9 +1032,9 @@ A análise dos resultados foi realizada com o auxílio das bibliotecas \textit{P
 
 \section{Cinética Clássica de Michaelis-Menten}
 
-A intenção dessa análise é reproduzir o comportamento clássico da cinética de Michaelis-Menten, onde a enzima se liga ao substrato em uma reação reversível para formar um complexo enzima-substrato, que posteriormente se converte em produto em uma reação irreversível. Para isso, foram definidos os seguintes parâmetros básicos e reacionais:
+A intenção dessa análise é reproduzir o comportamento clássico da cinética enzimática de Michaelis-Menten, onde a enzima se liga ao substrato em uma reação reversível para formar um complexo enzima-substrato, que posteriormente se converte em produto em uma reação irreversível. Para isso, foram definidos os parâmetros básicos e reacionais demonstrados na Tabela \ref{tab:params_michaelis_menten} e ilustrados nas Figuras \ref{fig:michaelis_menten} e \ref{fig:michaelis_menten_reaction}.
 
-\begin{table}
+\begin{table}[H]
     \centering
     \caption{Parâmetros da Simulação de Cinética Clássica de Michaelis-Menten}
     \vspace{0.2cm}
@@ -1077,7 +1077,7 @@ A escolha de 15000 iterações foi feita para garantir que, próximo do final da
 
 Em relação aos parâmetros de reação, definiu-se que sempre que substrato e enzima se encontrarem, eles irão formar o complexo enzima-substrato, entrando com o $P_R$ dessa etapa igual a 1. A reação inversa, onde o complexo se decompõe em enzima e substrato, ocorre com probabilidade $P_R = 0{,}0001$, o que simula uma reação reversível onde a formação do complexo é favorecida. A conversão do complexo em produto ocorre com probabilidade $P_R = 0{,}001$, o que simula a etapa lenta da reação geral e favorece a formação do produto. O mecanismo clássico de Michaelis-Menten propõe que a reação entre enzima e produto para formação do complexo não ocorre, portanto, o $P_R$ dessa etapa é 0.
 
-Definiu-se da forma abaixo os parâmetros de movimentação dos componentes:
+Definiu-se os parâmetros de movimentação dos componentes da forma exposta na Tabela \ref{tab:params_movimento} e na Figura \ref{fig:michaelis_menten_movement}:
 
 \begin{table}[H]
     \centering
@@ -1127,7 +1127,8 @@ Com esses parâmetros, a simulação foi executada e o arquivo CSV resultante fo
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{img/MM_initial_S0.png}
+    \includegraphics[width=0.7\textwidth]{img/MM_initial_S0.png}
+    \hspace{0.05\textwidth}
     \includegraphics[width=0.2\textwidth]{img/legend.png}
     \caption{\small Estado inicial da malha na simulação de cinética clássica de Michaelis-Menten.}
     \label{fig:MM_initial}
@@ -1135,7 +1136,7 @@ Com esses parâmetros, a simulação foi executada e o arquivo CSV resultante fo
 
 Nota-se que, nesse momento, não há produto (P) presente, pois a reação ainda não foi iniciada. A enzima (E) e o substrato (S) estão distribuídos aleatoriamente pela malha, enquanto a água (W) ocupa a maior parte das células.
 
-A seguir, apresenta-se o gráfico da fração relativa de cada componente ao longo das iterações:
+Na Figura \ref{fig:MM_conc}, apresenta-se o gráfico da fração relativa de cada componente ao longo das iterações:
 
 \begin{figure}[H]
     \centering
@@ -1149,6 +1150,8 @@ Importantes tendências são observadas no gráfico da Figura \ref{fig:MM_conc}.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{img/MM_1000it_S0.png}
+    \hspace{0.05\textwidth}
+    \includegraphics[width=0.2\textwidth]{img/legend.png}
     \caption{\small Estado da malha na iteração 1000 da simulação de cinética clássica de Michaelis-Menten.}
     \label{fig:MM_1000it}
 \end{figure}
@@ -1160,6 +1163,8 @@ A Figura \ref{fig:MM_8000it} mostra o estado da malha na iteração 8000, onde s
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{img/MM_8000it_S0.png}
+    \hspace{0.05\textwidth}
+    \includegraphics[width=0.2\textwidth]{img/legend.png}
     \caption{\small Estado da malha na iteração 8000 da simulação de cinética clássica de Michaelis-Menten.}
     \label{fig:MM_8000it}
 \end{figure}
@@ -1200,7 +1205,7 @@ com $R^2 = 0{,}9991$, indicando um excelente ajuste. A derivada dessa curva, que
     P'(t) = 5{,}812 \cdot 10^{-5} \left(\frac{e^{-3{,}834 \cdot 10^{-4} t}}{1 + e^{-4{,}815 \cdot 10^{-4} t}}\right) + 7{,}299 \cdot 10^{-5} \left(\frac{(1 - e^{-3{,}834 \cdot 10^{-4} t}) e^{-4{,}815 \cdot 10^{-4} t}}{(1 + e^{-4{,}815 \cdot 10^{-4} t})^2}\right)
 \end{equation}
 
-De posse da taxa de reação, obtem-se o gráfico de Michaelis-Menten, que relaciona a taxa de formação de produto com a concentração de substrato. A seguir, apresenta-se o gráfico da curva de Michaelis-Menten:
+De posse da taxa de reação, obtem-se o gráfico de Michaelis-Menten, que relaciona a taxa de formação de produto com a concentração de substrato. Na Figura \ref{fig:MM_curve}, apresenta-se o gráfico da curva de Michaelis-Menten:
 
 \begin{figure}[H]
     \centering
@@ -1243,7 +1248,7 @@ Por esse método, o coeficiente linear da equação, $b$, é utilizado para enco
 
 \section{Cinética com Substrato Apolar}
 
-A intenção dessa análise é reproduzir o comportamento da cinética de Michaelis-Menten, mas agora considerando a presença de um substrato com característica apolar. Para isso, é razoável imaginar que, para uma comparação justa, tanto os parâmetros básicos do modelo quanto os parâmetros de reação sejam os mesmos da simulação anterior, mas com alterações nos parâmetros de movimentação e interação dos componentes. A seguir, apresenta-se a Tabela \ref{tab:params_movimento_apolar} e a Figura \ref{fig:michaelis_menten_movement_apolar} com os parâmetros $P_M$ e $J$ utilizados:
+A intenção dessa análise é reproduzir o comportamento da cinética de Michaelis-Menten, mas agora considerando a presença de um substrato com característica apolar. Para isso, é razoável imaginar que, para uma comparação justa, tanto os parâmetros básicos do modelo quanto os parâmetros de reação sejam os mesmos da simulação anterior, mas com alterações nos parâmetros de movimentação e interação dos componentes. Apresenta-se a Tabela \ref{tab:params_movimento_apolar} e a Figura \ref{fig:michaelis_menten_movement_apolar} com os parâmetros $P_M$ e $J$ utilizados:
 
 \begin{table}[H]
     \centering
@@ -1287,8 +1292,8 @@ Após a execução completa dessa simulação e a análise do arquivo CSV gerado
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{img/MM_apolar_initial.png}
-    \hspace{0.5cm}
+    \includegraphics[width=0.7\textwidth]{img/MM_apolar_initial.png}
+    \hspace{0.05\textwidth}
     \includegraphics[width=0.2\textwidth]{img/legend.png}
     \caption{\small Estado inicial da malha na simulação de cinética com substrato apolar.}
     \label{fig:MM_apolar_initial}
@@ -1308,6 +1313,8 @@ Mais uma diferença a ser notada é a tendência observada de produto e substrat
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{img/apolar_3000.png}
+    \hspace{0.05\textwidth}
+    \includegraphics[width=0.2\textwidth]{img/legend.png}
     \caption{\small Estado da malha na iteração 3000 da simulação de cinética com substrato apolar.}
     \label{fig:MM_apolar_3000it}
 \end{figure}
@@ -1317,6 +1324,8 @@ A Figura \ref{fig:MM_apolar_10000it} mostra o estado da malha na iteração 1000
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{img/apolar_10000.png}
+    \hspace{0.05\textwidth}
+    \includegraphics[width=0.2\textwidth]{img/legend.png}
     \caption{\small Estado da malha na iteração 10000 da simulação de cinética com substrato apolar.}
     \label{fig:MM_apolar_10000it}
 \end{figure}
@@ -1334,7 +1343,7 @@ A derivada dessa curva, que representa a taxa de formação de produto, é aprox
     \label{eq:taxa_MM_apolar}
 \end{equation}
 
-A seguir, apresenta-se o gráfico da curva de concentração de produto e de sua derivada, a taxa da reação, para a cinética com substrato apolar:
+Na Figura \ref{fig:MM_apolar_rate}, apresenta-se o gráfico da curva de concentração de produto e de sua derivada, a taxa da reação, para a cinética com substrato apolar:
 
 \begin{figure}[H]
     \centering
@@ -1343,7 +1352,7 @@ A seguir, apresenta-se o gráfico da curva de concentração de produto e de sua
     \label{fig:MM_apolar_rate}
 \end{figure}
 
-O gráfico de Michaelis-Menten, que relaciona a taxa de formação de produto com a concentração de substrato, é apresentado a seguir:
+O gráfico de Michaelis-Menten, que relaciona a taxa de formação de produto com a concentração de substrato, é apresentado na Figura \ref{fig:MM_apolar_curve}:
 
 \begin{figure}[H]
     \centering
@@ -1492,12 +1501,12 @@ Os parâmetros de movimentação e interação dos componentes são definidos na
 
 Diferenças notáveis nessa simulação são a inclusão de valores distintos de $J$ para diferentes lados da célula de surfactante, representados por $F_1$ e $F_2$. $F_1$, o menor lado, é o lado polar, enquanto que $F_2$ representa o lado apolar. Note que os valores foram escolhidos de forma a simular esse comportamento assimétrico do surfactante, como por exemplo repulsão do lado apolar com a água ($J (W|F_2) = 0{,}5$) e atração do lado polar com a água ($J (W|F_1) = 1{,}7$).
 
-Após a execução completa dessa simulação, a matriz inicial gerada é ilustrada na Figura \ref{fig:michaelis_menten_movement_surfactante}. Note as células de surfactante (F) identificadas por meio da legenda e o direcionamento aleatório atribuído a elas, definido pela orientação da ponta do triângulo.
+Após a execução completa dessa simulação, a matriz inicial gerada é ilustrada na Figura \ref{fig:MM_surf_initial}. Note as células de surfactante (F) identificadas por meio da legenda e o direcionamento aleatório atribuído a elas, definido pela orientação da ponta do triângulo.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{img/MM_surf_initial.png}
-    \hspace{0.5cm}
+    \includegraphics[width=0.75\textwidth]{img/MM_surf_initial.png}
+    \hspace{0.05\textwidth}
     \includegraphics[width=0.15\textwidth]{img/legend_surf.png}
     \caption{\small Estado inicial da malha na simulação de cinética com surfactante.}
     \label{fig:MM_surf_initial}
@@ -1516,7 +1525,9 @@ Não se nota grandes diferenças entre os gráficos da dinâmica com surfactante
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{img/surf_3000.png}
+    \includegraphics[width=0.75\textwidth]{img/surf_3000.png}
+    \hspace{0.05\textwidth}
+    \includegraphics[width=0.15\textwidth]{img/legend_surf.png}
     \caption{\small Estado da malha na iteração 3000 da simulação de cinética com surfactante, com destaque para efeitos de interface.}
     \label{fig:MM_surf_3000it}
 \end{figure}
@@ -1525,7 +1536,9 @@ A 10000 iterações, o estado da malha é apresentado na Figura \ref{fig:MM_surf
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{img/surf_10000.png}
+    \includegraphics[width=0.75\textwidth]{img/surf_10000.png}
+    \hspace{0.05\textwidth}
+    \includegraphics[width=0.15\textwidth]{img/legend_surf.png}
     \caption{\small Estado da malha na iteração 10000 da simulação de cinética com surfactante.}
     \label{fig:MM_surf_10000it}
 \end{figure}

@@ -3,11 +3,11 @@
 * Compactação e paginação dos resultados
 * Acompanhamento do progresso da simulação - OK
 * Mostrar o código que calcula as equações e constantes relevantes da cinética
-* Testes unitários
-* Tentar executar uma simulação no meu note pessoal
+* Testes unitários - OK
+* Tentar executar uma simulação no meu note pessoal - OK
 
 * Na simulação com substrato apolar, J(AC) deveria ser igual a J(AB) = 1.1
-* Sempre numerar as tabelas e figuras ao citá-las.
+* Sempre numerar as tabelas e figuras ao citá-las. - OK
 * Parâmetros da interação do surfactante com o substrato - OK
 * Pensar em considerar interações polar-apolar como fracas, sem repulsão
 
