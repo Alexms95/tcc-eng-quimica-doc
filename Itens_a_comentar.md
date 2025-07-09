@@ -1,7 +1,7 @@
 * Células que rotacionam - OK
 * Geração de números aleatórios para executar os métodos probabilisticamente
 * Compactação e paginação dos resultados
-* Acompanhamento do progresso da simulação
+* Acompanhamento do progresso da simulação - OK
 * Mostrar o código que calcula as equações e constantes relevantes da cinética
 * Testes unitários
 * Tentar executar uma simulação no meu note pessoal
@@ -18,5 +18,5 @@
 * Adicionar imagens das grades geradas - OK
 * Réplicas das simulações
 * Texto descrevendo os Pr, corrigir - OK
-* Unidades
-* J = 0 em MM para S/S e P/P
+* Unidades - OK
+* J = 0 em MM para S/S e P/P - OK

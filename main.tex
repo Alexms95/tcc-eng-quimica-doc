@@ -871,6 +871,16 @@ Durante cada iteração, a malha é percorrida célula por célula, seguindo a o
 
 Depois de toda essa análise, o programa passa para a próxima célula caso haja alguma célula não processada na grade e repete o fluxo de aplicação das regras até que todas as células da grade tenham sido processadas. Nesse ponto, uma iteração na malha é concluída e o resultado é salvo em memória. Caso o número de iterações definido pelo usuário ainda não tenha sido atingido, uma nova iteração se inicia a partir da malha gerada pela iteração anterior, limpando apenas as informações de células onde houve movimentação ou reação, por exemplo. Quando todas as iterações são concluídas, a simulação é finalizada e os resultados são salvos no banco de dados para posterior consulta e análise. Vale ressaltar que o estado de cada malha após todas as iterações é salvo, isto é, o usuário é capaz de consultar a exata malha resultante de qualquer iteração específica, o que permite uma análise visual do comportamento do sistema ao longo do tempo.
 
+Para garantir a confiabilidade do modelo, foram implementados testes unitários utilizando a biblioteca \textit{pytest} do Python. Esses testes cobrem algumas das principais funcionalidades do modelo, como a movimentação, reação e rotação dos componentes, bem como a inicialização da grade e o processamento das iterações. Esses testes podem ser executados como forma de validar que o modelo está funcionando corretamente e que as regras de evolução estão sendo aplicadas conforme o esperado. 
+
+A Figura \ref{fig:unit_tests} ilustra o resultado da execução dos testes unitários, onde todos os testes foram aprovados, indicando que as regras implementadas foram testadas e estão retornando os resultados esperados. São, ao todo, 60 testes unitários, executados com o comando \texttt{pytest -v} e todos estão aprovados, conforme a saída apresentada na figura.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{img/unit_test.png}
+    \caption{\small Resultado da execução dos testes unitários do modelo de autômato celular.}
+    \label{fig:unit_tests}
+\end{figure}
 
 \subsection{Interface do Usuário}
 
