@@ -871,7 +871,7 @@ Durante cada iteração, a malha é percorrida célula por célula, seguindo a o
 
 Depois de toda essa análise, o programa passa para a próxima célula caso haja alguma célula não processada na grade e repete o fluxo de aplicação das regras até que todas as células da grade tenham sido processadas. Nesse ponto, uma iteração na malha é concluída e o resultado é salvo em memória. Caso o número de iterações definido pelo usuário ainda não tenha sido atingido, uma nova iteração se inicia a partir da malha gerada pela iteração anterior, limpando apenas as informações de células onde houve movimentação ou reação, por exemplo. Quando todas as iterações são concluídas, a simulação é finalizada e os resultados são salvos no banco de dados para posterior consulta e análise. Vale ressaltar que o estado de cada malha após todas as iterações é salvo, isto é, o usuário é capaz de consultar a exata malha resultante de qualquer iteração específica, o que permite uma análise visual do comportamento do sistema ao longo do tempo.
 
-Para garantir a confiabilidade do modelo, foram implementados testes unitários utilizando a biblioteca \textit{pytest} do Python. Esses testes cobrem algumas das principais funcionalidades do modelo, como a movimentação, reação e rotação dos componentes, bem como a inicialização da grade e o processamento das iterações. Esses testes podem ser executados como forma de validar que o modelo está funcionando corretamente e que as regras de evolução estão sendo aplicadas conforme o esperado. 
+Para garantir a confiabilidade do modelo, foram implementados testes unitários utilizando a biblioteca \textit{pytest} do Python. Esses testes cobrem algumas das principais funcionalidades do modelo, como a movimentação, reação e rotação dos componentes, bem como a inicialização da grade e o processamento das iterações. Esses testes podem ser executados como forma de validar que o modelo está funcionando corretamente e que as regras de evolução estão sendo aplicadas conforme o esperado.
 
 A Figura \ref{fig:unit_tests} ilustra o resultado da execução dos testes unitários, onde todos os testes foram aprovados, indicando que as regras implementadas foram testadas e estão retornando os resultados esperados. São, ao todo, 60 testes unitários, executados com o comando \texttt{pytest -v} e todos estão aprovados, conforme a saída apresentada na figura.
 
@@ -1246,6 +1246,28 @@ Foi possível obter, também, o gráfico típico de Lineweaver-Burk, que é uma 
 
 Por esse método, o coeficiente linear da equação, $b$, é utilizado para encontrar o valor de $V_{max}$, que é dado por $V_{max} = \frac{1}{b} \approx 2{,}48 \cdot 10^{-5} \, it^{-1}$. O coeficiente angular, $a$, é utilizado para encontrar o valor de $K_M$, que é dado por $K_M = \frac{a}{b} \approx 0{,}0162$. Pela razão descrita anteriormente, esse método será desconsiderado para outras simulações.
 
+A simulação em estudo foi, ainda, executada outras duas vezes, com o objetivo de verificar a reprodutibilidade dos resultados com os mesmos parâmetros. Toda a análise dos dados de frações relativas foi realizada para cada execução, e os resultados de $V_{max}$ e $K_M$ são apresentados na Tabela \ref{tab:params_MM_repeticoes}.
+
+\begin{table}[H]
+    \centering
+    \caption{Resultados de Repetições da Simulação de Cinética Clássica de Michaelis-Menten}
+    \vspace{0.2cm}
+    \begin{tabularx}{\textwidth}{X X m{5cm}}
+        \hline
+        \textbf{Execução} & \textbf{$V_{max} \, (it^{-1})$ }      & \textbf{$K_M$}          \\
+        \hline
+        1                 & $3{,}010 \cdot 10^{-5}$               & $0{,}0238$              \\
+        2                 & $2{,}956 \cdot 10^{-5}$               & $0{,}0220$              \\
+        3                 & $2{,}900 \cdot 10^{-5}$               & $0{,}0213$              \\
+        \hline
+        \textbf{Final}    & $(2{,}956 \pm 0{,}045) \cdot 10^{-5}$ & $0{,}0224 \pm 0{,}0011$ \\
+        \hline
+    \end{tabularx}
+    \vspace{0.2cm}
+    \makebox[\linewidth][l]{\small Fonte: Autoria própria}
+    \label{tab:params_MM_repeticoes}
+\end{table}
+
 \section{Cinética com Substrato Apolar}
 
 A intenção dessa análise é reproduzir o comportamento da cinética de Michaelis-Menten, mas agora considerando a presença de um substrato com característica apolar. Para isso, é razoável imaginar que, para uma comparação justa, tanto os parâmetros básicos do modelo quanto os parâmetros de reação sejam os mesmos da simulação anterior, mas com alterações nos parâmetros de movimentação e interação dos componentes. Apresenta-se a Tabela \ref{tab:params_movimento_apolar} e a Figura \ref{fig:michaelis_menten_movement_apolar} com os parâmetros $P_M$ e $J$ utilizados:
@@ -1369,7 +1391,7 @@ A curva de Michaelis-Menten obtida se apresenta, também, de forma semelhante ao
     \vspace{0.2cm}
     \begin{tabularx}{\textwidth}{X m{5cm}}
         \hline
-        \textbf{Constante} & \textbf{Valor}        \\
+        \textbf{Constante} & \textbf{Valor}                   \\
         \hline
         $V_{max}$          & $2{,}5 \cdot 10^{-5} \, it^{-1}$ \\
         $K_M$              & $0{,}0226 \, mol/mol$            \\
@@ -1380,9 +1402,31 @@ A curva de Michaelis-Menten obtida se apresenta, também, de forma semelhante ao
     \label{tab:params_MM_apolar}
 \end{table}
 
-Comparando esses resultados com os da tabela \ref{tab:params_MM} da simulação de cinética clássica, nota-se que tanto $V_{max}$ quanto $K_M$ são menores no caso do substrato apolar. A diminuição de $V_{max}$ indica que a taxa máxima de formação de produto cai devido à tendência do substrato em se aglomerar, uma vez que ele desta vez não se solubiliza em água. Levando em consideração que a enzima possui boa afinidade com a água, a reação com o substrato ocorre com menos frequência.
+Na Tabela \ref{tab:params_MM_apolar_repeticoes}, são apresentados os resultados de três execuções da simulação com substrato apolar, onde se nota a reprodutibilidade dos resultados.
 
-Por outro lado, a leve diminuição de $K_M$ (melhor chamado, aqui, de $K_M$ \textbf{aparente}) de certa forma pode ser entendida como um aumento na afinidade da enzima com o substrato. É fato que o substrato apolar não se solubiliza em água, o que pode levar às moléculas de enzima encontrarem ``bolhas'' de substrato, facilitando a reação de várias moléculas de substrato em pouco tempo. Isso pode ser visto como uma vantagem para a enzima em alguns momentos, que consegue reagir com o substrato apolar de forma mais eficiente, refletindo em aumento de afinidade, apesar da diminuição de $V_{max}$.
+\begin{table}[H]
+    \centering
+    \caption{Resultados de Repetições da Simulação de Cinética com Substrato Apolar}
+    \vspace{0.2cm}
+    \begin{tabularx}{\textwidth}{X X m{5cm}}
+        \hline
+        \textbf{Execução} & \textbf{$V_{max} \, (it^{-1})$ }      & \textbf{$K_M$}          \\
+        \hline
+        1                 & $2{,}502 \cdot 10^{-5}$               & $0{,}0226$              \\
+        2                 & $2{,}526 \cdot 10^{-5}$               & $0{,}0249$              \\
+        3                 & $2{,}701 \cdot 10^{-5}$               & $0{,}0239$              \\
+        \hline
+        \textbf{Final}    & $(2{,}576 \pm 0{,}089) \cdot 10^{-5}$ & $0{,}0238 \pm 0{,}0020$ \\
+        \hline
+    \end{tabularx}
+    \vspace{0.2cm}
+    \makebox[\linewidth][l]{\small Fonte: Autoria própria}
+    \label{tab:params_MM_apolar_repeticoes}
+\end{table}
+
+Comparando esses resultados com os da tabela \ref{tab:params_MM} da simulação de cinética clássica, nota-se $V_{max}$ é menor e $K_M$ é maior no caso do substrato apolar. A diminuição de $V_{max}$ indica que a taxa máxima de formação de produto cai devido à tendência do substrato em se aglomerar, uma vez que ele desta vez não se solubiliza em água. Levando em consideração que a enzima possui boa afinidade com a água, a reação com o substrato ocorre com menos frequência.
+
+Em adição a isso, o aumento de $K_M$ (melhor chamado, aqui, de $K_M$ \textbf{aparente}) de certa forma pode ser entendida como a redução na afinidade da enzima com o substrato. Como observado pela imagem da malha na Figura \ref{fig:MM_apolar_3000it}, é fato que o substrato apolar não se solubiliza em água e forma aglomerados, o que dificulta o encontro do substrato com a enzima, que está solubilizada em água, no decorrer das iterações.
 
 Embora o modelo de Michaelis-Menten não considere a presença de substratos apolares, os resultados obtidos com o modelo de autômato celular implementado mostram que é possível simular o comportamento da cinética enzimática mesmo em condições não ideais, gerando resultados que confirmam teorias. Isso demonstra a flexibilidade e a utilidade do modelo para estudar diferentes cenários e condições reacionais.
 
@@ -1585,7 +1629,7 @@ Os valores das constantes $V_{max}$ e $K_m$ obtidos a partir da simulação com 
     \vspace{0.2cm}
     \begin{tabularx}{\textwidth}{X m{5cm}}
         \hline
-        \textbf{Constante} & \textbf{Valor}          \\
+        \textbf{Constante} & \textbf{Valor}                     \\
         \hline
         $V_{max}$          & $2{,}635 \cdot 10^{-5} \, it^{-1}$ \\
         $K_m$              & $0{,}0268 \, mol/mol$              \\
@@ -1596,6 +1640,28 @@ Os valores das constantes $V_{max}$ e $K_m$ obtidos a partir da simulação com 
     \label{tab:params_MM_surfactant}
 \end{table}
 
+A Tabela \ref{tab:surf_repeticoes} apresenta os resultados de três execuções dessa simulação em termos das constantes $V_{max}$ e $K_M$.
+
+\begin{table}[H]
+    \centering
+    \caption{Resultados de Repetições da Simulação de Cinética com Substrato Apolar e Surfactante}
+    \vspace{0.2cm}
+    \begin{tabularx}{\textwidth}{X X m{5cm}}
+        \hline
+        \textbf{Execução} & \textbf{$V_{max} \, (it^{-1})$ }  & \textbf{$K_M$}          \\
+        \hline
+        1                 & $2{,}635 \cdot 10^{-5}$           & $0{,}0268$              \\
+        2                 & $2{,}649 \cdot 10^{-5}$           & $0{,}0252$              \\
+        3                 & $2{,}844 \cdot 10^{-5}$           & $0{,}0274$             \\
+        \hline
+        \textbf{Final}    & $(2{,}709 \pm 0{,}095) \cdot 10^{-5}$ & $0{,}0264 \pm 0{,}0009$ \\
+        \hline
+    \end{tabularx}
+    \vspace{0.2cm}
+    \makebox[\linewidth][l]{\small Fonte: Autoria própria}
+    \label{tab:surf_repeticoes}
+\end{table}
+
 Comparando esses resultados com os da Tabela \ref{tab:params_MM_apolar} da simulação de cinética com substrato apolar, nota-se que tanto $V_{max}$ quanto $K_M$ são maiores no caso do surfactante. $V_{max}$ é maior, o que indica que o surfactante auxiliou na formação de produto durante as primeiras iterações. A presença de uma molécula assimétrica de dois polos distintos substituindo uma polar, como a água, pode ter facilitado a interação entre enzima e substrato, aumentando a taxa de reação.
 
 Por outro lado, $K_M$ é maior, o que indica que a afinidade da enzima pelo substrato diminuiu. Isso pode ser explicado pelo fato de que o surfactante, apesar de auxiliar na formação do produto, determinou uma inibição. Pelos parâmetros de interação, tanto $J (E|S)$ quanto $J (E|F_1)$ e $J (E|F_2)$ são iguais a $1{,}1$, logo o surfactante pode ter
@@ -1604,7 +1670,7 @@ agido como um inibidor competitivo, dificultando o encontro entre enzima e subst
 Cabe ressaltar, novamente, que o modelo de Michaelis-Menten não considera a presença de espécies como surfactantes e as constantes calculadas aqui são \textbf{aparentes}. Entretanto, o modelo de AC foi capaz de simular o comportamento da cinética enzimática mesmo com a complexidade adicional do surfactante. A heterogeneidade do sistema e a dinâmica de interação entre os componentes foram bem capturadas, permitindo fazer análises e comparações com teorias conhecidas.
 
 \chapter{CONCLUSÕES}
-% Conclusões finais...
+
 
 \printbibliography[title={REFERÊNCIAS},heading=bibnumbered]
 
