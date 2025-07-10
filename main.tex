@@ -87,14 +87,17 @@
 
         \vfill
 
-        Trabalho de Conclusão de Curso apresentado à Escola de Química da Universidade Federal do Rio de Janeiro, como parte dos requisitos necessários à obtenção do grau de Engenheiro Químico.
+    \end{center}
+    Trabalho de Conclusão de Curso apresentado à Escola de Química da Universidade Federal do Rio de Janeiro, como parte dos requisitos necessários à obtenção do grau de Engenheiro Químico.
 
-        \vfill
+    \vfill
 
-        Orientadores: Heloísa Lajas Sanches, Bernardo Dias Ribeiro
+    \noindent Orientadores: Heloísa Lajas Sanches \\
+    \phantom{Orientadores: }Bernardo Dias Ribeiro
 
-        \vfill
+    \vfill
 
+    \begin{center}
         Rio de Janeiro \\
         2025
     \end{center}
@@ -128,7 +131,7 @@
 
 \end{center}
 
-Aprovado em 17 de julho de 2025.
+Aprovado em XX de XXXXX de 2025.
 
 \begin{center}
 
@@ -181,8 +184,11 @@ A todos que, de alguma forma, fizeram parte desta trajetória, meu sincero agrad
 
 \vspace*{\fill}
 \begin{flushright}
-    \textit{``A ciência é a arte de fazer perguntas.''} \\
-    \textbf{Isaac Asimov}
+    \begin{minipage}{0.6\textwidth}
+        \raggedleft
+        \textit{``Nós só podemos ver um pouco do futuro, mas o suficiente para perceber que há muito a fazer.''} \\
+        \textit{— Alan Turing}
+    \end{minipage}
 \end{flushright}
 \vspace*{4cm}
 
@@ -192,7 +198,7 @@ SILVA, Alex Matos da. \textbf{Desenvolvimento de Software para Simulação de Pr
 
 \medskip
 
-Este trabalho apresenta o desenvolvimento de um software para simulação de processos enzimáticos em meios multifásicos, com ênfase na modelagem de sistemas contendo surfactantes, utilizando a abordagem de autômatos celulares. O objetivo principal foi criar uma ferramenta computacional capaz de representar, de forma realista e flexível, a dinâmica de reações enzimáticas em ambientes heterogêneos, superando as limitações dos modelos clássicos baseados em equações diferenciais ordinárias. O software foi implementado em \textit{Python} (\citetitle{python}), com interface gráfica web baseada em \textit{React} (\citetitle{react}), e permite ao usuário configurar parâmetros do sistema, executar simulações e analisar resultados de forma intuitiva. O modelo de autômato celular adotado representa o sistema como uma grade bidimensional, onde cada célula pode conter diferentes componentes químicos, como enzima, substrato, produto, água, surfactante ou vazios, e evolui segundo regras locais de movimentação, reação e rotação. Foram realizadas simulações em três cenários principais: (i) cinética clássica de Michaelis-Menten com substrato polar, (ii) cinética com substrato apolar, e (iii) cinética com substrato apolar na presença de surfactante. Os resultados demonstraram que o modelo é capaz de reproduzir curvas típicas de Michaelis-Menten, calcular parâmetros cinéticos aparentes ($V_{max}$ e $K_M$), e capturar fenômenos como aglomeração de substratos apolares e ação de surfactantes na interface. A presença de surfactante aumentou a taxa máxima de reação, mas também elevou o valor aparente de $K_M$, sugerindo efeito inibitório competitivo. O software mostrou-se robusto, reprodutível e extensível, sendo uma ferramenta promissora para estudos acadêmicos e industriais de processos enzimáticos complexos.
+Este trabalho apresenta o desenvolvimento de um software para simulação de processos enzimáticos em meios multifásicos, com ênfase na modelagem de sistemas contendo surfactantes, utilizando a abordagem de autômatos celulares. O objetivo principal foi criar uma ferramenta computacional capaz de representar, de forma realista e flexível, a dinâmica de reações enzimáticas em ambientes heterogêneos, superando as limitações dos modelos clássicos baseados em equações diferenciais ordinárias. O software foi implementado em \textit{Python}, com interface gráfica web, e permite ao usuário configurar parâmetros do sistema, executar simulações e analisar resultados de forma intuitiva. O modelo de autômato celular adotado representa o sistema como uma grade bidimensional, onde cada célula pode conter diferentes componentes químicos, como enzima, substrato, produto, água, surfactante ou vazios, e evolui segundo regras locais de movimentação, reação e rotação. Foram realizadas simulações em três cenários principais: (i) cinética clássica de Michaelis-Menten com substrato polar, (ii) cinética com substrato apolar, e (iii) cinética com substrato apolar na presença de surfactante. Os resultados demonstraram que o modelo é capaz de reproduzir curvas típicas de Michaelis-Menten, calcular parâmetros cinéticos aparentes ($V_{max}$ e $K_M$), e capturar fenômenos como aglomeração de substratos apolares e ação de surfactantes na interface. A presença de surfactante aumentou a taxa máxima de reação, mas também elevou o valor aparente de $K_M$, sugerindo efeito inibitório competitivo. O software mostrou-se robusto, reprodutível e extensível, sendo uma ferramenta promissora para estudos acadêmicos e industriais de processos enzimáticos complexos.
 
 \medskip
 
@@ -204,7 +210,7 @@ SILVA, Alex Matos da. \textbf{Desenvolvimento de Software para Simulação de Pr
 
 \medskip
 
-This work presents the development of software for the simulation of enzymatic processes in multiphasic media, with emphasis on modeling systems containing surfactants, using the cellular automata approach. The main objective was to create a computational tool capable of realistically and flexibly representing the dynamics of enzymatic reactions in heterogeneous environments, overcoming the limitations of classical models based on ordinary differential equations. The software was implemented in \textit{Python} (\citetitle{python}), with a web graphical interface based on \textit{React} (\citetitle{react}), allowing users to configure system parameters, run simulations, and analyze results intuitively. The adopted cellular automaton model represents the system as a two-dimensional grid, where each cell can contain different chemical components, such as enzyme, substrate, product, water, surfactant, or voids, and evolves according to local rules of movement, reaction, and rotation. Simulations were performed in three main scenarios: (i) classical Michaelis-Menten kinetics with polar substrate, (ii) kinetics with apolar substrate, and (iii) kinetics with apolar substrate in the presence of surfactant. The results showed that the model is capable of reproducing typical Michaelis-Menten curves, calculating apparent kinetic parameters ($V_{max}$ and $K_M$), and capturing phenomena such as aggregation of apolar substrates and the action of surfactants at the interface. The presence of surfactant increased the maximum reaction rate but also raised the apparent $K_M$ value, suggesting a competitive inhibitory effect. The software proved to be robust, reproducible, and extensible, being a promising tool for academic and industrial studies of complex enzymatic processes.
+This work presents the development of software for the simulation of enzymatic processes in multiphasic media, with emphasis on modeling systems containing surfactants, using the cellular automata approach. The main objective was to create a computational tool capable of realistically and flexibly representing the dynamics of enzymatic reactions in heterogeneous environments, overcoming the limitations of classical models based on ordinary differential equations. The software was implemented in \textit{Python}, with a web graphical interface, allowing users to configure system parameters, run simulations, and analyze results intuitively. The adopted cellular automaton model represents the system as a two-dimensional grid, where each cell can contain different chemical components, such as enzyme, substrate, product, water, surfactant, or voids, and evolves according to local rules of movement, reaction, and rotation. Simulations were performed in three main scenarios: (i) classical Michaelis-Menten kinetics with polar substrate, (ii) kinetics with apolar substrate, and (iii) kinetics with apolar substrate in the presence of surfactant. The results showed that the model is capable of reproducing typical Michaelis-Menten curves, calculating apparent kinetic parameters ($V_{max}$ and $K_M$), and capturing phenomena such as aggregation of apolar substrates and the action of surfactants at the interface. The presence of surfactant increased the maximum reaction rate but also raised the apparent $K_M$ value, suggesting a competitive inhibitory effect. The software proved to be robust, reproducible, and extensible, being a promising tool for academic and industrial studies of complex enzymatic processes.
 
 \medskip
 
@@ -324,7 +330,7 @@ No setor farmacêutico, as enzimas desempenham papel fundamental na síntese de 
 
 \subsection{Mecanismos Relevantes}
 
-A compreensão detalhada dos mecanismos de ação das enzimas é imprescindível para o projeto e a otimização de processos bioquímicos em escala industrial. Entre os modelos disponíveis, o de Michaelis--Menten permanece o arcabouço mais utilizado para reações envolvendo um único substrato. Nesse modelo, a enzima livre ($E$) associa-se reversivelmente ao substrato ($S$) formando o complexo enzima–substrato ($ES$), o qual se decompõe, liberando produto ($P$) e regenerando a enzima (Eq.~\ref{eq:MM-mecanismo}) \cite{bisswanger2017}.
+A compreensão detalhada dos mecanismos de ação das enzimas é imprescindível para o projeto e a otimização de processos bioquímicos em escala industrial. Entre os modelos disponíveis, o de Michaelis--Menten permanece o arcabouço mais utilizado para reações envolvendo um único substrato. Nesse modelo, a enzima livre ($E$) associa-se reversivelmente ao substrato ($S$) formando o complexo enzima–-substrato ($ES$), o qual se decompõe, liberando produto ($P$) e regenerando a enzima (Eq.~\ref{eq:MM-mecanismo}) \cite{bisswanger2017}.
 
 \begin{equation}
     \label{eq:MM-mecanismo}
@@ -338,7 +344,7 @@ Aplicando a condição de \emph{estado quasi-estacionário} proposta por Briggs 
     v \;=\; \frac{V_{\mathrm{max}}[S]}{K_\mathrm{M} + [S]},
 \end{equation}
 
-onde $V_{\mathrm{max}} = k_{2}[E]_0$ é a velocidade máxima — obtida quando toda a enzima está saturada — e
+onde $V_{\mathrm{max}} = k_{2}[E]_0$ é a velocidade máxima, obtida quando toda a enzima está saturada, e
 
 \[
     K_\mathrm{M} \;=\; \frac{k_{-1}+k_{2}}{k_{1}}
@@ -632,7 +638,7 @@ Os modelos de autômato celular (AC) empregados neste trabalho seguem predominan
 Conforme discutido em \citeauthor*{kier2005}, modelos de água baseados em ACs devem reservar cerca de $31\,\%$ dos sítios da grade como
 cavidades vazias, mantendo os $69\,\%$ restantes ocupados por moléculas de
 H$_2$O (ou por outros ingredientes que venham a substituir parte da água).
-A seguir resumem--se as razões:
+A seguir resumem-se as razões:
 
 \begin{enumerate}[label=\alph*]
     \item \textbf{Ajuste volumétrico} – Estimativas estequiométricas indicam que
@@ -666,8 +672,8 @@ A seguir resumem--se as razões:
 
 Em suma, preservar \textbf{$31\,\%$ de cavidades vazias} equilibra densidade,
 mobilidade e conectividade intermolecular, garantindo que tanto propriedades
-estruturais da água quanto fenômenos dinâmicos — como a difusão necessária
-para colisões enzima--substrato — sejam reproduzidos com fidelidade.
+estruturais da água quanto fenômenos dinâmicos, como a difusão necessária
+para colisões enzima--substrato, sejam reproduzidos com fidelidade.
 
 \subsection{Simulação de Reações Químicas}
 
