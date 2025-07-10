@@ -186,11 +186,11 @@ SILVA, Alex Matos da. \textbf{Desenvolvimento de Software para Simulação de Pr
 
 \medskip
 
-[Inserir texto do resumo em português aqui.]
+Este trabalho apresenta o desenvolvimento de um software para simulação de processos enzimáticos em meios multifásicos, com ênfase na modelagem de sistemas contendo surfactantes, utilizando a abordagem de autômatos celulares. O objetivo principal foi criar uma ferramenta computacional capaz de representar, de forma realista e flexível, a dinâmica de reações enzimáticas em ambientes heterogêneos, superando as limitações dos modelos clássicos baseados em equações diferenciais ordinárias. O software foi implementado em Python, com interface gráfica web, e permite ao usuário configurar parâmetros do sistema, executar simulações e analisar resultados de forma intuitiva. O modelo de autômato celular adotado representa o sistema como uma grade bidimensional, onde cada célula pode conter diferentes componentes químicos, como enzima, substrato, produto, água, surfactante ou vazios, e evolui segundo regras locais de movimentação, reação e rotação. Foram realizadas simulações em três cenários principais: (i) cinética clássica de Michaelis-Menten com substrato polar, (ii) cinética com substrato apolar, e (iii) cinética com substrato apolar na presença de surfactante. Os resultados demonstraram que o modelo é capaz de reproduzir curvas típicas de Michaelis-Menten, calcular parâmetros cinéticos aparentes ($V_{max}$ e $K_M$), e capturar fenômenos como aglomeração de substratos apolares e ação de surfactantes na interface. A presença de surfactante aumentou a taxa máxima de reação, mas também elevou o valor aparente de $K_M$, sugerindo efeito inibitório competitivo. O software mostrou-se robusto, reprodutível e extensível, sendo uma ferramenta promissora para estudos acadêmicos e industriais de processos enzimáticos complexos.
 
 \medskip
 
-\textbf{Palavras-chave}: palavra-chave 1; palavra-chave 2; palavra-chave 3.
+\textbf{Palavras-chave}: simulação computacional; autômatos celulares; cinética enzimática; surfactantes; modelagem matemática.
 
 % Abstract
 \chapter*{\MakeUppercase{Abstract}}
@@ -198,11 +198,12 @@ SILVA, Alex Matos da. \textbf{Desenvolvimento de Software para Simulação de Pr
 
 \medskip
 
-[Insert English abstract here.]
+This work presents the development of software for the simulation of enzymatic processes in multiphasic media, with emphasis on modeling systems containing surfactants, using the cellular automata approach. The main objective was to create a computational tool capable of realistically and flexibly representing the dynamics of enzymatic reactions in heterogeneous environments, overcoming the limitations of classical models based on ordinary differential equations. The software was implemented in Python, with a web graphical interface, allowing users to configure system parameters, run simulations, and analyze results intuitively. The adopted cellular automaton model represents the system as a two-dimensional grid, where each cell can contain different chemical components, such as enzyme, substrate, product, water, surfactant, or voids, and evolves according to local rules of movement, reaction, and rotation. Simulations were performed in three main scenarios: (i) classical Michaelis-Menten kinetics with polar substrate, (ii) kinetics with apolar substrate, and (iii) kinetics with apolar substrate in the presence of surfactant. The results showed that the model is capable of reproducing typical Michaelis-Menten curves, calculating apparent kinetic parameters ($V_{max}$ and $K_M$), and capturing phenomena such as aggregation of apolar substrates and the action of surfactants at the interface. The presence of surfactant increased the maximum reaction rate but also raised the apparent $K_M$ value, suggesting a competitive inhibitory effect. The software proved to be robust, reproducible, and extensible, being a promising tool for academic and industrial studies of complex enzymatic processes.
 
 \medskip
 
-\textbf{Keywords}: keyword 1; keyword 2; keyword 3.
+\textbf{Keywords}: computational simulation; cellular automata; enzymatic kinetics; surfactants; mathematical modeling.
+
 \newpage
 
 % Listas
@@ -1683,6 +1684,13 @@ Cabe ressaltar, novamente, que o modelo de Michaelis-Menten não considera a pre
 
 \chapter{CONCLUSÕES}
 
+O desenvolvimento do software para simulação de processos enzimáticos utilizando autômatos celulares demonstrou ser uma alternativa eficiente e flexível frente aos métodos tradicionais baseados em equações diferenciais. O modelo implementado foi capaz de reproduzir com fidelidade o comportamento clássico da cinética de Michaelis-Menten, incluindo a formação e decomposição do complexo enzima-substrato, o consumo de substrato e a produção de produto, além de permitir a análise de cenários mais complexos, como a presença de inibidores e surfactantes. A abordagem baseada em autômatos celulares mostrou-se especialmente vantajosa para a modelagem de sistemas heterogêneos e multifásicos, nos quais os efeitos espaciais e estocásticos são relevantes e dificilmente capturados por modelos contínuos.
+
+O software desenvolvido apresenta uma interface gráfica intuitiva, facilitando o uso por pesquisadores e estudantes sem experiência prévia em programação, e permite a configuração detalhada dos parâmetros do sistema, bem como a exportação dos resultados para análise posterior. A integração com banco de dados relacional e a possibilidade de execução remota via API ampliam o potencial de aplicação da ferramenta em diferentes contextos acadêmicos e industriais.
+
+Os resultados obtidos nas simulações confirmam a robustez e a versatilidade do modelo, que pode ser facilmente adaptado para diferentes mecanismos enzimáticos e condições experimentais. Além disso, a utilização de software livre e tecnologias amplamente difundidas, como Python, contribui para a acessibilidade e disseminação da ferramenta.
+
+Em síntese, o trabalho alcançou seus objetivos ao fornecer uma solução computacional inovadora para a simulação de processos enzimáticos em ambientes complexos, contribuindo para o avanço do conhecimento na área e abrindo novas possibilidades para a pesquisa e o ensino em Engenharia Química e Biotecnologia. Recomenda-se, para trabalhos futuros, a implementação de técnicas de paralelização para otimizar o desempenho computacional e a ampliação do modelo para simular outros tipos de reações e interações moleculares.
 
 \printbibliography[title={REFERÊNCIAS},heading=bibnumbered]
 
