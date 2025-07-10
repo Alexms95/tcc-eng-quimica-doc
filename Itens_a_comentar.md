@@ -16,7 +16,7 @@
 * Colocar gráfico de concentrações e de Velocidade na revisão - OK
 * Equação de ajuste da formação de produto com o tempo, explicar
 * Adicionar imagens das grades geradas - OK
-* Réplicas das simulações
+* Réplicas das simulações - OK
 * Texto descrevendo os Pr, corrigir - OK
 * Unidades - OK
 * J = 0 em MM para S/S e P/P - OK
