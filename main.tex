@@ -232,6 +232,7 @@ This work presents the development of software for the simulation of enzymatic p
     AC \hspace{2cm} \= Autômato Celular \\
     CA \> Cellular Automaton \\
     CSTR \> Continuous Stirred-Tank Reactor \\
+    CMC \> Critical Micelle Concentration \\
     EDO \> Equação Diferencial Ordinária \\
     EQ \> Escola de Química \\
     GUI \> Graphical User Interface \\
@@ -418,6 +419,10 @@ Surfactantes são moléculas anfifílicas que, ao serem adicionadas a sistemas m
 O efeito dos surfactantes sobre a atividade enzimática, entretanto, é altamente dependente de sua natureza química, concentração e do tipo de enzima utilizada. Surfactantes aniônicos, catiônicos, não iônicos e zwitteriônicos podem interagir de maneiras distintas com a superfície da enzima, podendo tanto estabilizá-la quanto inibi-la. Em concentrações adequadas, surfactantes não iônicos, como o Triton X-100 ou o Tween 80, são frequentemente utilizados para aumentar a solubilidade de substratos hidrofóbicos e proteger a estrutura enzimática. Por outro lado, concentrações excessivas ou o uso de surfactantes com alta afinidade pela superfície proteica podem levar à desnaturação, agregação ou inativação da enzima, prejudicando o desempenho do processo \cite{lau2010surfactants}.
 
 Além do papel na transferência de massa e estabilização, surfactantes podem modular a seletividade da reação enzimática, influenciando a orientação do substrato na interface e, consequentemente, o perfil de produtos obtidos. Isso é particularmente relevante em reações de síntese orgânica fina, como a produção de ésteres, onde a seletividade enzimática pode ser ajustada por meio da escolha do tipo e da concentração de surfactante. Em alguns casos, a presença de surfactantes permite a realização de reações reversas, como a síntese de ligações peptídicas ou ésteres em meio orgânico, ampliando ainda mais as possibilidades de aplicação industrial das enzimas \cite{lau2010surfactants}.
+
+A concentração micelar crítica (CMC) representa um ponto-chave em sistemas enzimáticos que envolvem interfaces, como micelas e membranas. Ao se atingir a CMC, moléculas anfifílicas, como surfactantes ou certos substratos, passam a formar micelas de maneira espontânea. Essas estruturas micelares criam ambientes diferenciados onde as reações enzimáticas podem ocorrer. Nesse cenário, a cinética das enzimas é impactada, pois a quantidade de substrato disponível para a catálise depende do equilíbrio entre a fase aquosa e a interface micelar. Acima da CMC, a fração de substrato acessível à enzima se estabiliza, permitindo que a equação de Michaelis--Menten seja adaptada para descrever a saturação da interface \cite{bisswanger2017}.
+
+Em sistemas interfaciais, a CMC marca a transição em que o aumento da concentração total de substrato não resulta mais em maior disponibilidade para a enzima, já que o excesso de substrato é incorporado às micelas. Isso influencia diretamente a determinação dos parâmetros cinéticos, como Km e Vmax, que precisam ser analisados considerando a distribuição do substrato entre as diferentes fases do sistema. Assim, compreender o conceito de CMC é fundamental para projetar e interpretar experimentos com enzimas em meios micelares ou membranosos, sendo um aspecto central para a modelagem e otimização de processos enzimáticos em ambientes heterogêneos \cite{bisswanger2017}.
 
 Portanto, o desenvolvimento de processos enzimáticos eficientes em meios multifásicos requer uma compreensão aprofundada dos fenômenos interfaciais, da dinâmica de transferência de massa e das interações entre enzimas, surfactantes e solventes. A escolha criteriosa dos componentes do sistema, aliada ao controle das condições operacionais, é fundamental para garantir alta atividade, estabilidade e seletividade enzimática, viabilizando aplicações industriais inovadoras e sustentáveis.
 
@@ -1491,7 +1496,7 @@ A intenção dessa análise é reproduzir o comportamento da cinética de Michae
     \label{fig:apolar_surfactante}
 \end{figure}
 
-Para essa simulação, foram mantidos os dados de frações relativas de todos os componentes, exceto a água, que agora ocupa 79\% dos componentes, e o surfactante, que ocupa 3\%. Os dados de entrada de reações permanecem os mesmos das simulações anteriores a fim de manter a consistência comparativa, entretanto o comportamento assimétrico do surfactante é simulado pela configuração de rotação ilustrada na Figura \ref{fig:rotation_surfactant} e na Tabela \ref{tab:rotation_surfactant}.
+Para essa simulação, foram mantidos os dados de frações relativas de todos os componentes, exceto a água, que agora ocupa 79\% dos componentes, e o surfactante, que ocupa 3\%. Os dados de entrada de reações permanecem os mesmos das simulações anteriores a fim de manter a consistência comparativa, entretanto o comportamento anfifílico do surfactante é simulado pela configuração de rotação ilustrada na Figura \ref{fig:rotation_surfactant} e na Tabela \ref{tab:rotation_surfactant}.
 
 \begin{table}[H]
     \centering
@@ -1567,7 +1572,7 @@ Os parâmetros de movimentação e interação dos componentes são definidos na
     \label{fig:michaelis_menten_movement_surfactante}
 \end{figure}
 
-Diferenças notáveis nessa simulação são a inclusão de valores distintos de $J$ para diferentes lados da célula de surfactante, representados por $F_1$ e $F_2$. $F_1$, o menor lado, é o lado polar, enquanto que $F_2$ representa o lado apolar. Note que os valores foram escolhidos de forma a simular esse comportamento assimétrico do surfactante, como por exemplo repulsão do lado apolar com a água ($J (W|F_2) = 0{,}5$) e atração do lado polar com a água ($J (W|F_1) = 1{,}7$).
+Diferenças notáveis nessa simulação são a inclusão de valores distintos de $J$ para diferentes lados da célula de surfactante, representados por $F_1$ e $F_2$. $F_1$, o menor lado, é o lado polar, enquanto que $F_2$ representa o lado apolar. Note que os valores foram escolhidos de forma a simular esse comportamento anfifílico do surfactante, como por exemplo repulsão do lado apolar com a água ($J (W|F_2) = 0{,}5$) e atração do lado polar com a água ($J (W|F_1) = 1{,}7$).
 
 Após a execução completa dessa simulação, a matriz inicial gerada é ilustrada na Figura \ref{fig:MM_surf_initial}. Note as células de surfactante (F) identificadas por meio da legenda e o direcionamento aleatório atribuído a elas, definido pela orientação da ponta do triângulo.
 
@@ -1686,7 +1691,222 @@ A Tabela \ref{tab:surf_repeticoes} apresenta os resultados de três execuções 
     \label{tab:surf_repeticoes}
 \end{table}
 
-Comparando esses resultados com os da Tabela \ref{tab:params_MM_apolar} da simulação de cinética com substrato apolar, nota-se que tanto $V_{max}$ quanto $K_M$ são maiores no caso do surfactante. $V_{max}$ é maior, o que indica que o surfactante auxiliou na formação de produto durante as primeiras iterações. A presença de uma molécula assimétrica de dois polos distintos substituindo uma polar, como a água, pode ter facilitado a interação entre enzima e substrato, aumentando a taxa de reação.
+Comparando esses resultados com os da Tabela \ref{tab:params_MM_apolar} da simulação de cinética com substrato apolar, nota-se que tanto $V_{max}$ quanto $K_M$ são maiores no caso do surfactante. $V_{max}$ é maior, o que indica que o surfactante auxiliou na formação de produto durante as primeiras iterações. A presença de uma molécula anfifílica de dois polos distintos substituindo uma polar, como a água, pode ter facilitado a interação entre enzima e substrato, aumentando a taxa de reação.
+
+Por outro lado, $K_M$ é maior, o que indica que a afinidade da enzima pelo substrato diminuiu. Isso pode ser explicado pelo fato de que o surfactante, apesar de auxiliar na formação do produto, determinou uma inibição. Pelos parâmetros de interação, tanto $J (E|S)$ quanto $J (E|F_1)$ e $J (E|F_2)$ são iguais a $1{,}1$, logo o surfactante pode ter
+agido como um inibidor competitivo, dificultando o encontro entre enzima e substrato ao longo do tempo.
+
+Cabe ressaltar, novamente, que o modelo de Michaelis-Menten não considera a presença de espécies como surfactantes e as constantes calculadas aqui são \textbf{aparentes}. Entretanto, o modelo de AC foi capaz de simular o comportamento da cinética enzimática mesmo com a complexidade adicional do surfactante. A heterogeneidade do sistema e a dinâmica de interação entre os componentes foram bem capturadas, permitindo fazer análises e comparações com teorias conhecidas.
+
+\section{Cinética com Surfactante em Alta Concentração}
+
+Para continuar o estudo do impacto do surfactante na cinética enzimática, executou-se uma simulação adicional, com concentração maior de surfactante no sistema, a fim de simular as teorias de formação de micelas e o CMC. Os parâmetros dessa simulação são apresentados na Tabela \ref{tab:params_apolar_surfactante_high} e ilustrados na Figura \ref{fig:apolar_surfactante_high}.
+
+\begin{table}[H]
+    \centering
+    \caption{Parâmetros da Simulação de Cinética com Surfactante em Alta Concentração}
+    \vspace{0.2cm}
+    \begin{tabularx}{\textwidth}{X m{5cm}}
+        \hline
+        \textbf{Parâmetro}                     & \textbf{Valor}   \\
+        \hline
+        Número de iterações                    & 15000            \\
+        Dimensões da malha                     & $100 \times 100$ \\
+        Fração de Células de Enzima            & 3\%              \\
+        Fração de Células de Substrato         & 15\%             \\
+        Fração de Células de Produto           & 0\%              \\
+        Fração de Células de Água              & 72\%             \\
+        Fração de Células de Surfactante       & 10\%             \\
+        $P_R$ da reação $E + S \rightarrow ES$ & 1                \\
+        $P_R$ da reação $ES \rightarrow E + P$ & 0{,}001          \\
+        $P_R$ da reação $ES \rightarrow E + S$ & 0{,}0001         \\
+        $P_R$ da reação $E + P \rightarrow ES$ & 0                \\
+        \hline
+    \end{tabularx}
+    \vspace{0.2cm}
+    \makebox[\linewidth][l]{\small Fonte: Autoria própria}
+    \label{tab:params_apolar_surfactante_high}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{img/MM_surf_high.png}
+    \caption{\small Configuração básica e frações relativas de componentes da simulação de cinética com surfactante em alta concentração.}
+    \label{fig:apolar_surfactante_high}
+\end{figure}
+
+Para essa simulação, em comparação com a anterior com surfactante, foram mantidos os dados de frações relativas de todos os componentes, porém a água ocupa 72\% dos componentes, e o surfactante agora que ocupa 10\% contra 3\% da anterior. Os dados de entrada de reações e rotação permanecem os mesmos das simulações anteriores a fim de manter a consistência comparativa.
+
+Os parâmetros de movimentação e interação dos componentes são definidos na Tabela \ref{tab:params_movimento_surfactante_high} e ilustrados na Figura \ref{fig:michaelis_menten_movement_surfactante_high}.
+
+\begin{table}[H]
+    \centering
+    \caption{Parâmetros de Movimento para Simulação de Cinética com Surfactante}
+    \vspace{0.2cm}
+    \begin{tabularx}{\textwidth}{X m{5cm}}
+        \hline
+        \textbf{Parâmetro} & \textbf{Valor} \\
+        \hline
+        $P_M$ (E)          & 0{,}98         \\
+        $P_M$ (S)          & 0{,}99         \\
+        $P_M$ (P)          & 0{,}99         \\
+        $P_M$ (W)          & 1              \\
+        $P_M$ (F)          & 0{,}99         \\
+        $J$ (E$|$E)        & 0              \\
+        $J$ (E$|$S)        & 1{,}1          \\
+        $J$ (S$|$S)        & 1{,}7          \\
+        $J$ (E$|$P)        & 1{,}4          \\
+        $J$ (S$|$P)        & 1{,}7          \\
+        $J$ (P$|$P)        & 1{,}7          \\
+        $J$ (E$|$W)        & 1{,}7          \\
+        $J$ (S$|$W)        & 0{,}5          \\
+        $J$ (P$|$W)        & 0{,}5          \\
+        $J$ (W$|$W)        & 2{,}5          \\
+        $J$ (E$|F_1$)      & 1{,}7          \\
+        $J$ (S$|F_1$)      & 1{,}7          \\
+        $J$ (P$|F_1$)      & 1{,}7          \\
+        $J$ (W$|F_1$)      & 1{,}7          \\
+        $J$ (E$|F_2$)      & 0              \\
+        $J$ (S$|F_2$)      & 0              \\
+        $J$ (P$|F_2$)      & 0              \\
+        $J$ (W$|F_2$)      & 0              \\
+        $J$ ($F_1|F_2$)    & 1{,}1          \\
+        $J$ ($F_1|F_1$)    & 1{,}5          \\
+        $J$ ($F_2|F_2$)    & 1{,}7          \\
+        \hline
+    \end{tabularx}
+    \vspace{0.2cm}
+    \makebox[\linewidth][l]{\small Fonte: Autoria própria}
+    \label{tab:params_movimento_surfactante_high}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{img/movement_MM_surfactant_high.png}
+    \caption{\small Parâmetros de movimentação dos componentes da simulação de cinética com surfactante.}
+    \label{fig:michaelis_menten_movement_surfactante_high}
+\end{figure}
+
+A intenção dessa simulação é propor um cenário de maior concentração de surfactante com a expectativa da formação de micelas, o que teoricamente poderia auxiliar na taxa da reação ou na afinidade da enzima com o substrato apolar. Para atingir esses objetivos, foram ajustados os parâmetros de junção da parte apolar do surfactante com todos os componentes para $J = 0$, o que sugere que o meio onde a reação predominantemente acontece (meio aquoso) não interage com a parte apolar do surfactante, mas sim com a parte polar, provocando a formação de micelas no sistema.
+
+Após a execução completa dessa simulação, a matriz inicial gerada é ilustrada na Figura \ref{fig:MM_surf_initial_high}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{img/MM_surf_initial_high.png}
+    \hspace{0.05\textwidth}
+    \includegraphics[width=0.15\textwidth]{img/legend_surf.png}
+    \caption{\small Estado inicial da malha na simulação de cinética com surfactante em alta concentração.}
+    \label{fig:MM_surf_initial_high}
+\end{figure}
+
+Da análise do arquivo CSV gerado, tem-se os seguintes resultados, começando pelos gráficos de frações relativas de cada componente ao longo das iterações, ilustrados na Figura \ref{fig:MM_surf_conc_high}:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{img/MM_surf_conc_high.png}
+    \caption{\small Fração relativa (concentração) de cada componente ao longo das iterações na cinética com surfactante.}
+    \label{fig:MM_surf_conc_high}
+\end{figure}
+
+Não se nota grandes diferenças entre os gráficos da dinâmica com surfactante e sem, da simulação anterior. A estabilização do sistema começa a acontecer, também, por volta de 10000 iterações. A 3000 iterações, o estado da malha é apresentado na Figura \ref{fig:MM_surf_3000it}, onde se nota a presença de produto (P) e substrato (S) aglomerados e o surfactante (F) nesse meio, inclusive, muitas vezes fazendo interface com as células de água. Esse comportamento está destacado em vermelho na Figura \ref{fig:MM_surf_3000it}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{img/surf_3000.png}
+    \hspace{0.05\textwidth}
+    \includegraphics[width=0.15\textwidth]{img/legend_surf.png}
+    \caption{\small Estado da malha na iteração 3000 da simulação de cinética com surfactante, com destaque para efeitos de interface.}
+    \label{fig:MM_surf_3000it}
+\end{figure}
+
+A 10000 iterações, o estado da malha é apresentado na Figura \ref{fig:MM_surf_10000it}. Nota-se que o surfactante interage fortemente com os aglomerados de produto.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{img/surf_10000.png}
+    \hspace{0.05\textwidth}
+    \includegraphics[width=0.15\textwidth]{img/legend_surf.png}
+    \caption{\small Estado da malha na iteração 10000 da simulação de cinética com surfactante.}
+    \label{fig:MM_surf_10000it}
+\end{figure}
+
+
+Utilizando os dados de concentração do produto ao longo das iterações, foi realizada a regressão não-linear para obter a equação e a curva de concentração de produto. A equação encontrada é:
+
+\begin{equation}
+    P(t) = 0{,}1530 \left(\frac{1 - e^{-3 \cdot 10^{-4} t}}{1 + e^{-4 \cdot 10^{-4} t}}\right)
+    \label{eq:produto_MM_surfactant}
+\end{equation}
+com $R^2 = 0{,}9993$.
+
+A derivada dessa curva, que representa a taxa da reação, é aproximadamente dada por:
+
+\begin{equation}
+    P'(t) = 5{,}258 \cdot 10^{-5} \left(\frac{e^{-3{,}438 \cdot 10^{-4} t}}{1 + e^{-3{,}613 \cdot 10^{-4} t}}\right) + 5{,}527 \cdot 10^{-5} \left(\frac{(1 - e^{-3{,}438 \cdot 10^{-4} t}) e^{-3{,}613 \cdot 10^{-4} t}}{(1 + e^{-3{,}613 \cdot 10^{-4} t})^2}\right)
+    \label{eq:taxa_MM_surfactant}
+\end{equation}
+
+Na Figura \ref{fig:MM_surf_rate}, apresenta-se o gráfico da curva de concentração de produto e de sua derivada, a taxa da reação, para a cinética com surfactante:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{img/MM_surf_rate.png}
+    \caption{\small Curvas de concentração de produto e taxa da reação na cinética com surfactante.}
+    \label{fig:MM_surf_rate}
+\end{figure}
+
+O gráfico de Michaelis-Menten, que relaciona a taxa de formação de produto com a concentração de substrato, é apresentado na Figura \ref{fig:MM_surf_curve}:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{img/MM_surf_curve.png}
+    \caption{\small Curva de Michaelis-Menten para cinética com surfactante.}
+    \label{fig:MM_surf_curve}
+\end{figure}
+
+Os valores das constantes $V_{max}$ e $K_m$ obtidos a partir da simulação com surfactante são apresentados na Tabela \ref{tab:params_MM_surfactant}.
+
+\begin{table}[H]
+    \centering
+    \caption{Constantes de Michaelis-Menten na simulação de cinética com surfactante}
+    \vspace{0.2cm}
+    \begin{tabularx}{\textwidth}{X m{5cm}}
+        \hline
+        \textbf{Constante} & \textbf{Valor}                     \\
+        \hline
+        $V_{max}$          & $2{,}635 \cdot 10^{-5} \, it^{-1}$ \\
+        $K_m$              & $0{,}0268 \, mol/mol$              \\
+        \hline
+    \end{tabularx}
+    \vspace{0.2cm}
+    \makebox[\linewidth][l]{\small Fonte: Autoria própria}
+    \label{tab:params_MM_surfactant}
+\end{table}
+
+A Tabela \ref{tab:surf_repeticoes} apresenta os resultados de três execuções dessa simulação em termos das constantes $V_{max}$ e $K_M$.
+
+\begin{table}[H]
+    \centering
+    \caption{Resultados de Repetições da Simulação de Cinética com Substrato Apolar e Surfactante}
+    \vspace{0.2cm}
+    \begin{tabularx}{\textwidth}{X X m{5cm}}
+        \hline
+        \textbf{Execução} & \textbf{$V_{max} \, (it^{-1})$ }      & \textbf{$K_M$}          \\
+        \hline
+        1                 & $2{,}635 \cdot 10^{-5}$               & $0{,}0268$              \\
+        2                 & $2{,}649 \cdot 10^{-5}$               & $0{,}0252$              \\
+        3                 & $2{,}844 \cdot 10^{-5}$               & $0{,}0274$              \\
+        \hline
+        \textbf{Final}    & $(2{,}709 \pm 0{,}095) \cdot 10^{-5}$ & $0{,}0264 \pm 0{,}0009$ \\
+        \hline
+    \end{tabularx}
+    \vspace{0.2cm}
+    \makebox[\linewidth][l]{\small Fonte: Autoria própria}
+    \label{tab:surf_repeticoes}
+\end{table}
+
+Comparando esses resultados com os da Tabela \ref{tab:params_MM_apolar} da simulação de cinética com substrato apolar, nota-se que tanto $V_{max}$ quanto $K_M$ são maiores no caso do surfactante. $V_{max}$ é maior, o que indica que o surfactante auxiliou na formação de produto durante as primeiras iterações. A presença de uma molécula anfifílica de dois polos distintos substituindo uma polar, como a água, pode ter facilitado a interação entre enzima e substrato, aumentando a taxa de reação.
 
 Por outro lado, $K_M$ é maior, o que indica que a afinidade da enzima pelo substrato diminuiu. Isso pode ser explicado pelo fato de que o surfactante, apesar de auxiliar na formação do produto, determinou uma inibição. Pelos parâmetros de interação, tanto $J (E|S)$ quanto $J (E|F_1)$ e $J (E|F_2)$ são iguais a $1{,}1$, logo o surfactante pode ter
 agido como um inibidor competitivo, dificultando o encontro entre enzima e substrato ao longo do tempo.
