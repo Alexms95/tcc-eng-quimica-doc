@@ -1809,7 +1809,7 @@ Da análise do arquivo CSV gerado, tem-se os seguintes resultados, começando pe
     \label{fig:MM_surf_conc_high}
 \end{figure}
 
-A 3000 iterações, o estado da malha é apresentado na Figura \ref{fig:MM_surf_3000it_high}. Novamente, o surfactante procura ocupar os espaços nas interfaces entre as células de água e as células de substrato e produto aglomerados (apolares) e, em maior concentração, esse efeito é mais pronunciado. Nota-se a presença de inúmeras células de enzima fora do aglomerado de células de água, o que sugere que a enzima está consideravelmente disponível para reações e que o surfactante pode estar agindo como um facilitador da reação. Esses efeitos são destacados em vermelho na Figura \ref{fig:MM_surf_3000it_high}.
+A 3000 iterações, o estado da malha é apresentado na Figura \ref{fig:MM_surf_3000it_high}. Novamente, o surfactante procura ocupar os espaços nas interfaces entre as células de água e as células de substrato e produto aglomerados (apolares) e, em maior concentração, esse efeito é mais pronunciado. Nota-se a presença de inúmeras células de enzima fora do aglomerado de células de água, o que sugere que a enzima está ficando consideravelmente disponível para reações. Esses efeitos são destacados em vermelho na Figura \ref{fig:MM_surf_3000it_high}.
 
 \begin{figure}[H]
     \centering
@@ -1820,14 +1820,14 @@ A 3000 iterações, o estado da malha é apresentado na Figura \ref{fig:MM_surf_
     \label{fig:MM_surf_3000it_high}
 \end{figure}
 
-A 10000 iterações, o estado da malha é apresentado na Figura \ref{fig:MM_surf_10000it_high}. Nota-se que o surfactante interage fortemente com os aglomerados de produto.
+A 10000 iterações, o estado da malha é apresentado na Figura \ref{fig:MM_surf_10000it_high}. Mesmo após um terço das iterações executadas, o surfactante ainda se localiza nas interfaces entre água e componentes apolares.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.75\textwidth]{img/surf_10000_high.png}
     \hspace{0.05\textwidth}
     \includegraphics[width=0.15\textwidth]{img/legend_surf.png}
-    \caption{\small Estado da malha na iteração 10000 da simulação de cinética com surfactante.}
+    \caption{\small Estado da malha na iteração 10000 da simulação de cinética com surfactante em alta concentração.}
     \label{fig:MM_surf_10000it_high}
 \end{figure}
 
@@ -1835,37 +1835,37 @@ A 10000 iterações, o estado da malha é apresentado na Figura \ref{fig:MM_surf
 Utilizando os dados de concentração do produto ao longo das iterações, foi realizada a regressão não-linear para obter a equação e a curva de concentração de produto. A equação encontrada é:
 
 \begin{equation}
-    P(t) = 0{,}1530 \left(\frac{1 - e^{-3 \cdot 10^{-4} t}}{1 + e^{-4 \cdot 10^{-4} t}}\right)
-    \label{eq:produto_MM_surfactant}
+    P(t) = 0{,}1529 \left(\frac{1 - e^{-3 \cdot 10^{-4} t}}{1 + e^{-5 \cdot 10^{-4} t}}\right)
+    \label{eq:produto_MM_surfactant_high}
 \end{equation}
-com $R^2 = 0{,}9993$.
+com $R^2 = 0{,}9984$.
 
 A derivada dessa curva, que representa a taxa da reação, é aproximadamente dada por:
 
 \begin{equation}
-    P'(t) = 5{,}258 \cdot 10^{-5} \left(\frac{e^{-3{,}438 \cdot 10^{-4} t}}{1 + e^{-3{,}613 \cdot 10^{-4} t}}\right) + 5{,}527 \cdot 10^{-5} \left(\frac{(1 - e^{-3{,}438 \cdot 10^{-4} t}) e^{-3{,}613 \cdot 10^{-4} t}}{(1 + e^{-3{,}613 \cdot 10^{-4} t})^2}\right)
-    \label{eq:taxa_MM_surfactant}
+    P'(t) = 4{,}989 \cdot 10^{-5} \left(\frac{e^{-3{,}262 \cdot 10^{-4} t}}{1 + e^{-5{,}215 \cdot 10^{-4} t}}\right) + 7{,}977 \cdot 10^{-5} \left(\frac{(1 - e^{-3{,}262 \cdot 10^{-4} t}) e^{-5{,}215 \cdot 10^{-4} t}}{(1 + e^{-5{,}215 \cdot 10^{-4} t})^2}\right)
+    \label{eq:taxa_MM_surfactant_high}
 \end{equation}
 
-Na Figura \ref{fig:MM_surf_rate}, apresenta-se o gráfico da curva de concentração de produto e de sua derivada, a taxa da reação, para a cinética com surfactante:
+Na Figura \ref{fig:MM_surf_rate_high}, apresenta-se o gráfico da curva de concentração de produto e de sua derivada, a taxa da reação, para a cinética com surfactante:
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{img/MM_surf_rate.png}
-    \caption{\small Curvas de concentração de produto e taxa da reação na cinética com surfactante.}
-    \label{fig:MM_surf_rate}
+    \includegraphics[width=1\textwidth]{img/MM_surf_rate_high.png}
+    \caption{\small Curvas de concentração de produto e taxa da reação na cinética com surfactante em alta concentração.}
+    \label{fig:MM_surf_rate_high}
 \end{figure}
 
-O gráfico de Michaelis-Menten, que relaciona a taxa de formação de produto com a concentração de substrato, é apresentado na Figura \ref{fig:MM_surf_curve}:
+O gráfico de Michaelis-Menten, que relaciona a taxa de formação de produto com a concentração de substrato, é apresentado na Figura \ref{fig:MM_surf_curve_high}:
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{img/MM_surf_curve.png}
-    \caption{\small Curva de Michaelis-Menten para cinética com surfactante.}
-    \label{fig:MM_surf_curve}
+    \includegraphics[width=1\textwidth]{img/MM_surf_curve_high.png}
+    \caption{\small Curva de Michaelis-Menten para cinética com surfactante em alta concentração.}
+    \label{fig:MM_surf_curve_high}
 \end{figure}
 
-Os valores das constantes $V_{max}$ e $K_m$ obtidos a partir da simulação com surfactante são apresentados na Tabela \ref{tab:params_MM_surfactant}.
+Os valores das constantes $V_{max}$ e $K_m$ obtidos a partir da simulação com surfactante são apresentados na Tabela \ref{tab:params_MM_surfactant_high}.
 
 \begin{table}[H]
     \centering
@@ -1875,16 +1875,16 @@ Os valores das constantes $V_{max}$ e $K_m$ obtidos a partir da simulação com 
         \hline
         \textbf{Constante} & \textbf{Valor}                     \\
         \hline
-        $V_{max}$          & $2{,}635 \cdot 10^{-5} \, it^{-1}$ \\
-        $K_m$              & $0{,}0268 \, mol/mol$              \\
+        $V_{max}$          & $2{,}784 \cdot 10^{-5} \, it^{-1}$ \\
+        $K_m$              & $0{,}0210 \, mol/mol$              \\
         \hline
     \end{tabularx}
     \vspace{0.2cm}
     \makebox[\linewidth][l]{\small Fonte: Autoria própria}
-    \label{tab:params_MM_surfactant}
+    \label{tab:params_MM_surfactant_high}
 \end{table}
 
-A Tabela \ref{tab:surf_repeticoes} apresenta os resultados de três execuções dessa simulação em termos das constantes $V_{max}$ e $K_M$.
+A Tabela \ref{tab:surf_repeticoes_high} apresenta os resultados de três execuções dessa simulação em termos das constantes $V_{max}$ e $K_M$.
 
 \begin{table}[H]
     \centering
@@ -1894,8 +1894,8 @@ A Tabela \ref{tab:surf_repeticoes} apresenta os resultados de três execuções 
         \hline
         \textbf{Execução} & \textbf{$V_{max} \, (it^{-1})$ }      & \textbf{$K_M$}          \\
         \hline
-        1                 & $2{,}635 \cdot 10^{-5}$               & $0{,}0268$              \\
-        2                 & $2{,}649 \cdot 10^{-5}$               & $0{,}0252$              \\
+        1                 & $2{,}784 \cdot 10^{-5}$               & $0{,}0210$              \\
+        2                 & $2{,}607 \cdot 10^{-5}$               & $0{,}0229$              \\
         3                 & $2{,}844 \cdot 10^{-5}$               & $0{,}0274$              \\
         \hline
         \textbf{Final}    & $(2{,}709 \pm 0{,}095) \cdot 10^{-5}$ & $0{,}0264 \pm 0{,}0009$ \\
@@ -1903,15 +1903,9 @@ A Tabela \ref{tab:surf_repeticoes} apresenta os resultados de três execuções 
     \end{tabularx}
     \vspace{0.2cm}
     \makebox[\linewidth][l]{\small Fonte: Autoria própria}
-    \label{tab:surf_repeticoes}
+    \label{tab:surf_repeticoes_high}
 \end{table}
 
-Comparando esses resultados com os da Tabela \ref{tab:params_MM_apolar} da simulação de cinética com substrato apolar, nota-se que tanto $V_{max}$ quanto $K_M$ são maiores no caso do surfactante. $V_{max}$ é maior, o que indica que o surfactante auxiliou na formação de produto durante as primeiras iterações. A presença de uma molécula anfifílica de dois polos distintos substituindo uma polar, como a água, pode ter facilitado a interação entre enzima e substrato, aumentando a taxa de reação.
-
-Por outro lado, $K_M$ é maior, o que indica que a afinidade da enzima pelo substrato diminuiu. Isso pode ser explicado pelo fato de que o surfactante, apesar de auxiliar na formação do produto, determinou uma inibição. Pelos parâmetros de interação, tanto $J (E|S)$ quanto $J (E|F_1)$ e $J (E|F_2)$ são iguais a $1{,}1$, logo o surfactante pode ter
-agido como um inibidor competitivo, dificultando o encontro entre enzima e substrato ao longo do tempo.
-
-Cabe ressaltar, novamente, que o modelo de Michaelis-Menten não considera a presença de espécies como surfactantes e as constantes calculadas aqui são \textbf{aparentes}. Entretanto, o modelo de AC foi capaz de simular o comportamento da cinética enzimática mesmo com a complexidade adicional do surfactante. A heterogeneidade do sistema e a dinâmica de interação entre os componentes foram bem capturadas, permitindo fazer análises e comparações com teorias conhecidas.
 
 \chapter{CONCLUSÕES}
 
