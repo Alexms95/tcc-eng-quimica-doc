@@ -497,7 +497,7 @@ Os modelos de autômato celular (AC) empregados neste trabalho seguem predominan
     \item \textbf{Intervalo:} $0 \le P_M \le 1$.
     \item \textbf{Interpretação física:} controla a \textit{mobilidade inerente}.
           Valores próximos de 1 reproduzem um passeio aleatório praticamente livre; valores
-          menores simulam espécies mais lentas.
+          menores simulam espécies mais lentas. Pode ser entendido como análogo ao \textit{coeficiente de difusão}.
 \end{itemize}
 
 \begin{figure}[H]
@@ -524,10 +524,10 @@ Os modelos de autômato celular (AC) empregados neste trabalho seguem predominan
                   =0    & \text{movimento proibido}
               \end{cases}
           \]
-    \item \textbf{Significado químico:} descreve interações
+    \item \textbf{Interpretação física:} descreve interações
           hidrofóbicas/hidrofílicas, cargas opostas, etc.
           Por exemplo, \citeauthor{kier2005} ajustam
-          $J(\mathrm{WW})>1$ para reproduzir a coesão da água líquida.
+          $J(\mathrm{WW})>1$ para reproduzir a coesão da água líquida. Pode ser entendido como análogo a forças de atração intermoleculares, como ligações de hidrogênio ou forças de Van der Waals.
 \end{itemize}
 
 \begin{figure}[H]
@@ -551,10 +551,10 @@ Os modelos de autômato celular (AC) empregados neste trabalho seguem predominan
     \item \textbf{Dependência de coordenação:} se $A$ está ligado a
           $n$ vizinhos do tipo $B$, a probabilidade conjunta de separação é
           $P_B^{\,n}$; logo, múltiplos contatos estabilizam o agregado.
-    \item \textbf{Correspondência físico-química:}
+    \item \textbf{Interpretação física:}
           em água, $P_B(\mathrm{WW})$ pode ser correlacionado com a temperatura:
           valores maiores a temperaturas elevadas representam a maior
-          desordem da rede de ligações de hidrogênio \cite{kier2005}.
+          desordem da rede de ligações de hidrogênio \cite{kier2005}. Pode ser entendido como uma medida de repulsão intermolecular.
 \end{itemize}
 
 \begin{figure}[H]
@@ -588,7 +588,7 @@ Os modelos de autômato celular (AC) empregados neste trabalho seguem predominan
                     ocorre $A+B \xrightarrow{P_R(AB)} C+D$
                     com probabilidade $P_R(AB)$.
           \end{enumerate}
-    \item \textbf{Significado cinético:} $P_R$ pode ser relacionado a
+    \item \textbf{Interpretação física:} $P_R$ pode ser relacionado a
           uma constante de velocidade efetiva $k$
           (\textit{via} calibração: $k = P_R/\Delta t$,
           onde $\Delta t$ é a duração de uma iteração).
