@@ -21,6 +21,7 @@
 \usepackage{lmodern}
 \usepackage{changepage}
 \usepackage{tabularx}
+\usepackage{subfig}
 \usepackage[backend=biber,style=abnt]{biblatex}
 
 \usepackage[colorlinks=true, linkcolor=black, citecolor=black, urlcolor=blue]{hyperref}
@@ -447,7 +448,7 @@ Além do ``Jogo da Vida'', os autômatos celulares encontraram aplicações em u
 
 \subsection{Definição}
 
-Autômatos Celulares (AC) representam um paradigma computacional discreto que modela sistemas complexos através da interação local de componentes simples. Essencialmente, um autômato celular consiste em uma grade regular de células, onde cada célula possui um estado finito e discreto. A evolução do sistema ocorre em passos de tempo discretos, e o estado de cada célula no próximo passo de tempo é determinado por uma regra de transição que leva em consideração o seu próprio estado atual e os estados de suas células vizinhas. Essa regra é aplicada de forma síncrona e uniforme a todas as células da grade. A simplicidade das regras locais, quando aplicadas em larga escala, pode gerar comportamentos globais extremamente complexos e emergentes, tornando os ACs ferramentas poderosas para a simulação de fenômenos diversos \cite{kier2005}.
+Autômatos Celulares (AC) representam um paradigma computacional discreto que modela sistemas complexos através da interação local de componentes simples. Essencialmente, um autômato celular consiste em uma grade regular de células, onde cada célula possui um estado finito e discreto. A evolução do sistema ocorre em passos de tempo discretos, e o estado de cada célula no próximo passo de tempo é determinado por uma regra de transição que leva em consideração o seu próprio estado atual e os estados de suas células vizinhas. Essa regra é aplicada de forma síncrona e uniforme a todas as células da grade. A simplicidade das regras locais, quando aplicadas em larga escala, pode gerar comportamentos globais extremamente complexos e emergentes, tornando os ACs ferramentas poderosas para a simulação de fenômenos diversos \cite{kier2005} \cite{wolfram2002}.
 
 Os autômatos celulares são frequentemente representados por uma grade multidimensional, onde cada célula pode assumir um de vários estados possíveis. A configuração mais comum é a grade bidimensional, mas também podem ser utilizados grades unidimensionais ou tridimensionais. Para este trabalho, são utilizadas grades bidimensionais e os estados possíveis de uma célula são representados por \textbf{componentes}, que possuem significado físico, ou por \textbf{vazios}. A Figura \ref{fig:grade_2d} ilustra uma grade 2D (bidimensional) 5 x 5, isto é, de 5 linhas e 5 colunas.
 
@@ -469,27 +470,21 @@ Células de componentes podem interagir com suas vizinhas por meio de regras vá
     \label{fig:celula_rotacionavel}
 \end{figure}
 
-As células interagem com suas vizinhas imediatas, que podem ser definidas de diferentes maneiras. A vizinhança mais comum é a \textit{vizinhança de von Neumann}, que inclui as quatro células adjacentes (cima, baixo, esquerda e direita) pintadas de azul na Figura \ref{fig:vizinhanca_von_neumann}. A \textit{vizinhança de von Neumann estendida}, por sua vez, inclui também as células pintadas de verde na Figura \ref{fig:vizinhanca_von_neumann_estendida}, totalizando oito células vizinhas. Também é possível definir outras vizinhanças, como a \textit{vizinhança de Moore}, que inclui todas as oito células adjacentes (cima, baixo, esquerda, direita e as quatro diagonais), como na Figura \ref{fig:vizinhanca_moore}. A escolha da vizinhança influencia diretamente a dinâmica do autômato celular e, consequentemente, o comportamento emergente do sistema simulado. Neste trabalho são utilizadas as vizinhanças de von Neumann e von Neumann estendida.
+As células interagem com suas vizinhas imediatas, que podem ser definidas de diferentes maneiras. A vizinhança mais comum é a \textit{vizinhança de von Neumann}, que inclui as quatro células adjacentes (cima, baixo, esquerda e direita) pintadas de azul na Figura~\ref{fig:tipos_vizinhança}.a. A \textit{vizinhança de von Neumann estendida}, por sua vez, inclui também as células pintadas de verde na Figura~\ref{fig:tipos_vizinhança}.b, totalizando oito células vizinhas. Também é possível definir outras vizinhanças, como a \textit{vizinhança de Moore}, que inclui todas as oito células adjacentes (cima, baixo, esquerda, direita e as quatro diagonais), como na Figura~\ref{fig:tipos_vizinhança}.c. A escolha da vizinhança influencia diretamente a dinâmica do autômato celular e, consequentemente, o comportamento emergente do sistema simulado. Neste trabalho são utilizadas as vizinhanças de von Neumann e von Neumann estendida.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.5\textwidth]{img/vizinhanca_von_neumann.png}
-    \caption{\small Vizinhança de von Neumann de um componente A, definida pelas 4 células azuis.}
-    \label{fig:vizinhanca_von_neumann}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\textwidth]{img/vizinhanca_von_neumann_estendida.png}
-    \caption{\small Vizinhança de von Neumann estendida de um componente A, definida pelas células azuis e verdes.}
-    \label{fig:vizinhanca_von_neumann_estendida}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\textwidth]{img/vizinhanca_moore.png}
-    \caption{\small Vizinhança de Moore de um componente A, definida pelas 8 células azuis.}
-    \label{fig:vizinhanca_moore}
+    \subfloat[Vizinhança de von Neumann de um componente A, definida pelas 4 células azuis.]{%
+        \includegraphics[width=0.4\textwidth]{img/vizinhanca_von_neumann.png}
+    }\hspace{0.05\textwidth}
+    \subfloat[Vizinhança de von Neumann estendida de um componente A, definida pelas células azuis e verdes.]{%
+        \includegraphics[width=0.4\textwidth]{img/vizinhanca_von_neumann_estendida.png}
+    }\hspace{0.05\textwidth}
+    \subfloat[Vizinhança de Moore de um componente A, definida pelas 8 células azuis.]{%
+        \includegraphics[width=0.4\textwidth]{img/vizinhanca_moore.png}
+    }
+    \caption{\small Tipos de vizinhança em autômatos celulares.}
+    \label{fig:tipos_vizinhança}
 \end{figure}
 
 Os modelos de autômato celular (AC) empregados neste trabalho seguem predominantemente o formalismo probabilístico descrito por Kier \cite{kier2005}. Cada componente ou vazio ocupa uma célula de uma malha quadrada e interage apenas com as células de sua \textit{vizinhança de von Neumann estendida}. A dinâmica emerge da aplicação sincrônica, a cada iteração, (i) das \textbf{regras de movimentação} e (ii) das \textbf{regras de transição}. A seguir são definidos os cinco parâmetros fundamentais desses conjuntos de regras: $P_M$, $P_B$, $J$, $P_R$ e $P_{rot}$.
