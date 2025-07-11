@@ -353,10 +353,10 @@ onde $V_{\mathrm{max}} = k_{2}[E]_0$ é a velocidade máxima, obtida quando toda
 
 é a constante de Michaelis. Note-se que $K_\mathrm{M}$ coincide com a constante de dissociação ($K_\mathrm{d} = k_{-1}/k_{1}$) apenas no limite em que $k_{2}\!\ll\!k_{-1}$, hipótese empregada na versão de equilíbrio rápido de Michaelis e Menten (1913). Dados experimentais mostram que essa igualdade raramente se verifica, reforçando a superioridade do tratamento de steady-state para a maioria das enzimas industriais \cite{bisswanger2017}.
 
-A equação de Michaelis-Menten pode ser expressa em termos de taxa de reação ($r$), que é a forma mais comum em engenharia de reações químicas \cite{FOGLER_2016}. Considerando a reação acima, a equação toma a forma:
+A equação de Michaelis-Menten pode ser expressa em termos de taxa de reação ($r$), que é a forma mais comum em engenharia de reações químicas \cite{FOGLER_2016}. A taxa de reação, na cinética em questão, pode ser considerada como a taxa de formação de produto ($r_P = \dfrac{d[P]}{dt}$) ou a taxa de consumo de substrato ($-r_S = \dfrac{d[S]}{dt}$). Considerando a reação acima, a equação toma a forma:
 
 \begin{equation}
-    r = \frac{V_{\text{max}} [S]}{K_M + [S]}
+    r = r_P = -r_S = \frac{V_{\text{max}} [S]}{K_M + [S]}
 \end{equation}
 em que $V_{max}$ representa a velocidade (ou taxa) máxima de reação (quando a enzima está saturada pelo substrato).
 
@@ -367,7 +367,7 @@ No modelo de Michaelis-Menten, é tipico observar gráficos das concentrações 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{img/conc_time.png}
-    \caption{\small Tendências típicas das concentrações de enzima, substrato, complexo e produto ao longo do tempo em uma reação enzimática de Michaelis-Menten. Fonte: \citetitle{libretexts_michaelis_menten}.}
+    \caption{\small Tendências típicas das concentrações de enzima, substrato, complexo e produto ao longo do tempo em uma reação enzimática de Michaelis-Menten. Fonte: Adaptado de Wikipedia \cite{file_michaelis_menten_sp_e_es}.}
     \label{fig:concentracoes_michaelis_menten}
 \end{figure}
 
@@ -1896,7 +1896,7 @@ A Tabela \ref{tab:surf_repeticoes_high} apresenta os resultados de três execuç
         \hline
         1                 & $2{,}784 \cdot 10^{-5}$               & $0{,}0210$              \\
         2                 & $2{,}607 \cdot 10^{-5}$               & $0{,}0229$              \\
-        3                 & $2{,}844 \cdot 10^{-5}$               & $0{,}0274$              \\
+        3                 & $2{,}788 \cdot 10^{-5}$               & $0{,}0223$              \\
         \hline
         \textbf{Final}    & $(2{,}709 \pm 0{,}095) \cdot 10^{-5}$ & $0{,}0264 \pm 0{,}0009$ \\
         \hline
