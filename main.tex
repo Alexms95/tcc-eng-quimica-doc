@@ -1051,7 +1051,7 @@ O ambiente computacional utilizado para as simulações foi um computador com as
     \item \textbf{Python}: Versão 3.12 com as bibliotecas \textit{NumPy}, \textit{FastAPI} e \textit{SQLAlchemy} instaladas.
 \end{itemize}
 
-O código foi otimizado para garantir um desempenho eficiente, utilizando estruturas de dados adequadas e evitando operações desnecessárias dentro da sua proposta. O tempo de execução das simulações varia conforme o tamanho da grade e o número de iterações. Outro fator que impacta no tempo de execução é a utilização do computador em outras tarefas enquanto a simulação está em andamento. Durante as execuções para a geração dos resultados para este trabalho, o software foi capaz de processar 10000 iterações em grades de $100 \times 100$ células em torno de 45 minutos, com nenhuma ou baixa utilização do computador em tarefas alheias.
+O código foi otimizado para garantir um desempenho eficiente, utilizando estruturas de dados adequadas e evitando operações desnecessárias dentro da sua proposta. O tempo de execução das simulações varia conforme o tamanho da grade e o número de iterações. Outro fator que impacta no tempo de execução é a utilização do computador em outras tarefas enquanto a simulação está em andamento. Durante as execuções para a geração dos resultados para este trabalho, o software foi capaz de processar 15000 iterações em grades de $100 \times 100$ células em torno de 55 minutos no Linux, com nenhuma ou baixa utilização do computador em tarefas alheias.
 
 Como ocorre em muitos softwares desenvolvidos para resolver problemas complexos por meio de cálculos iterativos extensos, o principal gargalo de desempenho deste modelo está relacionado ao uso da CPU, uma vez que a execução ocorre de forma sequencial, sem paralelização. O consumo de memória, por outro lado, tende a não aumentar significativamente ao longo do tempo, pois, embora o programa armazene temporariamente as configurações das grades de cada iteração, a maior parte dessas informações está estruturada em arrays de números inteiros de 16 bits (números que representam os componentes na malha). Esses arrays ocupam consideravelmente menos espaço em memória quando comparados a estruturas baseadas em strings (caracteres de texto).
 
@@ -1913,6 +1913,114 @@ A Tabela \ref{tab:surf_repeticoes_high} apresenta os resultados de três execuç
 \end{table}
 
 Comparando esses resultados com os da Tabela \ref{tab:surf_repeticoes} da simulação anterior, $V_{max}$ aparente é maior, o que indica que o surfactante em alta concentração provocou um leve aumento na taxa da reação durante as primeiras iterações. $K_M$ aparente aqui é significativamente menor, o que indica que a afinidade da enzima pelo substrato foi aprimorada pelo surfactante em alta concentração, equiparando-se aos valores obtidos na cinética clássica com substrato solúvel, observado na Tabela \ref{tab:params_MM_repeticoes}. Isso sugere que a presença de surfactante em alta concentração pode ter facilitado a interação entre enzima e substrato, promovendo uma maior eficiência na reação. Em conjunto com as observações das malhas da simulação, é possível concluir que o surfactante nessa concentração tende a auxiliar na reação com substrato pouco solúvel ao formar micelas e aumentar a disponibilidade de enzima no meio aquoso.
+
+\section{Análise da Concentração Micelar Crítica}
+
+Dada a capacidade do modelo em simular o comportamento de surfactantes em diferentes concentrações, como foi mencionado nas duas últimas simulações, foram executadas algumas simulações com o intuito de observar a Concentração Micelar Crítica (CMC) do surfactante. A CMC é a concentração mínima de surfactante necessária para formar micelas em solução, e é um parâmetro crucial na caracterização de surfactantes.
+
+Para isso, foram realizadas simulações com diferentes frações de surfactante, variando de 3\% a 20\%. Iniciando com 3\%, apresenta-se as Tabelas \ref{tab:params_surfactant_cmc} e \ref{tab:mov_surfactant_cmc_3}, bem como as Figuras \ref{fig:params_surfactant_cmc} e \ref{fig:params_surfactant_cmc_3} com os parâmetros de entrada dessa simulação.
+
+\begin{table}[H]
+    \centering
+    \caption{Parâmetros da Simulação para estudo da CMC com 3\% de Surfactante}
+    \vspace{0.2cm}
+    \begin{tabularx}{\textwidth}{X m{5cm}}
+        \hline
+        \textbf{Parâmetro}               & \textbf{Valor}   \\
+        \hline
+        Número de iterações              & 10000            \\
+        Dimensões da malha               & $100 \times 100$ \\
+        Fração de Células de Água        & 97\%             \\
+        Fração de Células de Surfactante & 3\%              \\
+        \hline
+    \end{tabularx}
+    \vspace{0.2cm}
+    \makebox[\linewidth][l]{\small Fonte: Autoria própria}
+    \label{tab:params_surfactant_cmc}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \caption{Parâmetros de Movimento para Simulação de CMC com 3\% de Surfactante}
+    \vspace{0.2cm}
+    \begin{tabularx}{\textwidth}{X m{5cm}}
+        \hline
+        \textbf{Parâmetro} & \textbf{Valor} \\
+        \hline
+        $P_M$ (W)          & 1              \\
+        $P_M$ (F)          & 0{,}99         \\
+        $J$ (W$|$W)        & 2{,}5          \\
+        $J$ (W$|F_1$)      & 1{,}7          \\
+        $J$ (W$|F_2$)      & 0{,}8          \\
+        $J$ ($F_1|F_2$)    & 0,9            \\
+        $J$ ($F_2|F_2$)    & 1,5            \\
+        $J$ ($F_1|F_1$)    & 0              \\
+        \hline
+    \end{tabularx}
+    \vspace{0.2cm}
+    \makebox[\linewidth][l]{\small Fonte: Autoria própria}
+    \label{tab:mov_surfactant_cmc_3}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{img/basic_3perc.png}
+    \caption{\small Configuração básica e frações relativas de componentes da simulação para estudo da CMC com 3\% de surfactante.}
+    \label{fig:params_surfactant_cmc}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{img/mov_3perc.png}
+    \caption{\small Parâmetros de movimentação dos componentes da simulação para estudo da CMC com 3\% de surfactante.}
+    \label{fig:params_surfactant_cmc_3}
+\end{figure}
+
+Foi definido $J$ para a interação entre os lados polares do surfactante como 0, a fim de facilitar a interação delas com a água e provocar a formação das micelas. Outros parâmetros possuem ordem de grandeza semelhantes aos das simulações de cinética enzimática.
+
+Após a execução completa dessa simulação, a malha resultante após 3000 iterações é ilustrada na Figura \ref{fig:cmc_3perc}. Não há nenhuma tendência de formação de micelas, o que sugere que a concentração de surfactante é insuficiente para tal. As células de surfactante estão espalhadas pela malha, sem formar aglomerados significativos com conjuntos de células de água.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{img/cmc_3perc_3000.png}
+    \hspace{0.05\textwidth}
+    \includegraphics[width=0.15\textwidth]{img/legend_cmc.png}
+    \caption{\small Estado da malha na iteração 3000 da simulação de CMC com 3\% de surfactante.}
+    \label{fig:cmc_3perc}
+\end{figure}
+
+Mantendo os mesmos parâmetros, a simulação com surfactante a 10\% apresenta a malha ilustrada pela Figura \ref{fig:cmc_10perc_1000} a 2000 iterações. A concentração de surfactante é maior, o que provoca uma tendência de formação de micelas em alguns trechos, destacados em vermelho.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{img/cmc_10perc_1000.png}
+    \hspace{0.05\textwidth}
+    \includegraphics[width=0.15\textwidth]{img/legend_cmc.png}
+    \caption{\small Estado da malha na iteração 2000 da simulação de CMC com 10\% de surfactante.}
+    \label{fig:cmc_10perc_1000}
+\end{figure}
+
+Com a concentração de surfactante a 15\%, a malha resultante após 2000 iterações é apresentada na Figura \ref{fig:cmc_15perc_2000}. Nota-se uma maior tendência formação de micelas, com células de surfactante formando aglomerados mais significativos com água.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{img/cmc_15perc_2000.png}
+    \hspace{0.05\textwidth}
+    \includegraphics[width=0.15\textwidth]{img/legend_cmc.png}
+    \caption{\small Estado da malha na iteração 2000 da simulação de CMC com 15\% de surfactante.}
+    \label{fig:cmc_15perc_2000}
+\end{figure}
+
+Com 20\% de surfactante, a malha resultante após 2000 iterações é apresentada na Figura \ref{fig:cmc_20perc_2000}. A concentração de surfactante é alta o suficiente para formar micelas em praticamente toda a malha, com células de surfactante formando aglomerados significativos com água.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{img/cmc_15perc_2000.png}
+    \hspace{0.05\textwidth}
+    \includegraphics[width=0.15\textwidth]{img/legend_cmc.png}
+    \caption{\small Estado da malha na iteração 2000 da simulação de CMC com 20\% de surfactante.}
+    \label{fig:cmc_20perc_2000}
+\end{figure}
 
 \chapter{CONCLUSÕES}
 
