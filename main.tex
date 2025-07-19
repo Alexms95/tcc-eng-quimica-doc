@@ -68,7 +68,7 @@
 
         \vspace{2cm}
 
-        \textbf{\Large DESENVOLVIMENTO DE SOFTWARE PARA SIMULAÇÃO DE PROCESSOS ENZIMÁTICOS}
+        \textbf{\Large DESENVOLVIMENTO DE SOFTWARE PARA SIMULAÇÃO DE PROCESSOS ENZIMÁTICOS UTILIZANDO AUTÔMATOS CELULARES}
 
         \vfill
 
@@ -84,7 +84,7 @@
 
         \vfill
 
-        \textbf{\Large DESENVOLVIMENTO DE SOFTWARE PARA SIMULAÇÃO DE PROCESSOS ENZIMÁTICOS}
+        \textbf{\Large DESENVOLVIMENTO DE SOFTWARE PARA SIMULAÇÃO DE PROCESSOS ENZIMÁTICOS UTILIZANDO AUTÔMATOS CELULARES}
 
         \vfill
 
@@ -120,7 +120,7 @@
 
     \vspace{1cm}
 
-    \textbf{DESENVOLVIMENTO DE SOFTWARE PARA SIMULAÇÃO DE PROCESSOS ENZIMÁTICOS}
+    \textbf{DESENVOLVIMENTO DE SOFTWARE PARA SIMULAÇÃO DE PROCESSOS ENZIMÁTICOS UTILIZANDO AUTÔMATOS CELULARES}
 
     \vspace{0.5cm}
 
@@ -132,7 +132,7 @@
 
 \end{center}
 
-Aprovado em XX de XXXXX de 2025.
+Aprovado em 17 de julho de 2025.
 
 \begin{center}
 
@@ -154,7 +154,7 @@ Aprovado em XX de XXXXX de 2025.
     \vspace{1cm}
 
     \noindent\rule{10cm}{0.4pt}\\
-    \noindent\hspace*{0.2cm}Pedro Henrique Davi Constantino, D.Sc, UFRJ
+    \noindent\hspace*{0.2cm}Pedro Henrique Davi Constantino, Ph.D, UFRJ
 
 
     \vfill
@@ -195,7 +195,7 @@ A todos que, de alguma forma, fizeram parte desta trajetória, meu sincero agrad
 
 % Resumo
 \chapter*{\MakeUppercase{Resumo}}
-SILVA, Alex Matos da. \textbf{Desenvolvimento de Software para Simulação de Processos Enzimáticos}. Rio de Janeiro, 2025. Trabalho de Conclusão de Curso (Graduação em Engenharia Química) – Escola de Química, Universidade Federal do Rio de Janeiro, 2025.
+SILVA, Alex Matos da. \textbf{Desenvolvimento de Software para Simulação de Processos Enzimáticos Utilizando Autômatos Celulares}. Rio de Janeiro, 2025. Trabalho de Conclusão de Curso (Graduação em Engenharia Química) – Escola de Química, Universidade Federal do Rio de Janeiro, 2025.
 
 \medskip
 
@@ -207,7 +207,7 @@ Este trabalho apresenta o desenvolvimento de um software para simulação de pro
 
 % Abstract
 \chapter*{\MakeUppercase{Abstract}}
-SILVA, Alex Matos da. \textbf{Desenvolvimento de Software para Simulação de Processos Enzimáticos}. Rio de Janeiro, 2025. Trabalho de Conclusão de Curso (Graduação em Engenharia Química) – Escola de Química, Universidade Federal do Rio de Janeiro, 2025.
+SILVA, Alex Matos da. \textbf{Desenvolvimento de Software para Simulação de Processos Enzimáticos Utilizando Autômatos Celulares}. Rio de Janeiro, 2025. Trabalho de Conclusão de Curso (Graduação em Engenharia Química) – Escola de Química, Universidade Federal do Rio de Janeiro, 2025.
 
 \medskip
 
@@ -235,12 +235,9 @@ This work presents the development of software for the simulation of enzymatic p
     CSTR \> Continuous Stirred-Tank Reactor \\
     CMC \> Critical Micelle Concentration \\
     EDO \> Equação Diferencial Ordinária \\
-    EQ \> Escola de Química \\
     GUI \> Graphical User Interface \\
     MM \> Michaelis-Menten \\
     PFR \> Plug Flow Reactor \\
-    TCC \> Trabalho de Conclusão de Curso \\
-    UFRJ \> Universidade Federal do Rio de Janeiro \\
     ACs \> Autômatos Celulares \\
     CPU \> Unidade Central de Processamento \\
     RAM \> Memória de Acesso Aleatório \\
@@ -368,7 +365,7 @@ No modelo de Michaelis-Menten, é tipico observar gráficos das concentrações 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{img/conc_time.png}
-    \caption{\small Tendências típicas das concentrações de enzima, substrato, complexo e produto ao longo do tempo em uma reação enzimática de Michaelis-Menten. Fonte: Adaptado de Wikipedia \cite{file_michaelis_menten_sp_e_es}.}
+    \caption{\small Tendências típicas das concentrações de enzima, substrato, complexo e produto ao longo do tempo em uma reação enzimática de Michaelis-Menten. Fonte: Autoria própria.}
     \label{fig:concentracoes_michaelis_menten}
 \end{figure}
 
@@ -377,14 +374,14 @@ Experimentalmente, é comum tentar determinar os parâmetros cinéticos de uma e
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{img/Vmax_Km.png}
-    \caption{\small Curva de Michaelis-Menten típica, utilizada para determinar as constantes $K_M$ e $V_{max}$. Fonte: \citetitle{libretexts_michaelis_menten}.}
+    \caption{\small Curva de Michaelis-Menten típica, utilizada para determinar as constantes $K_M$ e $V_{max}$. Fonte: \cite{FOGLER_2016}.}
     \label{fig:MM_plot}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{img/LB.png}
-    \caption{\small Gráfico típico Lineweaver-Burk, utilizado para determinar as constantes $K_M$ e $V_{max}$. Fonte: \citetitle{libretexts_michaelis_menten}.}
+    \caption{\small Gráfico típico Lineweaver-Burk, utilizado para determinar as constantes $K_M$ e $V_{max}$. Fonte: \cite{FOGLER_2016}.}
     \label{fig:lineweaver_burk}
 \end{figure}
 
@@ -1067,7 +1064,7 @@ A análise dos resultados foi realizada com o auxílio das bibliotecas \textit{P
 
 \section{Cinética Clássica de Michaelis-Menten}
 
-A intenção dessa análise é reproduzir o comportamento clássico da cinética enzimática de Michaelis-Menten, onde a enzima se liga ao substrato em uma reação reversível para formar um complexo enzima-substrato, que posteriormente se converte em produto em uma reação irreversível. Para isso, foram definidos os parâmetros básicos e reacionais demonstrados na Tabela \ref{tab:params_michaelis_menten} e ilustrados nas Figuras \ref{fig:michaelis_menten} e \ref{fig:michaelis_menten_reaction}.
+A intenção dessa análise é reproduzir o comportamento clássico da cinética enzimática de Michaelis-Menten, onde a enzima se liga ao substrato em uma reação reversível para formar um complexo enzima-substrato, que posteriormente se converte em produto em uma reação irreversível. Para isso, foram definidos os parâmetros básicos e reacionais demonstrados na Tabela \ref{tab:params_michaelis_menten}.
 
 \begin{table}[H]
     \centering
@@ -1094,25 +1091,11 @@ A intenção dessa análise é reproduzir o comportamento clássico da cinética
     \label{tab:params_michaelis_menten}
 \end{table}
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1\textwidth]{img/basic_MM.png}
-    \caption{\small Configuração básica e frações relativas de componentes da simulação de cinética clássica de Michaelis-Menten.}
-    \label{fig:michaelis_menten}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1\textwidth]{img/reaction_MM.png}
-    \caption{\small Reações de formação do complexo enzima-substrato e conversão em produto na simulação de cinética clássica de Michaelis-Menten.}
-    \label{fig:michaelis_menten_reaction}
-\end{figure}
-
 A escolha de 15000 iterações foi feita para garantir que, próximo do final da execução da simulação, o sistema já tenha pouquíssima ou nenhuma reação, com concentração de substrato próxima de zero, o que indica que a enzima já não está mais reagindo com o substrato. Uma malha de $100 \times 100$ células (10000 células no total) é suficiente para observar graficamente o comportamento do sistema e ao mesmo tempo simular a presença de uma quantidade considerável de espécies químicas sem comprometer muito o tempo de execução total da simulação. As frações relativas foram escolhidas para simular um experimento real, onde a enzima está presente em quantidade bem abaixo do substrato em um meio aquoso.
 
 Em relação aos parâmetros de reação, definiu-se que sempre que substrato e enzima se encontrarem, eles irão formar o complexo enzima-substrato, entrando com o $P_R$ dessa etapa igual a 1. A reação inversa, onde o complexo se decompõe em enzima e substrato, ocorre com probabilidade $P_R = 0{,}0001$, o que simula uma reação reversível onde a formação do complexo é favorecida. A conversão do complexo em produto ocorre com probabilidade $P_R = 0{,}001$, o que simula a etapa lenta da reação geral. Assume-se que a formação do complexo $ES$ é muito mais rápida que a sua quebra e que a formação do produto. O mecanismo clássico de Michaelis-Menten propõe que a reação entre enzima e produto para formação do complexo não ocorre, portanto, o $P_R$ dessa etapa é 0.
 
-Definiu-se os parâmetros de movimentação dos componentes da forma exposta na Tabela \ref{tab:params_movimento} e na Figura \ref{fig:michaelis_menten_movement}:
+Definiu-se os parâmetros de movimentação dos componentes da forma exposta na Tabela \ref{tab:params_movimento}:
 
 \begin{table}[H]
     \centering
@@ -1142,13 +1125,6 @@ Definiu-se os parâmetros de movimentação dos componentes da forma exposta na 
     \makebox[\linewidth][l]{\small Fonte: Autoria própria}
     \label{tab:params_movimento}
 \end{table}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1\textwidth]{img/movement_MM_S0.png}
-    \caption{\small Parâmetros de movimentação dos componentes da simulação de cinética clássica de Michaelis-Menten.}
-    \label{fig:michaelis_menten_movement}
-\end{figure}
 
 Esses valores de movimentação e interação foram escolhidos para simular um sistema bastante dinâmico, dados os valores altos de $P_M$ e baixos de $J$, considerando seus limites estabelecidos. Intuitivamente, $P_M$ para a enzima foi escolhido como 0{,}98, sendo o menor valor entre os componentes imaginando sua molécula realisticamente mais pesada entre todos eles. $P_M = 0{,}99$ para o substrato e 0{,}99 para o produto indicam facilidade de movimentação comparativamente intermediária. A água é definida como um componente altamente móvel, com $P_M = 1$, o que simula um meio líquido formado por moléculas bastante leves.
 
@@ -1305,7 +1281,7 @@ A simulação em estudo foi, ainda, executada outras duas vezes, com o objetivo 
 
 \section{Cinética com Substrato Apolar}
 
-A intenção dessa análise é reproduzir o comportamento da cinética de Michaelis-Menten, mas agora considerando a presença de um substrato com característica apolar. Para isso, é razoável imaginar que, para uma comparação justa, tanto os parâmetros básicos do modelo quanto os parâmetros de reação sejam os mesmos da simulação anterior, mas com alterações nos parâmetros de movimentação e interação dos componentes. Apresenta-se a Tabela \ref{tab:params_movimento_apolar} e a Figura \ref{fig:michaelis_menten_movement_apolar} com os parâmetros $P_M$ e $J$ utilizados:
+A intenção dessa análise é reproduzir o comportamento da cinética de Michaelis-Menten, mas agora considerando a presença de um substrato com característica apolar. Para isso, é razoável imaginar que, para uma comparação justa, tanto os parâmetros básicos do modelo quanto os parâmetros de reação sejam os mesmos da simulação anterior, mas com alterações nos parâmetros de movimentação e interação dos componentes. Apresenta-se a Tabela \ref{tab:params_movimento_apolar} com os parâmetros $P_M$ e $J$ utilizados:
 
 \begin{table}[H]
     \centering
@@ -1335,13 +1311,6 @@ A intenção dessa análise é reproduzir o comportamento da cinética de Michae
     \makebox[\linewidth][l]{\small Fonte: Autoria própria}
     \label{tab:params_movimento_apolar}
 \end{table}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1\textwidth]{img/movement_MM_apolar.png}
-    \caption{\small Parâmetros de movimentação dos componentes da simulação de cinética com substrato apolar.}
-    \label{fig:michaelis_menten_movement_apolar}
-\end{figure}
 
 Comparando com a simulação para Michaelis-Menten clássica, nota-se que foi definido $J (E|S) = 1{,}1$, o que indica uma interação um pouco menos favorável entre enzima e substrato, visto que o substrato agora é apolar. Além disso, $J (S|W) = 0{,}5$ e $J (P|W) = 0{,}5$, o que indica que o substrato e a água se repelem em termos de interação e, dessa forma, é lógico pensar que o produto também será apolar e terá repulsão com a água. Os outros parâmetros são os mesmos da simulação anterior, o que permite uma comparação adequada entre os dois cenários.
 
@@ -1467,7 +1436,7 @@ Embora o modelo de Michaelis-Menten não considere a presença de substratos apo
 
 \section{Cinética com Substrato Apolar e Surfactante}
 
-A intenção dessa análise é reproduzir o comportamento da cinética de Michaelis-Menten com substrato apolar, mas agora considerando a presença de um surfactante que pode alterar a dinâmica do sistema. O surfactante é uma substância que reduz a tensão superficial entre dois líquidos ou entre um líquido e um sólido, facilitando a mistura de substâncias apolares em meios aquosos. Para isso, foram definidos os parâmetros básicos ilustrados na Tabela \ref{tab:params_apolar_surfactante} e na Figura \ref{fig:apolar_surfactante}.
+A intenção dessa análise é reproduzir o comportamento da cinética de Michaelis-Menten com substrato apolar, mas agora considerando a presença de um surfactante que pode alterar a dinâmica do sistema. O surfactante é uma substância que reduz a tensão superficial entre dois líquidos ou entre um líquido e um sólido, facilitando a mistura de substâncias apolares em meios aquosos. Para isso, foram definidos os parâmetros básicos ilustrados na Tabela \ref{tab:params_apolar_surfactante}.
 
 \begin{table}[H]
     \centering
@@ -1495,14 +1464,7 @@ A intenção dessa análise é reproduzir o comportamento da cinética de Michae
     \label{tab:params_apolar_surfactante}
 \end{table}
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1\textwidth]{img/MM_surf.png}
-    \caption{\small Configuração básica e frações relativas de componentes da simulação de cinética com surfactante.}
-    \label{fig:apolar_surfactante}
-\end{figure}
-
-Para essa simulação, foram mantidos os dados de frações relativas de todos os componentes, exceto a água, que agora ocupa 79\% dos componentes, e o surfactante, que ocupa 3\%. Os dados de entrada de reações permanecem os mesmos das simulações anteriores a fim de manter a consistência comparativa, entretanto o comportamento anfifílico do surfactante é simulado pela configuração de rotação ilustrada na Figura \ref{fig:rotation_surfactant} e na Tabela \ref{tab:rotation_surfactant}.
+Para essa simulação, foram mantidos os dados de frações relativas de todos os componentes, exceto a água, que agora ocupa 79\% dos componentes, e o surfactante, que ocupa 3\%. Os dados de entrada de reações permanecem os mesmos das simulações anteriores a fim de manter a consistência comparativa, entretanto o comportamento anfifílico do surfactante é simulado pela configuração de rotação ilustrada na Tabela \ref{tab:rotation_surfactant}.
 
 \begin{table}[H]
     \centering
@@ -1521,14 +1483,7 @@ Para essa simulação, foram mantidos os dados de frações relativas de todos o
     \label{tab:rotation_surfactant}
 \end{table}
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.5\textwidth]{img/rotation_surfactant.png}
-    \caption{\small Parâmetros de rotação atribuídos ao surfactante.}
-    \label{fig:rotation_surfactant}
-\end{figure}
-
-Os parâmetros de movimentação e interação dos componentes são definidos na Tabela \ref{tab:params_movimento_surfactante} e ilustrados na Figura \ref{fig:michaelis_menten_movement_surfactante}.
+Os parâmetros de movimentação e interação dos componentes são definidos na Tabela \ref{tab:params_movimento_surfactante}.
 
 \begin{table}[H]
     \centering
@@ -1570,13 +1525,6 @@ Os parâmetros de movimentação e interação dos componentes são definidos na
     \makebox[\linewidth][l]{\small Fonte: Autoria própria}
     \label{tab:params_movimento_surfactante}
 \end{table}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1\textwidth]{img/movement_MM_surfactant.png}
-    \caption{\small Parâmetros de movimentação dos componentes da simulação de cinética com surfactante.}
-    \label{fig:michaelis_menten_movement_surfactante}
-\end{figure}
 
 Diferenças notáveis nessa simulação são a inclusão de valores distintos de $J$ para diferentes lados da célula de surfactante, representados por $F_1$ e $F_2$. $F_1$, o menor lado, é o lado polar, enquanto que $F_2$ representa o lado apolar. Note que os valores foram escolhidos de forma a simular esse comportamento anfifílico do surfactante, como por exemplo repulsão do lado apolar com a água ($J (W|F_2) = 0{,}5$) e atração do lado polar com a água ($J (W|F_1) = 1{,}7$).
 
@@ -1706,7 +1654,7 @@ Cabe ressaltar, novamente, que o modelo de Michaelis-Menten não considera a pre
 
 \section{Cinética com Surfactante em Alta Concentração}
 
-Para continuar o estudo do impacto do surfactante na cinética enzimática, executou-se uma simulação adicional, com concentração maior de surfactante no sistema, a fim de simular as teorias de formação de micelas e o CMC. Os parâmetros dessa simulação são apresentados na Tabela \ref{tab:params_apolar_surfactante_high} e ilustrados na Figura \ref{fig:apolar_surfactante_high}.
+Para continuar o estudo do impacto do surfactante na cinética enzimática, executou-se uma simulação adicional, com concentração maior de surfactante no sistema, a fim de simular as teorias de formação de micelas e o CMC. Os parâmetros dessa simulação são apresentados na Tabela \ref{tab:params_apolar_surfactante_high}.
 
 \begin{table}[H]
     \centering
@@ -1734,16 +1682,9 @@ Para continuar o estudo do impacto do surfactante na cinética enzimática, exec
     \label{tab:params_apolar_surfactante_high}
 \end{table}
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1\textwidth]{img/MM_surf_high.png}
-    \caption{\small Configuração básica e frações relativas de componentes da simulação de cinética com surfactante em alta concentração.}
-    \label{fig:apolar_surfactante_high}
-\end{figure}
-
 Para essa simulação, em comparação com a anterior com surfactante, foram mantidos os dados de frações relativas de todos os componentes, porém a água ocupa 72\% dos componentes, e o surfactante agora que ocupa 10\% contra 3\% da anterior. Os dados de entrada de reações e rotação permanecem os mesmos das simulações anteriores a fim de manter a consistência comparativa.
 
-Os parâmetros de movimentação e interação dos componentes são definidos na Tabela \ref{tab:params_movimento_surfactante_high} e ilustrados na Figura \ref{fig:michaelis_menten_movement_surfactante_high}.
+Os parâmetros de movimentação e interação dos componentes são definidos na Tabela \ref{tab:params_movimento_surfactante_high}.
 
 \begin{table}[H]
     \centering
@@ -1785,13 +1726,6 @@ Os parâmetros de movimentação e interação dos componentes são definidos na
     \makebox[\linewidth][l]{\small Fonte: Autoria própria}
     \label{tab:params_movimento_surfactante_high}
 \end{table}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1\textwidth]{img/movement_MM_surfactant_high.png}
-    \caption{\small Parâmetros de movimentação dos componentes da simulação de cinética com surfactante.}
-    \label{fig:michaelis_menten_movement_surfactante_high}
-\end{figure}
 
 A intenção dessa simulação é propor um cenário de maior concentração de surfactante com a expectativa da formação de micelas, o que teoricamente poderia auxiliar na taxa da reação ou na afinidade da enzima com o substrato apolar. Para atingir esses objetivos, foram ajustados os parâmetros de junção da parte apolar do surfactante com todos os componentes para $J = 0$, o que sugere que o meio onde a reação predominantemente acontece (meio aquoso) não interage com a parte apolar do surfactante, mas sim com a parte polar, provocando a formação de micelas no sistema.
 
