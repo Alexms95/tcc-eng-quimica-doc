@@ -336,7 +336,7 @@ A compreensão detalhada dos mecanismos de ação das enzimas é imprescindível
     E + S \overset{k_1}{\underset{k_{-1}}{\rightleftharpoons}} ES \xrightarrow{k_2} E + P
 \end{equation}
 
-Aplicando a condição de \emph{estado quasi-estacionário} proposta por Briggs e Haldane (1925), admite-se que a concentração de $ES$ permanece aproximadamente constante após um breve período inicial (pré-steady-state). A resolução das equações diferenciais resulta na equação de velocidade
+Aplicando a condição de \emph{estado quasi-estacionário} proposta por Briggs e Haldane (1925), admite-se que a concentração de $ES$ permanece aproximadamente constante após um breve período inicial (estado pré-estacionário). A resolução das equações diferenciais resulta na equação de velocidade
 
 \begin{equation}
     \label{eq:MM-equacao}
@@ -409,6 +409,8 @@ Outro mecanismo relevante, especialmente em reações envolvendo múltiplos subs
 \end{equation}
 onde $A$ e $B$ são substratos, $P$ e $Q$ são produtos, $E$ é a enzima em seu estado original e $E'$ é a enzima modificada após a reação com o primeiro substrato. Esse mecanismo é típico de enzimas transferases e algumas oxidoredutases, sendo importante em processos industriais que envolvem reações de transferência de grupos funcionais \cite{FOGLER_2016}.
 
+No contexto de reações catalisadas por lipases em emulsões óleo-água, o mecanismo ping-pong-bi-bi apresenta-se como modelo cinético fundamental. A lipase sofre uma modificação interfacial ao hidrolisar o primeiro éster graxo, formando o intermediário acil-enzima ($E'$) e liberando um ácido graxo ($P$). Em seguida, $E'$ reage com a porção restante do substrato ($B$), regenerando a forma livre da enzima ($E$) e liberando o segundo produto ($Q$) \cite{nelson2018}.
+
 O conhecimento detalhado desses mecanismos permite a modelagem matemática precisa dos processos enzimáticos, possibilitando a simulação, o controle e a otimização de reatores industriais. Além disso, a compreensão dos fatores que afetam a atividade enzimática, como concentração de substrato, presença de inibidores e condições físico-químicas do meio, é fundamental para o desenvolvimento de processos robustos e eficientes.
 
 \subsection{Reações Enzimáticas em Meios Multifásicos}
@@ -431,7 +433,7 @@ Além do papel na transferência de massa e estabilização, surfactantes podem 
 
 A concentração micelar crítica (CMC) representa um ponto-chave em sistemas enzimáticos que envolvem interfaces, como micelas e membranas. Ao se atingir a CMC, moléculas anfifílicas, como surfactantes ou certos substratos, passam a formar micelas de maneira espontânea. Essas estruturas micelares criam ambientes diferenciados onde as reações enzimáticas podem ocorrer. Nesse cenário, a cinética das enzimas é impactada, pois a quantidade de substrato disponível para a catálise depende do equilíbrio entre a fase aquosa e a interface micelar. Acima da CMC, a fração de substrato acessível à enzima se estabiliza, permitindo que a equação de Michaelis--Menten seja adaptada para descrever a saturação da interface \cite{bisswanger2017}.
 
-Em sistemas interfaciais, a CMC marca a transição em que o aumento da concentração total de substrato não resulta mais em maior disponibilidade para a enzima, já que o excesso de substrato é incorporado às micelas. Isso influencia diretamente a determinação dos parâmetros cinéticos, como Km e Vmax, que precisam ser analisados considerando a distribuição do substrato entre as diferentes fases do sistema. Assim, compreender o conceito de CMC é fundamental para projetar e interpretar experimentos com enzimas em meios micelares ou membranosos, sendo um aspecto central para a modelagem e otimização de processos enzimáticos em ambientes heterogêneos \cite{bisswanger2017}.
+Em sistemas interfaciais, acima da concentração micelar crítica (CMC) o número médio de monômeros de substrato por micela permanece praticamente constante. Cada monômero adicional de substrato gera, portanto, uma nova micela, enquanto o substrato livre na fase aquosa permanece aproximadamente constante. Isso influencia diretamente a determinação dos parâmetros cinéticos, como Km e Vmax, que precisam ser analisados considerando a distribuição do substrato entre as diferentes fases do sistema. Assim, compreender o conceito de CMC é fundamental para projetar e interpretar experimentos com enzimas em meios micelares ou membranosos, sendo um aspecto central para a modelagem e otimização de processos enzimáticos em ambientes heterogêneos \cite{bisswanger2017}.
 
 Portanto, o desenvolvimento de processos enzimáticos eficientes em meios multifásicos requer uma compreensão aprofundada dos fenômenos interfaciais, da dinâmica de transferência de massa e das interações entre enzimas, surfactantes e solventes. A escolha criteriosa dos componentes do sistema, aliada ao controle das condições operacionais, é fundamental para garantir alta atividade, estabilidade e seletividade enzimática, viabilizando aplicações industriais inovadoras e sustentáveis.
 
@@ -621,6 +623,8 @@ Os modelos de autômato celular (AC) empregados neste trabalho seguem predominan
     \label{fig:rotacao}
 \end{figure}
 
+A Tabela \ref{tab:parametros_fundamentais} resume os parâmetros fundamentais do modelo de autômato celular, incluindo seus símbolos e intervalos de valores possíveis.
+
 \begin{table}[H]
     \centering
     \caption{Parâmetros Fundamentais do Modelo de Autômato Celular}
@@ -639,6 +643,7 @@ Os modelos de autômato celular (AC) empregados neste trabalho seguem predominan
 
     \vspace{0.2cm}
     \makebox[\linewidth][l]{\small Fonte: Autoria própria}
+    \label{tab:parametros_fundamentais}
 \end{table}
 
 \subsubsection{Fração de Células Vazias}
@@ -692,7 +697,7 @@ Os autômatos celulares oferecem uma alternativa promissora para a simulação d
 
 A grande vantagem dos autômatos celulares na simulação de reações químicas reside na sua capacidade de incorporar explicitamente a heterogeneidade espacial e os efeitos de difusão de forma natural. Ao contrário das abordagens baseadas em EDOs, que assumem homogeneidade, os ACs permitem que as concentrações das espécies variem localmente, e que as reações ocorram apenas onde os reagentes estão presentes. Isso é particularmente útil para sistemas onde a mistura não é perfeita, ou onde existem gradientes de concentração significativos, como em reações em superfícies, em géis ou em sistemas biológicos. Além disso, os ACs podem simular a estocasticidade inerente às reações químicas em nível molecular, onde as interações são probabilísticas. A natureza discreta e paralela dos autômatos celulares também os torna adequados para implementação em computadores, permitindo a simulação de sistemas complexos com um grande número de partículas e células \cite{kier2005}.
 
-Um exemplo clássico da aplicação de autômatos celulares em reações químicas é a simulação de reações de Belousov-Zhabotinsky, que exibem padrões oscilatórios e ondas de propagação. Nesses modelos, as regras de transição são formuladas para replicar as interações químicas que levam a esses comportamentos complexos, e os ACs conseguem reproduzir fielmente os padrões observados experimentalmente. Outras aplicações incluem a simulação de reações em catálise heterogênea, onde a superfície do catalisador pode ser representada por uma grade de células, e as moléculas reagentes se adsorvem, reagem e dessorvem de acordo com as regras do autômato. A flexibilidade dos autômatos celulares permite a incorporação de diversos fatores, como a temperatura, a presença de inibidores ou ativadores, e a geometria do reator, tornando-os uma ferramenta versátil para a exploração de fenômenos cinéticos complexos \cite{kier2005}.
+Um exemplo clássico da aplicação de autômatos celulares em reações químicas é a simulação de reações de Belousov-Zhabotinsky, que exibem padrões oscilatórios e ondas de propagação. Nesses modelos, as regras de transição são formuladas para replicar as interações químicas que levam a esses comportamentos complexos, e os ACs conseguem reproduzir fielmente os padrões observados experimentalmente. Outras aplicações incluem a simulação de reações em catálise heterogênea, onde a superfície do catalisador pode ser representada por uma grade de células, e as moléculas reagentes se adsorvem, reagem e dessorvem de acordo com as regras do autômato. A flexibilidade dos autômatos celulares permite a incorporação de diversos fatores, como a temperatura e a presença de inibidores ou ativadores, tornando-os uma ferramenta versátil para a exploração de fenômenos cinéticos complexos \cite{kier2005}.
 
 \subsection{Simulação de Reações Enzimáticas com Autômatos Celulares}
 
@@ -747,17 +752,17 @@ Em síntese, o trabalho de Dutta et al. \cite{dutta2015generalized} evidencia qu
 
 \subsubsection{Trabalho de Vasconcelos \citeyear{vasconcelos2019}}
 
-O objetivo central do trabalho de Vasconcelos \cite{vasconcelos2019} foi construir um modelo de autômatos celulares (AC) em \textit{Scilab} capaz de reproduzir a cinética enzimática de Michaelis–Menten e variações mais complexas sem recorrer a equações diferenciais. Para isso, o autor partiu de uma malha quadrada 2-D de 100 × 100 sítios com contorno toroidal, de modo que cada célula pode conter exatamente um componente químico ($E$, $S$, $P$, complexos ou “água”) e interagir apenas com seus quatro vizinhos de von Neumann.
+O objetivo central do trabalho de Vasconcelos \cite{vasconcelos2019} foi construir um modelo de autômatos celulares (AC) em \textit{Scilab} capaz de reproduzir a cinética enzimática de Michaelis–Menten e variações mais complexas sem recorrer a equações diferenciais. Para isso, o autor partiu de uma malha quadrada 2-D de 100 × 100 sítios com contorno periódica (toroidal), no qual células das bordas interagem continuamente com as células opostas, de modo que cada célula pode conter exatamente um componente químico ($E$, $S$, $P$, complexos ou “água”) e interagir apenas com seus quatro vizinhos de von Neumann.
 
 A primeira etapa metodológica buscou validar uma nova forma de representar o complexo enzima-substrato. Em vez de um estado único, o autor utilizou duas células adjacentes ligadas por restrições de quebra quase nulas. O objetivo era manter a integridade espacial do complexo durante as iterações e, ao mesmo tempo, facilitar sua dissociação controlada. Quando comparada a um modelo clássico de um único passo ($E + S \rightarrow E + P$), a abordagem bivizinha produziu curvas de formação de produto praticamente sobrepostas, com diferença inferior a 1 $\%$ em toda a simulação, confirmando a equivalência cinética das duas representações.
 
-Com essa validação em mãos, a pesquisa avançou para analisar o efeito da concentração inicial de substrato. Ao variar gradualmente a quantidade de $S$, Vasconcelos observou um aumento nítido no pico de enzima complexada e um prolongamento da fase pré-estacionária. Em números, o máximo de $ES$ praticamente dobrou entre a menor e a maior carga de substrato, enquanto o tempo para que a enzima retornasse majoritariamente ao estado livre cresceu de poucas centenas para cerca de duas mil iterações. Esses comportamentos reproduzem qualitativamente a dependência entre saturação enzimática e disponibilidade de substrato descrita pelos modelos contínuos.
+Com essa validação em mãos, a pesquisa avançou para analisar o efeito da concentração inicial de substrato. Ao variar gradualmente a quantidade de $S$, \citeauthor*{vasconcelos2019} observou um aumento nítido no pico de enzima complexada e um prolongamento da fase pré-estacionária. Em números, o máximo de $ES$ praticamente dobrou entre a menor e a maior carga de substrato, enquanto o tempo para que a enzima retornasse majoritariamente ao estado livre cresceu de poucas centenas para cerca de duas mil iterações. Esses comportamentos reproduzem qualitativamente a dependência entre saturação enzimática e disponibilidade de substrato descrita pelos modelos contínuos.
 
 Para verificar se as simulações poderiam fornecer parâmetros globais, foi aplicado o método de Lineweaver–Burk aos valores de velocidade inicial extraídos de oito grupos de ensaios. A regressão linear exibiu coeficiente de determinação $R^2 \approx 0,97$, indicando forte aderência à equação de Michaelis–Menten. A interseção das retas revelou $V_{max}$ em torno de 0,026 fração de produto por iteração (equivalente a cerca de 260 moléculas por passo) e um $K_M$ próximo de 9 unidades relativas de substrato, números compatíveis com sistemas reais quando se normaliza a escala discreta do autômato.
 
 Em seguida, o algoritmo foi estendido para testar diferentes mecanismos de inibição. A inclusão de um inibidor competitivo, modelado como nova espécie com afinidade exclusiva pela enzima livre, reduziu a conversão final de produto para cerca de 29 \%. No cenário de inibição irreversível, onde o complexo $EI$ não se desfazia mais, o rendimento caiu ainda mais, estabilizando próximo de 18 \%. Por contraste, a reação de Michaelis–Menten sem inibidor atingiu perto de 52 \% de conversão, enquanto a variante reversível ($E + P \rightleftharpoons ES$) apresentou um perfil mais lento, mas alcançou 45 \% ao final da janela analisada, evidenciando a recombinação do produto à enzima.
 
-Os traços temporais dessas quatro configurações mostraram assinaturas distintas: nas curvas competitivas, a desaceleração ocorreu logo no início, refletindo a competição direta por sítios ativos; na rota irreversível, a atividade declinou continuamente à medida que a fração de enzima funcional era sequestrada em $EI$; e na versão reversível, observou-se uma queda inicial seguida de leve recuperação, resultado da reciclagem do produto.
+Os traços temporais dessas quatro configurações mostraram assinaturas distintas: nas curvas competitivas, a desaceleração da formação do complexo ocorreu logo no início, refletindo a competição direta por sítios ativos; na rota irreversível, a atividade declinou continuamente à medida que a fração de enzima funcional era sequestrada em $EI$; e na versão reversível, observou-se uma queda inicial seguida de leve recuperação, resultado da reciclagem do produto.
 
 Para avaliar a flexibilidade do modelo, o capítulo final abordou a cinética ping-pong bi-bi típica de lipases. Foram introduzidas duas formas enzimáticas ($E_1 e E_2$) e seus respectivos complexos com substratos diferentes. Mesmo com essa rede de etapas adicionais, o autômato manteve estabilidade numérica e converteu mais de 90 \% dos substratos em menos de mil iterações. O consumo sequencial — primeiro $S_1$, depois $S_2$ — surgiu espontaneamente, replicando a alternância de estados catalíticos característica do mecanismo.
 
@@ -866,7 +871,7 @@ Há uma relação conceitual importante entre a propensão de junção $J$ e a p
 \end{equation}
 onde $\alpha$ e $\beta$ representam componentes do sistema, $P_B(\alpha, \beta)$ é a probabilidade de quebra da ligação entre os componentes $\alpha$ e $\beta$, e $J(\alpha, \beta)$ é a propensão de junção entre eles. Quando $J(\alpha, \beta) = 0$, temos $P_B(\alpha, \beta) = 1$, indicando que não há propensão de junção e a ligação é sempre quebrada. Por outro lado, quando $J(\alpha, \beta) \to \infty$, temos $P_B(\alpha, \beta) \to 0$, indicando que a ligação é sempre mantida.
 
-Essa definição traz a vantagem de reduzir a quantidade de parâmetros obrigatórios solicitados ao usuário do software, uma vez que basta definir as entradas de $J$ que os valores de $P_B$ poderão ser calculados automaticamente. A constante $1.5$ é um refinamento aplicado a fim de tanto obter probabilidades de quebra um pouco maiores, o que auxilia no aumento da dinâmica do sistema, quanto suavizar a variação de $P_B$ frente a mudanças em $J$, especialmente na região do domínio onde $J$ é maior porém próximo de 1, o que facilita o controle sobre as alterações que esses parâmetros causam no sistema.
+Essa definição traz a vantagem de reduzir a quantidade de parâmetros obrigatórios solicitados ao usuário do software, uma vez que basta definir as entradas de $J$ que os valores de $P_B$ poderão ser calculados automaticamente. A constante $1.5$ é um refinamento empírico aplicado a este trabalho a fim de tanto obter probabilidades de quebra um pouco maiores, o que auxilia no aumento da dinâmica do sistema, quanto suavizar a variação de $P_B$ frente a mudanças em $J$, especialmente na região do domínio onde $J$ é maior porém próximo de 1, o que facilita o controle sobre as alterações que esses parâmetros causam no sistema.
 
 \subsubsection{Reação e Rotação dos Componentes}
 
@@ -892,7 +897,7 @@ O código do AC propriamente dito segue uma estrutura modular, onde as principai
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{img/fluxograma.png}
+    \includegraphics[width=0.7\textwidth]{img/fluxograma2.png}
     \caption{Fluxograma do modelo de autômato celular implementado.}
     \label{fig:fluxograma}
 \end{figure}
