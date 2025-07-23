@@ -1067,13 +1067,13 @@ Foram executadas diversas simulações utilizando o modelo de autômato celular 
 
 A análise dos resultados foi realizada com o auxílio das bibliotecas \textit{Pandas} (\citetitle{pandas}), \textit{Matplotlib} (\citetitle{matplotlib}) e \textit{Scikit-learn} do Python. \textit{Pandas} é uma biblioteca bastante conhecida no ambiente de tratamento de dados, pois permite a leitura e manipulação de dados de forma eficiente e intuitiva. \textit{Matplotlib} é uma biblioteca de visualização de dados que permite a criação de gráficos e plots de forma simples, permitindo criar gráficos dos mais variados tipos e estilos, além de integrar muito bem com \textit{Pandas}. \textit{Scikit-learn} é uma biblioteca bastante útil para análise estatística e aprendizado de máquina, que oferece diversas ferramentas para análise de dados, incluindo regressão, classificação e clustering. Essas bibliotecas foram utilizadas para processar os dados de frações relativas das simulações, gerar gráficos e realizar análises estatísticas dos resultados.
 
-\section{Cinética Clássica de Michaelis-Menten}
+\section{Cinética Clássica de Michaelis--Menten}
 
-A intenção dessa análise é reproduzir o comportamento clássico da cinética enzimática de Michaelis-Menten, onde a enzima se liga ao substrato em uma reação reversível para formar um complexo enzima-substrato, que posteriormente se converte em produto em uma reação irreversível. Para isso, foram definidos os parâmetros básicos e reacionais demonstrados na Tabela \ref{tab:params_michaelis_menten}.
+A intenção dessa análise é reproduzir o comportamento clássico da cinética enzimática de Michaelis--Menten, onde a enzima se liga ao substrato em uma reação reversível para formar um complexo enzima-substrato, que posteriormente se converte em produto em uma reação irreversível. Para isso, foram definidos os parâmetros básicos e reacionais demonstrados na Tabela \ref{tab:params_michaelis_menten}.
 
 \begin{table}[H]
     \centering
-    \caption{Parâmetros da Simulação de Cinética Clássica de Michaelis-Menten}
+    \caption{Parâmetros da Simulação de Cinética Clássica de Michaelis--Menten}
     \vspace{0.2cm}
     \begin{tabularx}{\textwidth}{X m{5cm}}
         \hline
@@ -1098,7 +1098,7 @@ A intenção dessa análise é reproduzir o comportamento clássico da cinética
 
 A escolha de 15000 iterações foi feita para garantir que, próximo do final da execução da simulação, o sistema já tenha pouquíssima ou nenhuma reação, com concentração de substrato próxima de zero, o que indica que a enzima já não está mais reagindo com o substrato. Uma malha de $100 \times 100$ células (10000 células no total) é suficiente para observar graficamente o comportamento do sistema e ao mesmo tempo simular a presença de uma quantidade considerável de espécies químicas sem comprometer muito o tempo de execução total da simulação. As frações relativas foram escolhidas para simular um experimento real, onde a enzima está presente em quantidade bem abaixo do substrato em um meio aquoso.
 
-Em relação aos parâmetros de reação, definiu-se que sempre que substrato e enzima se encontrarem, eles irão formar o complexo enzima-substrato, entrando com o $P_R$ dessa etapa igual a 1. A reação inversa, onde o complexo se decompõe em enzima e substrato, ocorre com probabilidade $P_R = 0{,}0001$, o que simula uma reação reversível onde a formação do complexo é favorecida. A conversão do complexo em produto ocorre com probabilidade $P_R = 0{,}001$, o que simula a etapa lenta da reação geral. Assume-se que a formação do complexo $ES$ é muito mais rápida que a sua quebra e que a formação do produto. O mecanismo clássico de Michaelis-Menten propõe que a reação entre enzima e produto para formação do complexo não ocorre, portanto, o $P_R$ dessa etapa é 0.
+Em relação aos parâmetros de reação, definiu-se que sempre que substrato e enzima se encontrarem, eles irão formar o complexo enzima-substrato, entrando com o $P_R$ dessa etapa igual a 1. Esse valor traduz uma reação onde se parte do princípio que a formação do complexo é uma reação muito mais rápida que a sua decomposição (reação inversa) e que a formação de produto, além da própria difusão dos componentes no meio. A reação inversa, onde o complexo se decompõe em enzima e substrato, ocorre com probabilidade $P_R = 0{,}0001$, o que simula uma reação reversível onde a formação do complexo é favorecida. A conversão do complexo em produto ocorre com probabilidade $P_R = 0{,}001$, o que simula a etapa lenta da reação geral. O mecanismo clássico de Michaelis--Menten propõe que a reação entre enzima e produto para formação do complexo não ocorre, portanto, o $P_R$ dessa etapa é 0.
 
 Definiu-se os parâmetros de movimentação dos componentes da forma exposta na Tabela \ref{tab:params_movimento}:
 
@@ -1135,9 +1135,9 @@ Esses valores de movimentação e interação foram escolhidos para simular um s
 
 Com o objetivo de simular um sistema em que substrato e enzima são solúveis em água e se aproximar mais das condições para a modelagem pela cinética clássica de Michaelis-Menten, a interação da enzima, do substrato e do produto com a água são definidas como favoráveis à atração, com valores de $J$ de 1{,}7. A interação entre enzima e substrato é definida, também, como atrativa, com $J = 1{,}7$, o que possibilita a formação do complexo enzima-substrato.
 
-Nota-se, pelos mesmos motivos, a boa interação entre enzima e água, além da diferença entre a ligação da enzima com o substrato e dela com o produto. Enzima-substrato foi pensada para ser uma interação maior no sentido de favorecer a formação do complexo, em detrimento da interação com o produto que, segundo a cinética em estudo, não gera reação. O valor de $J (E|P)$ ser um pouco mais baixo também vem da ideia que, após uma reação completa, o produto ``se descola'' da enzima, sugerindo uma interação mais fraca entre eles (com $P_B (E,P)$ um pouco maior, dada a relação inversa entre $J$ e $P_B$).
+Nota-se, pelos mesmos motivos, a boa interação entre enzima e água, além da diferença entre a ligação da enzima com o substrato e dela com o produto. Enzima-substrato foi pensada para ser uma interação maior no sentido de favorecer a formação do complexo, em detrimento da interação com o produto que, segundo a cinética em estudo, não gera reação. O valor de $J (E|P)$ ser um pouco mais baixo também vem da ideia que, após uma reação completa, o produto se separa do sítio ativo da enzima, sugerindo uma interação mais fraca entre eles (com $P_B (E,P)$ um pouco maior, dada a relação inversa entre $J$ e $P_B$).
 
-Os parâmetros $J (S|S)$, $J (P|P)$ e $J (E|E)$ foram definidos como 0, o que significa que não há interação entre células do mesmo tipo, ou seja, enzimas não se atraem entre si, substratos não se atraem entre si e produtos não se atraem entre si. Isso simula um sistema onde as moléculas de cada um desses componentes estão solubilizados em água, sem formação de aglomerados.
+Os parâmetros $J (S|S)$, $J (P|P)$ e $J (E|E)$ foram definidos como 0, o que significa que não há interação entre células do mesmo tipo, ou seja, tanto enzimas quanto substratos e produtos ficam espalhados no meio arquoso. Isso simula um sistema onde as moléculas de cada um desses componentes estão solubilizados em água, sem formação de aglomerados.
 
 Com esses parâmetros, a simulação foi executada e o arquivo CSV resultante foi analisado. O estado inicial da malha, gerado de forma aleatória, é apresentado na Figura \ref{fig:MM_initial}, onde é possível observar a distribuição inicial dos componentes químicos, com enzima (E) em verde, substrato (S) em roxo, produto (P) em rosa, água (W) em azul e intermediário (complexo ES) em amarelo. Células em cinza representam vazios.
 
@@ -1187,7 +1187,7 @@ A Figura \ref{fig:MM_8000it} mostra o estado da malha na iteração 8000, onde s
 
 Esse resultado é consistente com o mecanismo de Michaelis-Menten para cinética enzimática, uma vez que o comportamento das concentrações dos componentes ao longo do tempo segue as tendências esperadas.
 
-Outra análise interessante é a geração da curva de Michaelis-Menten, que relaciona a taxa da reação, que pode ser entendida como a taxa de formação de produto, com a concentração do substrato. Para isso, utilizou-se os dados de concentração do produto ao longo das iterações para fazer uma regressão não-linear, na qual a curva de ajuste é aquela referente à concentração de produto pelo tempo na cinética de Michaelis-Menten, dada por:
+Outra análise interessante é a geração da curva de Michaelis-Menten, que relaciona a taxa da reação, que pode ser entendida como a taxa de formação de produto, com a concentração do substrato. Para isso, utilizou-se os dados de concentração do produto ao longo das iterações para fazer uma regressão não-linear, na qual a curva de ajuste é uma equação empírica que reflete a concentração de produto pelo tempo, dada por:
 
 \begin{equation}
     \label{eq:produto_MM}
@@ -1220,6 +1220,8 @@ com $R^2 = 0{,}9991$, indicando um excelente ajuste. A derivada dessa curva, que
 \begin{equation}
     P'(t) = 5{,}812 \cdot 10^{-5} \left(\frac{e^{-3{,}834 \cdot 10^{-4} t}}{1 + e^{-4{,}815 \cdot 10^{-4} t}}\right) + 7{,}299 \cdot 10^{-5} \left(\frac{(1 - e^{-3{,}834 \cdot 10^{-4} t}) e^{-4{,}815 \cdot 10^{-4} t}}{(1 + e^{-4{,}815 \cdot 10^{-4} t})^2}\right)
 \end{equation}
+
+O ajuste utilizando uma equação empírica é uma prática comum em Engenharia de Processos, especialmente em ocasiões onde não se conhece uma solução analítica para o problema. Aqui, embora se trate de uma simulação clássica de Michaelis--Menten, a curva de concentração de produto foi ajustada por uma equação empírica a fim de propor um método padrão para a análise dos resultados, inclusive em cenários complexos e heterogêneos, os quais são analisados posteriormente neste trabalho.
 
 De posse da taxa de reação, obtem-se o gráfico de Michaelis-Menten, que relaciona a taxa de formação de produto com a concentração de substrato. Na Figura \ref{fig:MM_curve}, apresenta-se o gráfico da curva de Michaelis-Menten:
 
@@ -1433,11 +1435,9 @@ Na Tabela \ref{tab:params_MM_apolar_repeticoes}, são apresentados os resultados
     \label{tab:params_MM_apolar_repeticoes}
 \end{table}
 
-Comparando esses resultados com os da tabela \ref{tab:params_MM} da simulação de cinética clássica, nota-se que $V_{max}$ é menor e $K_M$ é maior no caso do substrato apolar. A diminuição de $V_{max}$ indica que a taxa máxima de formação de produto cai devido à tendência do substrato em se aglomerar, uma vez que ele desta vez não se solubiliza em água. Levando em consideração que a enzima possui boa afinidade com a água, a reação com o substrato ocorre com menos frequência.
+Comparando esses resultados com os da tabela \ref{tab:params_MM} da simulação de cinética clássica, nota-se que $V_{max}$ é menor e $K_M$ é maior no caso do substrato apolar. A diminuição de $V_{max}$ indica que a taxa máxima de formação de produto cai devido à tendência do substrato em se aglomerar, uma vez que ele desta vez não se solubiliza em água. Levando em consideração que a enzima possui boa afinidade com a água, a reação com o substrato ocorre com menos frequência. A redução da frequência com que a reação enzimática ocorreu também é refletida no aumento de $K_M$.
 
-Em adição a isso, o aumento de $K_M$ (melhor chamado, aqui, de $K_M$ \textbf{aparente}) de certa forma pode ser entendida como a redução na afinidade da enzima com o substrato. Como observado pela imagem da malha na Figura \ref{fig:MM_apolar_3000it}, é fato que o substrato apolar não se solubiliza em água e forma aglomerados, o que dificulta o encontro do substrato com a enzima, que está solubilizada em água, no decorrer das iterações.
-
-Embora o modelo de Michaelis-Menten não considere a presença de substratos apolares, os resultados obtidos com o modelo de autômato celular implementado mostram que é possível simular o comportamento da cinética enzimática mesmo em condições não ideais, gerando resultados que confirmam teorias. Isso demonstra a flexibilidade e a utilidade do modelo para estudar diferentes cenários e condições reacionais.
+Embora o modelo de Michaelis-Menten não considere a presença de substratos apolares, os resultados obtidos com o modelo de autômato celular implementado mostram que é possível simular o comportamento da cinética enzimática mesmo em condições não ideais. No cenário em estudo, a teoria que a reação enzimática com substrato situado uma fase diferente da enzima (que torna o substrato pouco disponível) é prejudicada em relação à uma com substrato solúvel pode ser confirmada. Isso demonstra a flexibilidade e a utilidade do modelo para estudar diferentes cenários e condições reacionais.
 
 \section{Cinética com Substrato Apolar e Surfactante}
 
@@ -1652,10 +1652,10 @@ A Tabela \ref{tab:surf_repeticoes} apresenta os resultados de três execuções 
 
 Comparando esses resultados com os da Tabela \ref{tab:params_MM_apolar} da simulação de cinética com substrato apolar, nota-se que tanto $V_{max}$ quanto $K_M$ são maiores no caso do surfactante. $V_{max}$ é maior, o que indica que o surfactante auxiliou na formação de produto durante as primeiras iterações. A presença de uma molécula anfifílica de dois polos distintos substituindo uma polar, como a água, pode ter facilitado a interação entre enzima e substrato, aumentando a taxa de reação.
 
-Por outro lado, $K_M$ é maior, o que indica que a afinidade da enzima pelo substrato diminuiu. Isso pode ser explicado pelo fato de que o surfactante, apesar de auxiliar na formação do produto, determinou uma inibição. Pelos parâmetros de interação, tanto $J (E|S)$ quanto $J (E|F_1)$ e $J (E|F_2)$ são iguais a $1{,}1$, logo o surfactante pode ter
-agido como um inibidor competitivo, dificultando o encontro entre enzima e substrato ao longo do tempo.
+Por outro lado, $K_M$ se apresentou significativamente maior. Isso pode ser explicado pelo fato de que o surfactante, apesar de auxiliar na formação do produto, determinou uma inibição. Pelos parâmetros de interação, tanto $J (E|S)$ quanto $J (E|F_1)$ e $J (E|F_2)$ são iguais a $1{,}1$. Esses valores indicam que o surfactante pode, por muitas vezes, ter agido como um componente que ``competiu'' com o substrato pela atração com a enzima, tornando-a menos disponível para reagir com o substrato. Pode-se entender que
+o componente anfifílico agiu teoricamente como um inibidor competitivo, dificultando o encontro entre enzima e substrato ao longo do tempo.
 
-Cabe ressaltar, novamente, que o modelo de Michaelis-Menten não considera a presença de espécies como surfactantes e as constantes calculadas aqui são \textbf{aparentes}. Entretanto, o modelo de AC foi capaz de simular o comportamento da cinética enzimática mesmo com a complexidade adicional do surfactante. A heterogeneidade do sistema e a dinâmica de interação entre os componentes foram bem capturadas, permitindo fazer análises e comparações com teorias conhecidas.
+Cabe ressaltar, novamente, que o modelo de Michaelis-Menten não considera a presença de espécies como surfactantes e as constantes calculadas aqui são \textbf{aparentes}. Entretanto, o modelo de AC foi capaz de simular o comportamento da cinética enzimática mesmo com a complexidade adicional do surfactante. A heterogeneidade do sistema e a dinâmica de interação entre os componentes foram bem capturadas.
 
 \section{Cinética com Surfactante em Alta Concentração}
 
@@ -1853,15 +1853,15 @@ A Tabela \ref{tab:surf_repeticoes_high} apresenta os resultados de três execuç
 
 Comparando esses resultados com os da Tabela \ref{tab:surf_repeticoes} da simulação anterior, $V_{max}$ aparente é maior, o que indica que o surfactante em alta concentração provocou um leve aumento na taxa da reação durante as primeiras iterações. $K_M$ aparente aqui é significativamente menor, o que indica que a afinidade da enzima pelo substrato foi aprimorada pelo surfactante em alta concentração, equiparando-se aos valores obtidos na cinética clássica com substrato solúvel, observado na Tabela \ref{tab:params_MM_repeticoes}. Isso sugere que a presença de surfactante em alta concentração pode ter facilitado a interação entre enzima e substrato, promovendo uma maior eficiência na reação. Em conjunto com as observações das malhas da simulação, é possível concluir que o surfactante nessa concentração tende a auxiliar na reação com substrato pouco solúvel ao formar micelas e aumentar a disponibilidade de enzima no meio aquoso.
 
-\section{Análise da Concentração Micelar Crítica}
+\section{Análise da Tendência de Formação de Micelas}
 
-Dada a capacidade do modelo em simular o comportamento de surfactantes em diferentes concentrações, como foi mencionado nas duas últimas simulações, foram executadas algumas simulações com o intuito de observar a Concentração Micelar Crítica (CMC) do surfactante. A CMC é a concentração mínima de surfactante necessária para formar micelas em solução, e é um parâmetro crucial na caracterização de surfactantes.
+Dada a capacidade do modelo em simular o comportamento de surfactantes em diferentes concentrações, como foi mencionado nas duas últimas simulações, foram executadas algumas simulações com o intuito de observar a tendência de partição do surfactante, que remete à Concentração Micelar Crítica (CMC). A CMC é a concentração mínima de surfactante necessária para formar micelas em solução, e é um parâmetro crucial na caracterização de surfactantes.
 
 Para isso, foram realizadas simulações com diferentes frações de surfactante, variando de 3\% a 15\%. Iniciando com 3\%, apresenta-se as Tabelas \ref{tab:params_surfactant_cmc} e \ref{tab:mov_surfactant_cmc_3}, bem como as Figuras \ref{fig:params_surfactant_cmc} e \ref{fig:params_surfactant_cmc_3} com os parâmetros de entrada dessa simulação.
 
 \begin{table}[H]
     \centering
-    \caption{Parâmetros da Simulação para estudo da CMC com 3\% de Surfactante}
+    \caption{Parâmetros da Simulação para estudo da tendência de formação de micelas com 3\% de Surfactante}
     \vspace{0.2cm}
     \begin{tabularx}{\textwidth}{X m{5cm}}
         \hline
@@ -1880,7 +1880,7 @@ Para isso, foram realizadas simulações com diferentes frações de surfactante
 
 \begin{table}[H]
     \centering
-    \caption{Parâmetros de Movimento para Simulação de CMC com 3\% de Surfactante}
+    \caption{Parâmetros de Movimento para Simulação de tendência de formação de micelas com 3\% de Surfactante}
     \vspace{0.2cm}
     \begin{tabularx}{\textwidth}{X m{5cm}}
         \hline
@@ -1904,14 +1904,14 @@ Para isso, foram realizadas simulações com diferentes frações de surfactante
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{img/basic_3perc.png}
-    \caption{\small Configuração básica e frações relativas de componentes da simulação para estudo da CMC com 3\% de surfactante.}
+    \caption{\small Configuração básica e frações relativas de componentes da simulação para estudo da tendência de formação de micelas com 3\% de surfactante.}
     \label{fig:params_surfactant_cmc}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{img/mov_3perc.png}
-    \caption{\small Parâmetros de movimentação dos componentes da simulação para estudo da CMC com 3\% de surfactante.}
+    \caption{\small Parâmetros de movimentação dos componentes da simulação para estudo da tendência de formação de micelas com 3\% de surfactante.}
     \label{fig:params_surfactant_cmc_3}
 \end{figure}
 
@@ -1924,7 +1924,7 @@ Após a execução completa dessa simulação, a malha resultante após 3000 ite
     \includegraphics[width=0.75\textwidth]{img/cmc_3perc_3000.png}
     \hspace{0.05\textwidth}
     \includegraphics[width=0.15\textwidth]{img/legend_cmc.png}
-    \caption{\small Estado da malha na iteração 3000 da simulação de CMC com 3\% de surfactante.}
+    \caption{\small Estado da malha na iteração 3000 da simulação de tendência de formação de micelas com 3\% de surfactante.}
     \label{fig:cmc_3perc}
 \end{figure}
 
@@ -1935,7 +1935,7 @@ Mantendo os mesmos parâmetros, a simulação com surfactante a 10\% apresenta a
     \includegraphics[width=0.75\textwidth]{img/cmc_10perc_1000.png}
     \hspace{0.05\textwidth}
     \includegraphics[width=0.15\textwidth]{img/legend_cmc.png}
-    \caption{\small Estado da malha na iteração 2000 da simulação de CMC com 10\% de surfactante.}
+    \caption{\small Estado da malha na iteração 2000 da simulação de tendência de formação de micelas com 10\% de surfactante.}
     \label{fig:cmc_10perc_1000}
 \end{figure}
 
@@ -1946,7 +1946,7 @@ Com a concentração de surfactante a 15\%, a malha resultante após 2000 itera�
     \includegraphics[width=0.75\textwidth]{img/cmc_15perc_2000.png}
     \hspace{0.05\textwidth}
     \includegraphics[width=0.15\textwidth]{img/legend_cmc.png}
-    \caption{\small Estado da malha na iteração 2000 da simulação de CMC com 15\% de surfactante.}
+    \caption{\small Estado da malha na iteração 2000 da simulação de tendência de formação de micelas com 15\% de surfactante.}
     \label{fig:cmc_15perc_2000}
 \end{figure}
 
@@ -1960,7 +1960,7 @@ O software desenvolvido apresenta uma interface gráfica intuitiva, facilitando 
 
 Os resultados obtidos nas simulações confirmam a robustez e a versatilidade do modelo, que pode ser facilmente adaptado para diferentes mecanismos enzimáticos e condições experimentais. Foi possível simular cinéticas clássicas de Michaelis--Menten, bem como cenários mais desafiadores, como meios bifásicos com substrato apolar e surfactante. Sobre este último, foi possível observar a sua influência na cinética enzimática com efeitos de interface e formação de micelas. O surfactante pode atrapalhar ou auxiliar na cinética, dependendo de sua concentração e da sua CMC.
 
-Em síntese, o trabalho alcançou seus objetivos ao fornecer uma solução computacional inovadora para a simulação de processos enzimáticos em ambientes complexos, contribuindo para o avanço do conhecimento na área e abrindo novas possibilidades para a pesquisa e o ensino em Engenharia Química e Biotecnologia. Recomenda-se, para trabalhos futuros, a implementação de técnicas de paralelização para otimizar o desempenho computacional e a ampliação do modelo para simular outros tipos de reações e interações moleculares, além de incorporar relações mais explícitas com parâmetros físicos e/ou químicos, como o coeficiente de difusão.
+Em síntese, o trabalho alcançou seus objetivos ao fornecer uma solução computacional inovadora para a simulação de processos enzimáticos em ambientes complexos, contribuindo para o avanço do conhecimento na área e abrindo novas possibilidades para a pesquisa e o ensino em Engenharia Química e Biotecnologia. Recomenda-se, para trabalhos futuros, a implementação de técnicas de paralelização para otimizar o desempenho computacional, a ampliação do modelo para simular outros tipos de reações e interações moleculares, a incorporação de relações mais explícitas com parâmetros físicos e/ou químicos, como o coeficiente de difusão, além do estudo de correlações claras das propriedades físicas reais do sistema com os parâmetros fundamentais do autômato celular.
 
 \printbibliography[title={REFERÊNCIAS},heading=bibnumbered]
 
