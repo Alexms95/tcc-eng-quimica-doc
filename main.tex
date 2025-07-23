@@ -22,6 +22,7 @@
 \usepackage{changepage}
 \usepackage{tabularx}
 \usepackage{subfig}
+\usepackage{pdfpages}
 \usepackage[backend=biber,style=abnt]{biblatex}
 
 \usepackage[colorlinks=true, linkcolor=black, citecolor=black, urlcolor=blue]{hyperref}
@@ -107,11 +108,7 @@
 % Ficha catalográfica (substituir manualmente após gerar)
 \newpage
 \pagenumbering{roman}
-\vspace*{\fill}
-\begin{center}
-    \textit{Gerar a ficha catalográfica em http://fichacatalografica.sibi.ufrj.br/ e inserir aqui.}
-\end{center}
-\vspace*{\fill}
+\includepdf[pages=-,fitpaper=true]{ficha_catalografica.pdf}
 \newpage
 
 % Folha de aprovação
